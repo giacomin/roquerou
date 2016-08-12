@@ -10,6 +10,7 @@ import entidades.Cidade;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import telas.TelaPrincipal;
 
 /**
  *
@@ -22,7 +23,11 @@ public class Roquerou {
      */
     public static void main(String[] args) {
                 
+           new TelaPrincipal().setVisible(true);
+
+
         // Criar ou atualizar
+        /*
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
                 
@@ -39,7 +44,7 @@ public class Roquerou {
         session.flush();
         session.close();
         sf.close();
-               
+        */       
               
         // Deletar
         /*
