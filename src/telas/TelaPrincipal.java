@@ -29,7 +29,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         menuPrincipal = new javax.swing.JMenuBar();
-        itemCadastro = new javax.swing.JMenu();
+        menuArquivo = new javax.swing.JMenu();
+        itemArquivoSair = new javax.swing.JMenuItem();
+        menuCadastro = new javax.swing.JMenu();
         itemCadastroCidade = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,14 +42,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
+            .addGap(0, 826, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGap(0, 557, Short.MAX_VALUE)
         );
 
-        itemCadastro.setText("Cadastro");
+        menuArquivo.setText("Arquivo");
+        menuArquivo.setToolTipText("");
+
+        itemArquivoSair.setText("Sair");
+        itemArquivoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemArquivoSairActionPerformed(evt);
+            }
+        });
+        menuArquivo.add(itemArquivoSair);
+
+        menuPrincipal.add(menuArquivo);
+
+        menuCadastro.setText("Cadastro");
 
         itemCadastroCidade.setText("Cidade");
         itemCadastroCidade.addActionListener(new java.awt.event.ActionListener() {
@@ -55,9 +70,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 itemCadastroCidadeActionPerformed(evt);
             }
         });
-        itemCadastro.add(itemCadastroCidade);
+        menuCadastro.add(itemCadastroCidade);
 
-        menuPrincipal.add(itemCadastro);
+        menuPrincipal.add(menuCadastro);
 
         setJMenuBar(menuPrincipal);
 
@@ -65,11 +80,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,6 +104,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_itemCadastroCidadeActionPerformed
+
+    private void itemArquivoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArquivoSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_itemArquivoSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,9 +145,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu itemCadastro;
+    private javax.swing.JMenuItem itemArquivoSair;
     private javax.swing.JMenuItem itemCadastroCidade;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu menuArquivo;
+    private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;
     // End of variables declaration//GEN-END:variables
 }

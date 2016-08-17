@@ -7,6 +7,8 @@ package roquerou;
 
 import config.HibernateUtil;
 import entidades.Cidade;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -22,7 +24,14 @@ public class Roquerou {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-                
+
+        // Tema Nimbus
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+        }
+
+        
         new TelaPrincipal().setVisible(true);
         
 
