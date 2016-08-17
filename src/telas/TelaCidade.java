@@ -108,6 +108,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         botaoNovo = new javax.swing.JButton();
         botaoSalvar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox();
         jTextField3 = new javax.swing.JTextField();
@@ -146,7 +147,6 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         campoCEP.setEnabled(false);
 
-        botaoNovo.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/roquerou/icons/list_add.png")); // NOI18N
         botaoNovo.setText("Novo");
         botaoNovo.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoNovo.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -156,7 +156,6 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
-        botaoSalvar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/roquerou/icons/document_save_all.png")); // NOI18N
         botaoSalvar.setText("Salvar");
         botaoSalvar.setEnabled(false);
         botaoSalvar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -168,6 +167,13 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("teste");
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,15 +199,15 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                                 .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(campoNome)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -225,7 +231,8 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -233,7 +240,6 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "UF" }));
 
-        botaoBuscar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/roquerou/icons/document_preview.png")); // NOI18N
         botaoBuscar.setText("Buscar");
         botaoBuscar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoBuscar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -256,13 +262,11 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabelaCidade);
 
-        botaoExcluir.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/roquerou/icons/list_remove.png")); // NOI18N
         botaoExcluir.setText("Excluir");
         botaoExcluir.setEnabled(false);
         botaoExcluir.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoExcluir.setMinimumSize(new java.awt.Dimension(80, 27));
 
-        botaoEditar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/roquerou/icons/edit2.png")); // NOI18N
         botaoEditar.setText("Editar");
         botaoEditar.setEnabled(false);
         botaoEditar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -306,7 +310,6 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        botaoFechar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/roquerou/icons/application_exit.png")); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoFechar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -367,6 +370,10 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboUFActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoBuscar;
@@ -380,6 +387,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoNome;
     private javax.swing.JComboBox comboUF;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
