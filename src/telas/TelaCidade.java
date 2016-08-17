@@ -4,6 +4,7 @@ import config.HibernateUtil;
 import entidades.Cidade;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -68,23 +69,28 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     }
     // Método salvarCidade()
     public void salvarCidade(){
-        SessionFactory sf2 = HibernateUtil.getSessionFactory();
-        Session session2 = sf2.openSession();
-                
-        Cidade c = new Cidade();
-        //c.setIdCidade(1);
-        c.setNome(campoNome.getText());
-        c.setUf((String) comboUF.getSelectedItem());
-        c.setCep(Integer.parseInt(campoCEP.getText()));
+    
+        Session sessao = null;
+        try {
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+
+            Cidade cid = new Cidade();
+            cid.setNome(campoNome.getText());
+            cid.setUf((String) comboUF.getSelectedItem());
+            cid.setCep(Integer.parseInt(campoCEP.getText()));
+            
+            sessao.save(cid);
+            t.commit();
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        } finally {
+            sessao.close();
+        }
         
-        Transaction tx = session2.beginTransaction();
-        session2.saveOrUpdate(c);
-        tx.commit();
         
-        session2.flush();
-        session2.close();
-        sf2.close();
-                
+        
     }
     
      /**
