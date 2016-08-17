@@ -1,14 +1,13 @@
 package telas;
 
 import config.HibernateUtil;
+import dao.CidadeDAO;
 import entidades.Cidade;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -70,24 +69,32 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     // Método salvarCidade()
     public void salvarCidade(){
     
-        Session sessao = null;
-        try {
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
+//        Session sessao = null;
+//        try {
+//            sessao = HibernateUtil.getSessionFactory().openSession();
+//            Transaction t = sessao.beginTransaction();
 
             Cidade cid = new Cidade();
             cid.setNome(campoNome.getText());
             cid.setUf((String) comboUF.getSelectedItem());
             cid.setCep(Integer.parseInt(campoCEP.getText()));
             
-            sessao.save(cid);
-            t.commit();
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        } finally {
-            sessao.close();
-        }
+            String retorno = new CidadeDAO().salvar(cid);
+            
+            if (retorno == null){
+                System.out.println("deu certo");
+            } else {
+                System.out.println("deu errado");
+            }
+            
+//            sessao.save(cid);
+//            t.commit();
+//
+//        } catch (HibernateException he) {
+//            he.printStackTrace();
+//        } finally {
+//            sessao.close();
+//        }
         
         
         
