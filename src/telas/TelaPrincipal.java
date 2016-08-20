@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemArquivoSair = new javax.swing.JMenuItem();
         menuCadastro = new javax.swing.JMenu();
         itemCadastroCidade = new javax.swing.JMenuItem();
+        ItemCadastroCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +73,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroCidade);
 
+        ItemCadastroCliente.setText("Cliente");
+        ItemCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCadastroClienteActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(ItemCadastroCliente);
+
         menuPrincipal.add(menuCadastro);
 
         setJMenuBar(menuPrincipal);
@@ -109,6 +118,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_itemArquivoSairActionPerformed
 
+    private void ItemCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCadastroClienteActionPerformed
+
+        TelaCliente telaCliente = new TelaCliente();
+        telaCliente.setVisible(true);
+        jDesktopPane1.add(telaCliente);
+        telaCliente.moveToFront();
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_ItemCadastroClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -145,6 +164,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemCadastroCliente;
     private javax.swing.JMenuItem itemArquivoSair;
     private javax.swing.JMenuItem itemCadastroCidade;
     private javax.swing.JDesktopPane jDesktopPane1;

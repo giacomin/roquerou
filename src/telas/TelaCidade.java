@@ -148,6 +148,11 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         campoId.setEnabled(false);
 
         campoNome.setEnabled(false);
+        campoNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeActionPerformed(evt);
+            }
+        });
 
         comboUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RS", "SC", "PR" }));
         comboUF.setEnabled(false);
@@ -384,6 +389,10 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
