@@ -5,6 +5,11 @@
  */
 package telas;
 
+import dao.ClienteDAO;
+import entidades.Cidade;
+import entidades.Cliente;
+import static java.lang.Integer.parseInt;
+
 /**
  *
  * @author Eduardo
@@ -26,19 +31,49 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEmailCliente.setEnabled(true);
         campoEnderecoCliente.setEnabled(true);
     }
-    
-        public void zerarCampos() {
+
+    public void zerarCampos() {
         campoNomeCliente.setText("");
         campoFoneCliente.setText("");
         campoBairroCliente.setText("");
         campoEmailCliente.setText("");
         campoEnderecoCliente.setText("");
     }
-    
+
     // método habilitarSalvar()
     public void habilitarSalvar() {
         botaoSalvarCliente.setEnabled(true);
+
+    }
+
+    public void salvarCliente() {
+
+        Cliente cli = new Cliente();
+        Cidade cid = new Cidade();
         
+                
+        cli.setNome(campoNomeCliente.getText());
+        cli.setFone(campoFoneCliente.getText());
+        cli.setEmail(campoEmailCliente.getText());
+        cli.setEndereco(campoEnderecoCliente.getText());
+        cli.setBairro(campoBairroCliente.getText());
+        cid.setIdCidade(1);
+        cli.setCidade(cid);
+        
+
+        
+        
+        //cli.setCidade((Cidade) comboCidadeCliente.getSelectedItem());
+
+        // String retorno = new ClienteDAO().salvar(cli);
+        String retorno = new ClienteDAO().salvar(cli);
+
+        if (retorno == null) {
+            System.out.println("deu certo");
+        } else {
+            System.out.println("deu errado");
+        }
+
     }
 
     /**
@@ -111,11 +146,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         campoBairroCliente.setEnabled(false);
 
-        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
         comboCidadeCliente.setEnabled(false);
+        comboCidadeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCidadeClienteActionPerformed(evt);
+            }
+        });
 
         botaoSalvarCliente.setText("Salvar");
         botaoSalvarCliente.setEnabled(false);
+        botaoSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSalvarClienteActionPerformed(evt);
+            }
+        });
 
         botaoNovoCliente.setText("Novo");
         botaoNovoCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +235,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvarCliente)
                     .addComponent(botaoNovoCliente))
@@ -251,7 +295,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEditarCliente)
                     .addComponent(botaoExcluirCliente))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -294,6 +338,17 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         zerarCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoNovoClienteActionPerformed
+
+    private void botaoSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarClienteActionPerformed
+
+        salvarCliente();
+        zerarCampos();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoSalvarClienteActionPerformed
+
+    private void comboCidadeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCidadeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCidadeClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

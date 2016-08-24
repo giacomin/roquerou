@@ -35,7 +35,7 @@ public class Cliente  implements java.io.Serializable {
      private Set pedidos = new HashSet(0);
 
     public Cliente() {
-    }
+        }
 
 	
     public Cliente(Cidade cidade, String nome) {
