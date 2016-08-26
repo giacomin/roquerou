@@ -6,6 +6,7 @@
 package dao;
 
 import config.HibernateUtil;
+import entidades.Cliente;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,9 +17,9 @@ import org.hibernate.Transaction;
  */
 public class ClienteDAO implements IDAO {
 
+    
     @Override
     public String salvar(Object o) {
-
 
         Session sessao = null;
         try {
@@ -27,7 +28,28 @@ public class ClienteDAO implements IDAO {
 
             sessao.save(o);
             t.commit();
-            
+
+            return null;
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            return he.toString();
+        } finally {
+            sessao.close();
+        }
+    }
+
+
+    public String deletar(Object d) {
+
+        Session sessao = null;
+        try {
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+
+            sessao.delete(d);
+
+            t.commit();
+
             return null;
         } catch (HibernateException he) {
             he.printStackTrace();

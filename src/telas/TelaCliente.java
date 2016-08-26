@@ -5,10 +5,23 @@
  */
 package telas;
 
+import config.HibernateUtil;
+import dao.CidadeDAO;
 import dao.ClienteDAO;
 import entidades.Cidade;
 import entidades.Cliente;
+import java.awt.PopupMenu;
+import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -21,6 +34,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
      */
     public TelaCliente() {
         initComponents();
+        popularCombo();
     }
 
     public void habilitarCampos() {
@@ -46,26 +60,65 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     }
 
+    public void popularCombo() {
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("from Cidade");
+        List<Cidade> dados_cidade = query.list();
+        Cidade cid = new Cidade();
+
+        for (Cidade cidaderow : dados_cidade) {
+
+            cid.setIdCidade(cidaderow.getIdCidade());
+            cid.setNome(cidaderow.getNome());
+            comboCidadeCliente.addItem(cidaderow.getNome());
+
+
+        }
+        
+
+        session.getTransaction().commit();
+    }
+
+    public void deletarCliente() {
+
+        Cidade cid = new Cidade();
+        Cliente cli = new Cliente();
+
+        cid.setIdCidade((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 4));
+        cli.setIdCliente((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
+        cli.setCidade(cid);
+        cli.setNome((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 1));
+
+        String retorno = new ClienteDAO().deletar(cli);
+
+        buscarCliente();
+
+        if (retorno == null) {
+            System.out.println("Cliente Excluído");
+        } else {
+            System.out.println("ERRO na EXCLUSÃO");
+        }
+
+    }
+
     public void salvarCliente() {
 
         Cliente cli = new Cliente();
         Cidade cid = new Cidade();
-        
-                
+
         cli.setNome(campoNomeCliente.getText());
         cli.setFone(campoFoneCliente.getText());
         cli.setEmail(campoEmailCliente.getText());
         cli.setEndereco(campoEnderecoCliente.getText());
         cli.setBairro(campoBairroCliente.getText());
-        cid.setIdCidade(1);
+        cid.setIdCidade(comboCidadeCliente.getSelectedIndex());
+        //cid.setIdCidade(1);
         cli.setCidade(cid);
-        
 
-        
-        
-        //cli.setCidade((Cidade) comboCidadeCliente.getSelectedItem());
-
-        // String retorno = new ClienteDAO().salvar(cli);
         String retorno = new ClienteDAO().salvar(cli);
 
         if (retorno == null) {
@@ -73,6 +126,33 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         } else {
             System.out.println("deu errado");
         }
+
+    }
+
+    public void buscarCliente() {
+
+        DefaultTableModel modelTable = (DefaultTableModel) tabelaCliente.getModel();
+        modelTable.setNumRows(0);
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("from Cliente");
+        List<Cliente> dados_cliente = query.list();
+
+        for (Cliente clienterow : dados_cliente) {
+
+            modelTable.addRow(new Object[]{
+                clienterow.getIdCliente(),
+                clienterow.getNome(),
+                clienterow.getFone(),
+                clienterow.getEmail(),
+                clienterow.getCidade().getIdCidade()
+            });
+
+        }
+        session.getTransaction().commit();
 
     }
 
@@ -85,6 +165,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         jpCliente1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -106,9 +187,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaCliente = new javax.swing.JTable();
         botaoEditarCliente = new javax.swing.JButton();
         botaoExcluirCliente = new javax.swing.JButton();
+        botaoFechar = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         jLabel1.setText("Código:");
 
@@ -146,7 +239,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         campoBairroCliente.setEnabled(false);
 
-        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
         comboCidadeCliente.setEnabled(false);
         comboCidadeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,12 +285,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(campoFoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jpCliente1Layout.createSequentialGroup()
                                         .addComponent(botaoNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(botaoSalvarCliente))))
+                                        .addComponent(botaoSalvarCliente))
+                                    .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(campoNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpCliente1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -206,7 +298,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jpCliente1Layout.setVerticalGroup(
             jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,29 +330,49 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvarCliente)
                     .addComponent(botaoNovoCliente))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "Fone", "Email", "Cidade"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelaCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tabelaClienteFocusGained(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaCliente);
 
         botaoEditarCliente.setText("Editar");
         botaoEditarCliente.setEnabled(false);
+        botaoEditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEditarClienteActionPerformed(evt);
+            }
+        });
 
         botaoExcluirCliente.setText("Excluir");
         botaoExcluirCliente.setEnabled(false);
+        botaoExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoExcluirClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpCliente2Layout = new javax.swing.GroupLayout(jpCliente2);
         jpCliente2.setLayout(jpCliente2Layout);
@@ -271,7 +383,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jpCliente2Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -285,7 +397,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jpCliente2Layout.setVerticalGroup(
             jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCliente2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
@@ -294,9 +406,15 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEditarCliente)
-                    .addComponent(botaoExcluirCliente))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(botaoExcluirCliente)))
         );
+
+        botaoFechar.setText("Fechar");
+        botaoFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,17 +425,20 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jpCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jpCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jpCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jpCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoFechar))
         );
 
         pack();
@@ -347,13 +468,54 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoSalvarClienteActionPerformed
 
     private void comboCidadeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCidadeClienteActionPerformed
+
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCidadeClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        buscarCliente();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botaoExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirClienteActionPerformed
+
+        deletarCliente();
+
+    }//GEN-LAST:event_botaoExcluirClienteActionPerformed
+
+    private void tabelaClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabelaClienteFocusGained
+
+        this.tabelaCliente.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                //altera os botoes para ativados somente se houver linha selecionada
+                botaoExcluirCliente.setEnabled(!lsm.isSelectionEmpty());
+                botaoEditarCliente.setEnabled(!lsm.isSelectionEmpty());
+            }
+        });
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaClienteFocusGained
+
+    private void botaoEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoEditarClienteActionPerformed
+
+    private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
+
+        this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoFecharActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoEditarCliente;
     private javax.swing.JButton botaoExcluirCliente;
+    private javax.swing.JButton botaoFechar;
     private javax.swing.JButton botaoNovoCliente;
     private javax.swing.JButton botaoSalvarCliente;
     private javax.swing.JTextField campoBairroCliente;
@@ -363,6 +525,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoNomeCliente;
     private javax.swing.JComboBox<String> comboCidadeCliente;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -371,10 +534,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JPanel jpCliente1;
     private javax.swing.JPanel jpCliente2;
+    private javax.swing.JTable tabelaCliente;
     // End of variables declaration//GEN-END:variables
 }
