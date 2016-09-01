@@ -6,15 +6,10 @@
 package telas;
 
 import config.HibernateUtil;
-import dao.CidadeDAO;
 import dao.ClienteDAO;
 import entidades.Cidade;
 import entidades.Cliente;
-import java.awt.PopupMenu;
-import java.awt.event.ActionListener;
-import static java.lang.Integer.parseInt;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -35,6 +30,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     public TelaCliente() {
         initComponents();
         popularCombo();
+
     }
 
     public void habilitarCampos() {
@@ -75,20 +71,20 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             cid.setIdCidade(cidaderow.getIdCidade());
             cid.setNome(cidaderow.getNome());
             comboCidadeCliente.addItem(cidaderow.getNome());
-
+            //comboCidadeCliente.addItem(String.valueOf(cid.getIdCidade()) +'-'+ String.valueOf(cid.getNome()));
+                      
 
         }
-        
 
         session.getTransaction().commit();
     }
 
-    public void deletarCliente() {
+    public void excluirCliente() {
 
         Cidade cid = new Cidade();
         Cliente cli = new Cliente();
 
-        cid.setIdCidade((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 4));
+        cid.setIdCidade((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 6));
         cli.setIdCliente((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
         cli.setCidade(cid);
         cli.setNome((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 1));
@@ -116,7 +112,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         cli.setEndereco(campoEnderecoCliente.getText());
         cli.setBairro(campoBairroCliente.getText());
         cid.setIdCidade(comboCidadeCliente.getSelectedIndex());
-        //cid.setIdCidade(1);
+        //cid.setIdCidade((Integer) comboCidadeCliente.getSelectedItem());
         cli.setCidade(cid);
 
         String retorno = new ClienteDAO().salvar(cli);
@@ -148,12 +144,31 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 clienterow.getNome(),
                 clienterow.getFone(),
                 clienterow.getEmail(),
+                clienterow.getEndereco(),
+                clienterow.getBairro(),
                 clienterow.getCidade().getIdCidade()
             });
 
         }
         session.getTransaction().commit();
 
+    }
+
+    public void editarCliente() {
+
+        Cliente cli = new Cliente();
+        Cidade cid = new Cidade();
+
+        cli.setIdCliente((Integer) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
+        cli.setNome((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 1));
+        cli.setFone((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 2));
+        cli.setEmail((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 3));
+        cli.setEndereco((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 4));
+        cli.setBairro((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 5));
+        cid.setIdCidade((Integer) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 6));
+        cli.setCidade(cid);
+
+        // return cli;
     }
 
     /**
@@ -239,6 +254,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         campoBairroCliente.setEnabled(false);
 
+        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         comboCidadeCliente.setEnabled(false);
         comboCidadeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,35 +286,38 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCliente1Layout.createSequentialGroup()
                         .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
-                        .addGap(21, 21, 21)
-                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpCliente1Layout.createSequentialGroup()
-                                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(campoEmailCliente)
-                                    .addComponent(campoBairroCliente)
-                                    .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6))
+                                .addGap(21, 21, 21)
                                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoFoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jpCliente1Layout.createSequentialGroup()
-                                        .addComponent(botaoNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(botaoSalvarCliente))
-                                    .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(campoNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(campoEmailCliente)
+                                            .addComponent(campoBairroCliente)
+                                            .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel7))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(campoFoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jpCliente1Layout.createSequentialGroup()
+                                                .addComponent(botaoNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(botaoSalvarCliente))
+                                            .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(campoNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(jpCliente1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpCliente1Layout.setVerticalGroup(
             jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +349,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvarCliente)
                     .addComponent(botaoNovoCliente))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jButton1.setText("Buscar");
@@ -342,13 +361,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Fone", "Email", "Cidade"
+                "ID", "Nome", "Fone", "Email", "Endereço", "Bairro", "Cidade"
             }
         ));
         tabelaCliente.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -437,8 +456,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addComponent(jpCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jpCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaoFechar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(botaoFechar)
+                .addContainerGap())
         );
 
         pack();
@@ -469,7 +489,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void comboCidadeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCidadeClienteActionPerformed
 
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCidadeClienteActionPerformed
 
@@ -482,7 +501,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void botaoExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirClienteActionPerformed
 
-        deletarCliente();
+        excluirCliente();
 
     }//GEN-LAST:event_botaoExcluirClienteActionPerformed
 
@@ -502,7 +521,17 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tabelaClienteFocusGained
 
     private void botaoEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarClienteActionPerformed
-        // TODO add your handling code here:
+
+        Cidade cid = new Cidade();
+        Cliente cli = new Cliente();
+        cli.setIdCliente((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
+        cid.setIdCidade((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 6));
+        cli.setCidade(cid);
+                
+        EditarCliente edit = new EditarCliente();
+        edit.popular(cli);
+        edit.setVisible(true);
+
     }//GEN-LAST:event_botaoEditarClienteActionPerformed
 
     private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed

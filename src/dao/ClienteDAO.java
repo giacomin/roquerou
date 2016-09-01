@@ -6,10 +6,15 @@
 package dao;
 
 import config.HibernateUtil;
+import entidades.Cidade;
 import entidades.Cliente;
+import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import telas.TelaCliente;
 
 /**
  *
@@ -17,7 +22,6 @@ import org.hibernate.Transaction;
  */
 public class ClienteDAO implements IDAO {
 
-    
     @Override
     public String salvar(Object o) {
 
@@ -38,7 +42,6 @@ public class ClienteDAO implements IDAO {
         }
     }
 
-
     public String deletar(Object d) {
 
         Session sessao = null;
@@ -58,5 +61,26 @@ public class ClienteDAO implements IDAO {
             sessao.close();
         }
     }
+
+    public String editar(Object o) {
+
+        Session sessao = null;
+        try {
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+
+            sessao.update(o);
+            t.commit();
+
+            return null;
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            return he.toString();
+        } finally {
+            sessao.close();
+        }
+    }
+
+
 
 }
