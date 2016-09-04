@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2016 23:28:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Fornecedor" table="fornecedor" catalog="roquedb" optimistic-lock="version">
+        <id name="idFornecedor" type="java.lang.Integer">
+            <column name="id_fornecedor" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cidade" class="entidades.Cidade" fetch="select">
+            <column name="id_cidade" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="100" not-null="true" />
+        </property>
+        <property name="fone" type="string">
+            <column name="fone" length="25" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <property name="cnpj" type="int">
+            <column name="cnpj" not-null="true" />
+        </property>
+        <property name="endereco" type="string">
+            <column name="endereco" length="150" not-null="true" />
+        </property>
+        <property name="bairro" type="string">
+            <column name="bairro" length="50" />
+        </property>
+        <set name="compras" table="compra" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_fornecedor" not-null="true" />
+            </key>
+            <one-to-many class="entidades.Compra" />
+        </set>
+    </class>
+</hibernate-mapping>

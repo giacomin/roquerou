@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2016 23:28:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Pedido" table="pedido" catalog="roquedb" optimistic-lock="version">
+        <id name="idPedido" type="java.lang.Integer">
+            <column name="id_pedido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="entidades.Cliente" fetch="select">
+            <column name="id_cliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="entidades.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
+        <property name="data" type="date">
+            <column name="data" length="10" not-null="true" />
+        </property>
+        <property name="valorTotal" type="float">
+            <column name="valor_total" precision="12" scale="0" not-null="true" />
+        </property>
+        <set name="itensPedidos" table="itens_pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pedido" not-null="true" />
+            </key>
+            <one-to-many class="entidades.ItensPedido" />
+        </set>
+    </class>
+</hibernate-mapping>

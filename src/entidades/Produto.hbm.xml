@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2016 23:28:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Produto" table="produto" catalog="roquedb" optimistic-lock="version">
+        <id name="idProduto" type="java.lang.Integer">
+            <column name="id_produto" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="100" not-null="true" />
+        </property>
+        <property name="descricao" type="string">
+            <column name="descricao" length="65535" />
+        </property>
+        <property name="unidade" type="string">
+            <column name="unidade" length="25" not-null="true" />
+        </property>
+        <property name="valorUnit" type="float">
+            <column name="valor_unit" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="estoque" type="java.lang.Integer">
+            <column name="estoque" />
+        </property>
+        <set name="compras" table="compra" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_produto" not-null="true" />
+            </key>
+            <one-to-many class="entidades.Compra" />
+        </set>
+        <set name="itensPedidos" table="itens_pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_produto" not-null="true" />
+            </key>
+            <one-to-many class="entidades.ItensPedido" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2016 23:28:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Compra" table="compra" catalog="roquedb" optimistic-lock="version">
+        <id name="idCompra" type="java.lang.Integer">
+            <column name="id_compra" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fornecedor" class="entidades.Fornecedor" fetch="select">
+            <column name="id_fornecedor" not-null="true" />
+        </many-to-one>
+        <many-to-one name="produto" class="entidades.Produto" fetch="select">
+            <column name="id_produto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="entidades.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
+        <property name="quantidade" type="int">
+            <column name="quantidade" not-null="true" />
+        </property>
+        <property name="custoUnit" type="float">
+            <column name="custo_unit" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="data" type="date">
+            <column name="data" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
