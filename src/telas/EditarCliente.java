@@ -121,8 +121,8 @@ public class EditarCliente extends javax.swing.JFrame {
         edEmail = new javax.swing.JTextField();
         edBairro = new javax.swing.JTextField();
         edEndereco = new javax.swing.JTextField();
-        edFone = new javax.swing.JTextField();
         edCombo = new javax.swing.JComboBox<>();
+        edFone = new javax.swing.JFormattedTextField();
         jButton2 = new javax.swing.JButton();
         botaoEditarCliente = new javax.swing.JButton();
 
@@ -155,13 +155,13 @@ public class EditarCliente extends javax.swing.JFrame {
             }
         });
 
-        edFone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edFoneActionPerformed(evt);
-            }
-        });
-
         edCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+
+        try {
+            edFone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,20 +173,20 @@ public class EditarCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(edBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(edFone, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                        .addComponent(edEndereco))
-                                    .addComponent(edNome, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(edCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(edCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edNome, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edFone, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(81, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,10 +295,6 @@ public class EditarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoEditarClienteActionPerformed
 
-    private void edFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edFoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edFoneActionPerformed
-
     private void edCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edCodigoActionPerformed
@@ -346,7 +342,7 @@ public class EditarCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> edCombo;
     private javax.swing.JTextField edEmail;
     private javax.swing.JTextField edEndereco;
-    private javax.swing.JTextField edFone;
+    private javax.swing.JFormattedTextField edFone;
     private javax.swing.JTextField edNome;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
