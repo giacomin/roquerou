@@ -31,6 +31,9 @@ public class Produto  implements java.io.Serializable {
      private Integer estoque;
      private Set compras = new HashSet(0);
      private Set itensPedidos = new HashSet(0);
+     //Pesquisa
+     private String comboPesquisa;
+     private String campoPesquisa;
 
     public Produto() {
     }
@@ -131,6 +134,22 @@ public class Produto  implements java.io.Serializable {
         this.itensPedidos = itensPedidos;
     }
 
+    public void setComboPesquisaProduto(String comboPesquisaProduto) {
+        this.comboPesquisa = comboPesquisaProduto;
+    }
+    
+    public void setCampoPesquisaProduto(String campoPesquisaProduto) {
+        this.campoPesquisa = campoPesquisaProduto;
+    }
+    
+    
+    public String getComboPesquisaProduto() {
+        return comboPesquisa;
+    }
+    
+    public String getCampoPesquisaProduto() {
+        return campoPesquisa;
+    }
 
 
 

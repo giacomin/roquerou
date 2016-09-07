@@ -1,2 +1,4 @@
 /nbproject/private/
 /src/hibernate.cfg.xml
+/build/
+/dist/
