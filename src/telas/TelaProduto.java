@@ -1,39 +1,46 @@
 package telas;
 
-import dao.CidadeDAO;
-import entidades.Cidade;
+import dao.ProdutoDAO;
+import entidades.Produto;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author giacomin
  */
-public class TelaCidade extends javax.swing.JInternalFrame {
+public class TelaProduto extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form TelaCidade
+     * Creates new form TelaProduto
      */
-    public TelaCidade() {
+    public TelaProduto() {
         initComponents();
     }
 
-    // Método salvarCidade()
-    public void salvarCidade() {
+    // Método salvarProduto()
+    public void salvarProduto() {
 
-        Cidade cid = new Cidade();
+        Produto prod = new Produto();
 
         if ("".equals(campoId.getText())) {
-            cid.setNome(campoNome.getText());
-            cid.setUf((String) comboUF.getSelectedItem());
-            cid.setCep(Integer.parseInt(campoCEP.getText()));
+            // New Produto
+            prod.setNome(campoNome.getText());
+            prod.setDescricao(campoDescricao.getText());
+            prod.setUnidade(campoUnidade.getText());
+            prod.setValorUnit(Float.parseFloat(campoValorUnit.getText()));
+            //prod.setEstoque(Integer.parseInt(campoEstoque.getText()));
+
         } else {
-            cid.setIdCidade(Integer.parseInt(campoId.getText()));
-            cid.setNome(campoNome.getText());
-            cid.setUf((String) comboUF.getSelectedItem());
-            cid.setCep(Integer.parseInt(campoCEP.getText()));
+            // Updade Produto
+            prod.setIdProduto(Integer.parseInt(campoId.getText()));
+            prod.setNome(campoNome.getText());
+            prod.setDescricao(campoDescricao.getText());
+            prod.setUnidade(campoUnidade.getText());
+            prod.setValorUnit(Float.parseFloat(campoValorUnit.getText()));
+            //prod.setEstoque(Integer.parseInt(campoEstoque.getText()));
         }
 
-        String retorno = new CidadeDAO().salvar(cid);
+        String retorno = new ProdutoDAO().salvar(prod);
 
         if (retorno == null) {
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -43,82 +50,131 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         campoId.setText("");
         campoNome.setText("");
-        campoCEP.setText("");
+        campoDescricao.setText("");
+        campoUnidade.setText("");
+        campoValorUnit.setText("");
+        campoEstoque.setText("");
 
         campoNome.setEnabled(false);
-        campoCEP.setEnabled(false);
-        comboUF.setEnabled(false);
+        campoDescricao.setEnabled(false);
+        campoUnidade.setEnabled(false);
+        campoValorUnit.setEnabled(false);
+        campoEstoque.setEnabled(false);
 
         botaoSalvar.setEnabled(false);
         botaoNovo.setEnabled(true);
     }
 
-    // Método listaCidades()
-    public void listaCidades() {
+    // Método listaProdutos()
+    public void listaProdutos() {
 
         botaoSalvar.setEnabled(false);
         botaoEditar.setEnabled(false);
         botaoExcluir.setEnabled(false);
         botaoNovo.setEnabled(true);
         campoNome.setText("");
-        campoCEP.setText("");
+
+        campoDescricao.setText("");
+        campoUnidade.setText("");
+        campoValorUnit.setText("");
+        campoEstoque.setText("");
+
         campoNome.setEnabled(false);
-        comboUF.setEnabled(false);
-        campoCEP.setEnabled(false);
+        campoDescricao.setEnabled(false);
+        campoUnidade.setEnabled(false);
+        campoValorUnit.setEnabled(false);
+        campoEstoque.setEnabled(false);
 
-        CidadeDAO pesquisa = new CidadeDAO();
-        Cidade cid = new Cidade();
+        ProdutoDAO pesquisa = new ProdutoDAO();
+        Produto prod = new Produto();
 
-        String comboPesquisa = comboPesquisaCidade.getSelectedItem().toString();
-        String campoPesquisa = campoPesquisaCidade.getText();
+        String comboPesquisa = comboPesquisaProduto.getSelectedItem().toString();
+        String campoPesquisa = campoPesquisaProduto.getText();
 
-        cid.setComboPesquisaCidade(comboPesquisa);
-        cid.setCampoPesquisaCidade(campoPesquisa);
+        prod.setComboPesquisaProduto(comboPesquisa);
+        prod.setCampoPesquisaProduto(campoPesquisa);
 
-        pesquisa.listarCidade(tabelaCidade, cid);
+        pesquisa.listarProduto(tabelaProduto, prod);
     }
 
-    // Método cadastrarCidade(): limpa campos e deixa apto a salvar
-    public void cadastrarCidade() {
+    // Método editarProduto()
+    public void editarProduto() {
 
-        tabelaCidade.clearSelection();
+        botaoNovo.setEnabled(false);
+        botaoSalvar.setEnabled(true);
 
-        botaoEditar.setEnabled(false);
-        botaoExcluir.setEnabled(false);
+        int row = tabelaProduto.getSelectedRow();
+
+        Object id = tabelaProduto.getValueAt(row, 0);
+        Object nome = tabelaProduto.getValueAt(row, 1);
+        Object descricao = tabelaProduto.getValueAt(row, 2);
+        Object unidade = tabelaProduto.getValueAt(row, 3);
+        Object valorunit = tabelaProduto.getValueAt(row, 4);
+        //Object estoque = tabelaProduto.getValueAt(row, 5);
+
+        Produto prod = new Produto();
+
+        prod.setIdProduto(Integer.parseInt(id.toString()));
+        prod.setNome(nome.toString());
+        prod.setDescricao(descricao.toString());
+        prod.setUnidade(unidade.toString());
+        prod.setValorUnit(Float.parseFloat(valorunit.toString()));
+        //prod.setEstoque(Integer.parseInt(estoque.toString()));
+
+        campoId.setText(prod.getIdProduto().toString());
+        campoNome.setText(prod.getNome());
+        campoDescricao.setText(prod.getDescricao());
+        campoUnidade.setText(prod.getUnidade());
+        campoValorUnit.setText(Float.toString(prod.getValorUnit()));
+        //campoEstoque.setText(prod.getEstoque().toString());
 
         campoNome.setEnabled(true);
-        campoCEP.setEnabled(true);
-        comboUF.setEnabled(true);
+        campoDescricao.setEnabled(true);
+        campoUnidade.setEnabled(true);
+        campoValorUnit.setEnabled(true);
+        //campoEstoque.setEnabled(true);
+    }
 
+    // Método cadastrarProduto(): limpa campos e deixa apto a salvar
+    public void cadastrarProduto() {
+        tabelaProduto.clearSelection();
+        botaoEditar.setEnabled(false);
+        botaoExcluir.setEnabled(false);
+        campoNome.setEnabled(true);
+        campoDescricao.setEnabled(true);
+        campoUnidade.setEnabled(true);
+        campoValorUnit.setEnabled(true);
         botaoSalvar.setEnabled(true);
         botaoNovo.setEnabled(false);
     }
 
-    public void excluirCidade() {
-
+    public void excluirProduto() {
         if (JOptionPane.showConfirmDialog(null, "Deseja mesmo remover o registro?", "Cuidado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            int row = tabelaProduto.getSelectedRow();
 
-            int row = tabelaCidade.getSelectedRow();
+            Object id = tabelaProduto.getValueAt(row, 0);
+            Object nome = tabelaProduto.getValueAt(row, 1);
+            Object descricao = tabelaProduto.getValueAt(row, 2);
+            Object unidade = tabelaProduto.getValueAt(row, 3);
+            Object valorunit = tabelaProduto.getValueAt(row, 4);
+            Object estoque = tabelaProduto.getValueAt(row, 5);
 
-            Object id = tabelaCidade.getValueAt(row, 0);
-            Object nome = tabelaCidade.getValueAt(row, 1);
-            Object cep = tabelaCidade.getValueAt(row, 2);
-            Object uf = tabelaCidade.getValueAt(row, 3);
+            ProdutoDAO prodDAO = new ProdutoDAO();
+            Produto prod = new Produto();
 
-            CidadeDAO cidDAO = new CidadeDAO();
-            Cidade cid = new Cidade();
+            prod.setIdProduto(Integer.parseInt(id.toString()));
+            prod.setNome(nome.toString());
+            prod.setDescricao(descricao.toString());
+            prod.setUnidade(unidade.toString());
+            prod.setValorUnit(Float.parseFloat(valorunit.toString()));
+            //prod.setEstoque(Integer.parseInt(estoque.toString()));
 
-            cid.setIdCidade(Integer.parseInt(id.toString()));
-            cid.setNome(nome.toString());
-            cid.setCep(Integer.parseInt(cep.toString()));
-            cid.setUf(uf.toString());
-
-            String retorno = cidDAO.remover(cid);
+            String retorno = prodDAO.remover(prod);
 
             if (retorno == null) {
-                JOptionPane.showMessageDialog(null, "Cidade removida com sucesso!");
+                JOptionPane.showMessageDialog(null, "Produto removida com sucesso!");
             } else {
-                JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover a cidade.");
+                JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover a prodade.");
             }
         } else {
             // Não faz nada.
@@ -127,8 +183,6 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
     ;
    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -140,47 +194,41 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         campoId = new javax.swing.JTextField();
         campoNome = new javax.swing.JTextField();
-        comboUF = new javax.swing.JComboBox();
-        campoCEP = new javax.swing.JTextField();
         botaoNovo = new javax.swing.JButton();
         botaoSalvar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        campoDescricao = new javax.swing.JTextField();
+        campoUnidade = new javax.swing.JTextField();
+        campoValorUnit = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        campoEstoque = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        comboPesquisaCidade = new javax.swing.JComboBox();
-        campoPesquisaCidade = new javax.swing.JTextField();
+        comboPesquisaProduto = new javax.swing.JComboBox();
+        campoPesquisaProduto = new javax.swing.JTextField();
         botaoBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaCidade = new javax.swing.JTable();
+        tabelaProduto = new javax.swing.JTable();
         botaoExcluir = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
         botaoFechar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setClosable(true);
-        setTitle("Cidade");
+        setTitle("Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Nome:");
 
-        jLabel2.setText("UF:");
+        jLabel2.setText("Unidade:");
 
-        jLabel3.setText("CEP:");
+        jLabel3.setText("Valor Unit:");
 
         jLabel4.setText("Código:");
 
         campoId.setEnabled(false);
 
         campoNome.setEnabled(false);
-
-        comboUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RS", "SC", "PR" }));
-        comboUF.setEnabled(false);
-        comboUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboUFActionPerformed(evt);
-            }
-        });
-
-        campoCEP.setEnabled(false);
 
         botaoNovo.setText("Novo");
         botaoNovo.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -202,6 +250,18 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Descrição:");
+
+        campoDescricao.setEnabled(false);
+
+        campoUnidade.setEnabled(false);
+
+        campoValorUnit.setEnabled(false);
+
+        jLabel6.setText("Estoque:");
+
+        campoEstoque.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -216,22 +276,30 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel5)))
+                            .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(comboUF, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCEP))
+                                .addComponent(campoValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoDescricao)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(campoNome)))
+                                .addComponent(campoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(7, 392, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,13 +311,17 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(campoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(comboUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(campoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,10 +331,10 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        comboPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "UF" }));
-        comboPesquisaCidade.addActionListener(new java.awt.event.ActionListener() {
+        comboPesquisaProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome" }));
+        comboPesquisaProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboPesquisaCidadeActionPerformed(evt);
+                comboPesquisaProdutoActionPerformed(evt);
             }
         });
 
@@ -275,25 +347,33 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
-        tabelaCidade.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "CEP", "UF"
+                "Código", "Nome", "Descrição", "Unidade", "Valor Unit.", "Estoque"
             }
-        ));
-        tabelaCidade.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaCidadeMouseClicked(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaCidade);
+        tabelaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProdutoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaProduto);
 
         botaoExcluir.setText("Excluir");
         botaoExcluir.setEnabled(false);
@@ -323,9 +403,9 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(comboPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoPesquisaCidade)
+                        .addComponent(campoPesquisaProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -333,7 +413,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                         .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -341,8 +421,8 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,12 +446,13 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(botaoFechar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 710, Short.MAX_VALUE)
+                        .addComponent(botaoFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -381,21 +462,21 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        salvarCidade();
-        listaCidades();
+        salvarProduto();
+        listaProdutos();
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
-        listaCidades();
+        listaProdutos();
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
     private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
@@ -403,55 +484,27 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharActionPerformed
 
     private void botaoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNovoActionPerformed
-        cadastrarCidade();
+        cadastrarProduto();
     }//GEN-LAST:event_botaoNovoActionPerformed
 
-    private void comboUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboUFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboUFActionPerformed
-
-    private void comboPesquisaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPesquisaCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboPesquisaCidadeActionPerformed
-
-    private void tabelaCidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCidadeMouseClicked
+    private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
         botaoEditar.setEnabled(true);
         botaoExcluir.setEnabled(true);
-    }//GEN-LAST:event_tabelaCidadeMouseClicked
+    }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
-        excluirCidade();
-        listaCidades();
+        excluirProduto();
+        listaProdutos();
     }//GEN-LAST:event_botaoExcluirActionPerformed
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        
-        botaoNovo.setEnabled(false);
-        botaoSalvar.setEnabled(true);
+        editarProduto();
 
-        int row = tabelaCidade.getSelectedRow();
-
-        Object id = tabelaCidade.getValueAt(row, 0);
-        Object nome = tabelaCidade.getValueAt(row, 1);
-        Object cep = tabelaCidade.getValueAt(row, 2);
-        Object uf = tabelaCidade.getValueAt(row, 3);
-
-        Cidade cid = new Cidade();
-
-        cid.setIdCidade(Integer.parseInt(id.toString()));
-        cid.setNome(nome.toString());
-        cid.setCep(Integer.parseInt(cep.toString()));
-        cid.setUf(uf.toString());
-
-        campoId.setText(cid.getIdCidade().toString());
-        campoNome.setText(cid.getNome());
-        campoCEP.setText(cid.getCep().toString());
-        comboUF.setSelectedItem(cep);
-
-        campoNome.setEnabled(true);
-        campoCEP.setEnabled(true);
-        comboUF.setEnabled(true);
 
     }//GEN-LAST:event_botaoEditarActionPerformed
+
+    private void comboPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPesquisaProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboPesquisaProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -461,19 +514,23 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     private javax.swing.JButton botaoFechar;
     private javax.swing.JButton botaoNovo;
     private javax.swing.JButton botaoSalvar;
-    private javax.swing.JTextField campoCEP;
+    private javax.swing.JTextField campoDescricao;
+    private javax.swing.JTextField campoEstoque;
     private javax.swing.JTextField campoId;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JTextField campoPesquisaCidade;
-    private javax.swing.JComboBox comboPesquisaCidade;
-    private javax.swing.JComboBox comboUF;
+    private javax.swing.JTextField campoPesquisaProduto;
+    private javax.swing.JTextField campoUnidade;
+    private javax.swing.JTextField campoValorUnit;
+    private javax.swing.JComboBox comboPesquisaProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaCidade;
+    private javax.swing.JTable tabelaProduto;
     // End of variables declaration//GEN-END:variables
 }

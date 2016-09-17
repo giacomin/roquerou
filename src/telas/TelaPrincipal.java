@@ -36,10 +36,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuArquivo = new javax.swing.JMenu();
         itemArquivoSair = new javax.swing.JMenuItem();
         menuCadastro = new javax.swing.JMenu();
-        itemCadastroCidade = new javax.swing.JMenuItem();
         ItemCadastroCliente = new javax.swing.JMenuItem();
+        itemCadastroProduto = new javax.swing.JMenuItem();
+        itemCadastroCidade = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Roquerou");
 
         jDesktopPane1PRINCIPAL.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -47,11 +49,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1PRINCIPAL.setLayout(jDesktopPane1PRINCIPALLayout);
         jDesktopPane1PRINCIPALLayout.setHorizontalGroup(
             jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 826, Short.MAX_VALUE)
+            .addGap(0, 1158, Short.MAX_VALUE)
         );
         jDesktopPane1PRINCIPALLayout.setVerticalGroup(
             jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
         menuArquivo.setText("Arquivo");
@@ -69,14 +71,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuCadastro.setText("Cadastro");
 
-        itemCadastroCidade.setText("Cidade");
-        itemCadastroCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemCadastroCidadeActionPerformed(evt);
-            }
-        });
-        menuCadastro.add(itemCadastroCidade);
-
         ItemCadastroCliente.setText("Cliente");
         ItemCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +78,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(ItemCadastroCliente);
+
+        itemCadastroProduto.setText("Produto");
+        itemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCadastroProdutoActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(itemCadastroProduto);
+
+        itemCadastroCidade.setText("Cidade");
+        itemCadastroCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCadastroCidadeActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(itemCadastroCidade);
 
         menuPrincipal.add(menuCadastro);
 
@@ -113,9 +123,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1PRINCIPAL.add(telaCidade);
         telaCidade.moveToFront();
         
-        
-        
-        
     }//GEN-LAST:event_itemCadastroCidadeActionPerformed
 
     private void itemArquivoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArquivoSairActionPerformed
@@ -128,9 +135,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaCliente.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaCliente);
         telaCliente.moveToFront();
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_ItemCadastroClienteActionPerformed
+
+    private void itemCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroProdutoActionPerformed
+        TelaProduto telaProduto = new TelaProduto();
+        telaProduto.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaProduto);
+        telaProduto.moveToFront();
+    }//GEN-LAST:event_itemCadastroProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +186,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem ItemCadastroCliente;
     private javax.swing.JMenuItem itemArquivoSair;
     private javax.swing.JMenuItem itemCadastroCidade;
+    private javax.swing.JMenuItem itemCadastroProduto;
     private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
