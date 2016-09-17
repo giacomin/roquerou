@@ -15,7 +15,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
+        
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
+
+       
     }
 
     /**
@@ -27,7 +31,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane1PRINCIPAL = new javax.swing.JDesktopPane();
         menuPrincipal = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         itemArquivoSair = new javax.swing.JMenuItem();
@@ -37,16 +41,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setBackground(new java.awt.Color(0, 102, 102));
+        jDesktopPane1PRINCIPAL.setBackground(new java.awt.Color(0, 102, 102));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jDesktopPane1PRINCIPALLayout = new javax.swing.GroupLayout(jDesktopPane1PRINCIPAL);
+        jDesktopPane1PRINCIPAL.setLayout(jDesktopPane1PRINCIPALLayout);
+        jDesktopPane1PRINCIPALLayout.setHorizontalGroup(
+            jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 826, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jDesktopPane1PRINCIPALLayout.setVerticalGroup(
+            jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 557, Short.MAX_VALUE)
         );
 
@@ -90,13 +94,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1PRINCIPAL)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1PRINCIPAL)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -106,7 +110,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void itemCadastroCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroCidadeActionPerformed
         TelaCidade telaCidade = new TelaCidade();
         telaCidade.setVisible(true);
-        jDesktopPane1.add(telaCidade);
+        jDesktopPane1PRINCIPAL.add(telaCidade);
         telaCidade.moveToFront();
         
         
@@ -122,7 +126,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setVisible(true);
-        jDesktopPane1.add(telaCliente);
+        jDesktopPane1PRINCIPAL.add(telaCliente);
         telaCliente.moveToFront();
         
 // TODO add your handling code here:
@@ -159,6 +163,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
+                
             }
         });
     }
@@ -167,7 +172,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem ItemCadastroCliente;
     private javax.swing.JMenuItem itemArquivoSair;
     private javax.swing.JMenuItem itemCadastroCidade;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;

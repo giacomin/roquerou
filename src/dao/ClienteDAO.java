@@ -30,7 +30,7 @@ public class ClienteDAO implements IDAO {
             sessao = HibernateUtil.getSessionFactory().openSession();
             Transaction t = sessao.beginTransaction();
 
-            sessao.save(o);
+            sessao.saveOrUpdate(o);
             t.commit();
 
             return null;
@@ -61,26 +61,5 @@ public class ClienteDAO implements IDAO {
             sessao.close();
         }
     }
-
-    public String editar(Object o) {
-
-        Session sessao = null;
-        try {
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
-            sessao.update(o);
-            t.commit();
-
-            return null;
-        } catch (HibernateException he) {
-            he.printStackTrace();
-            return he.toString();
-        } finally {
-            sessao.close();
-        }
-    }
-
-
 
 }

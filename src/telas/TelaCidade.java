@@ -428,6 +428,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         listaCidades();
     }//GEN-LAST:event_botaoExcluirActionPerformed
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
+        
         botaoNovo.setEnabled(false);
         botaoSalvar.setEnabled(true);
 
