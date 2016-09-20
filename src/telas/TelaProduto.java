@@ -2,6 +2,7 @@ package telas;
 
 import dao.ProdutoDAO;
 import entidades.Produto;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,56 +18,89 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    // Método salvarProduto()
+    // *** Método salvarProduto() ***
     public void salvarProduto() {
 
         Produto prod = new Produto();
 
-        if ("".equals(campoId.getText())) {
-            // New Produto
-            prod.setNome(campoNome.getText());
-            prod.setDescricao(campoDescricao.getText());
-            prod.setUnidade(campoUnidade.getText());
-            prod.setValorUnit(Float.parseFloat(campoValorUnit.getText()));
-            //prod.setEstoque(Integer.parseInt(campoEstoque.getText()));
+        campoNome.setBackground(Color.white);
+        campoUnidade.setBackground(Color.white);
+        campoValorUnit.setBackground(Color.white);
 
-        } else {
-            // Updade Produto
-            prod.setIdProduto(Integer.parseInt(campoId.getText()));
-            prod.setNome(campoNome.getText());
-            prod.setDescricao(campoDescricao.getText());
-            prod.setUnidade(campoUnidade.getText());
-            prod.setValorUnit(Float.parseFloat(campoValorUnit.getText()));
-            //prod.setEstoque(Integer.parseInt(campoEstoque.getText()));
+        boolean nomeProduto = prod.validaNomeProduto(campoNome.getText());
+        boolean nomeUnidade = prod.validaUnidadeProduto(campoUnidade.getText());
+        boolean valorProduto = prod.validaValorProduto(campoValorUnit.getText());
+
+        // Se todos os campos estiverem OK...
+        if (nomeProduto == true && nomeUnidade == true && valorProduto == true) {
+
+            // Quando for um novo produto
+            if ("".equals(campoId.getText())) {
+                prod.setNome(campoNome.getText());
+                prod.setDescricao(campoDescricao.getText());
+                prod.setUnidade(campoUnidade.getText());
+                prod.setValorUnit(Float.parseFloat(campoValorUnit.getText()));
+                //prod.setEstoque(Integer.parseInt(campoEstoque.getText()));
+
+            } // Quando for uma edição de produto
+            else {
+                prod.setIdProduto(Integer.parseInt(campoId.getText()));
+                prod.setNome(campoNome.getText());
+                prod.setDescricao(campoDescricao.getText());
+                prod.setUnidade(campoUnidade.getText());
+                prod.setValorUnit(Float.parseFloat(campoValorUnit.getText()));
+                //prod.setEstoque(Integer.parseInt(campoEstoque.getText()));
+            }
+
+            String retorno = new ProdutoDAO().salvar(prod);
+
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
+            }
+
+            campoId.setText("");
+            campoNome.setText("");
+            campoDescricao.setText("");
+            campoUnidade.setText("");
+            campoValorUnit.setText("");
+            campoEstoque.setText("");
+
+            campoNome.setEnabled(false);
+            campoDescricao.setEnabled(false);
+            campoUnidade.setEnabled(false);
+            campoValorUnit.setEnabled(false);
+            campoEstoque.setEnabled(false);
+
+            botaoSalvar.setEnabled(false);
+            botaoNovo.setEnabled(true);
+
+            pesquisarProduto();
+
+        } // Caso contrário (se a validação não estiver OK)...
+        else {
+            if (prod.validaNomeProduto(campoNome.getText()) == false) {
+                campoNome.setBackground(Color.pink);
+            }
+            if (prod.validaUnidadeProduto(campoUnidade.getText()) == false) {
+                campoUnidade.setBackground(Color.pink);
+            }
+
+            if (prod.validaValorProduto(campoValorUnit.getText()) == false) {
+                campoValorUnit.setBackground(Color.pink);
+            }
+
+            JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
         }
-
-        String retorno = new ProdutoDAO().salvar(prod);
-
-        if (retorno == null) {
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
-        }
-
-        campoId.setText("");
-        campoNome.setText("");
-        campoDescricao.setText("");
-        campoUnidade.setText("");
-        campoValorUnit.setText("");
-        campoEstoque.setText("");
-
-        campoNome.setEnabled(false);
-        campoDescricao.setEnabled(false);
-        campoUnidade.setEnabled(false);
-        campoValorUnit.setEnabled(false);
-        campoEstoque.setEnabled(false);
-
-        botaoSalvar.setEnabled(false);
-        botaoNovo.setEnabled(true);
     }
 
-    // Método listaProdutos()
-    public void listaProdutos() {
+    // *** Método pesquisarProdutos() ***
+    public void pesquisarProduto() {
+
+        campoNome.setBackground(Color.white);
+        campoUnidade.setBackground(Color.white);
+        campoValorUnit.setBackground(Color.white);
 
         botaoSalvar.setEnabled(false);
         botaoEditar.setEnabled(false);
@@ -97,7 +131,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         pesquisa.listarProduto(tabelaProduto, prod);
     }
 
-    // Método editarProduto()
+    // *** Método editarProduto() ***
     public void editarProduto() {
 
         botaoNovo.setEnabled(false);
@@ -135,8 +169,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         //campoEstoque.setEnabled(true);
     }
 
-    // Método cadastrarProduto(): limpa campos e deixa apto a salvar
-    public void cadastrarProduto() {
+    // *** Método novoProduto(): limpa campos e deixa apto a salvar ***
+    public void novoProduto() {
         tabelaProduto.clearSelection();
         botaoEditar.setEnabled(false);
         botaoExcluir.setEnabled(false);
@@ -172,16 +206,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             String retorno = prodDAO.remover(prod);
 
             if (retorno == null) {
-                JOptionPane.showMessageDialog(null, "Produto removida com sucesso!");
+                JOptionPane.showMessageDialog(null, "Produto removido com sucesso!");
             } else {
-                JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover a prodade.");
+                JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover o produto.");
             }
-        } else {
-            // Não faz nada.
         }
     }
-
-    ;
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -199,9 +229,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         campoDescricao = new javax.swing.JTextField();
         campoUnidade = new javax.swing.JTextField();
-        campoValorUnit = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         campoEstoque = new javax.swing.JTextField();
+        campoValorUnit = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         comboPesquisaProduto = new javax.swing.JComboBox();
         campoPesquisaProduto = new javax.swing.JTextField();
@@ -222,7 +252,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Unidade:");
 
-        jLabel3.setText("Valor Unit:");
+        jLabel3.setText("Valor R$:");
 
         jLabel4.setText("Código:");
 
@@ -230,6 +260,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
         campoNome.setEnabled(false);
 
+        botaoNovo.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_add.png")); // NOI18N
         botaoNovo.setText("Novo");
         botaoNovo.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoNovo.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -240,6 +271,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoSalvar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/dialog_ok_apply.png")); // NOI18N
         botaoSalvar.setText("Salvar");
         botaoSalvar.setEnabled(false);
         botaoSalvar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -256,11 +288,11 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
         campoUnidade.setEnabled(false);
 
-        campoValorUnit.setEnabled(false);
-
         jLabel6.setText("Estoque:");
 
         campoEstoque.setEnabled(false);
+
+        campoValorUnit.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -268,38 +300,36 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6)
+                    .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(22, 22, 22)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel5)))
-                            .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDescricao)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(campoValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(campoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(campoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,11 +347,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
                     .addComponent(campoValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(campoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(campoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,12 +363,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         comboPesquisaProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome" }));
-        comboPesquisaProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboPesquisaProdutoActionPerformed(evt);
-            }
-        });
 
+        botaoBuscar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_find.png")); // NOI18N
         botaoBuscar.setText("Buscar");
         botaoBuscar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoBuscar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -357,7 +384,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Descrição", "Unidade", "Valor Unit.", "Estoque"
+                "Cód.", "Nome", "Descrição", "Unid.", "Valor Unit.", "Estoque"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -374,7 +401,16 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tabelaProduto);
+        if (tabelaProduto.getColumnModel().getColumnCount() > 0) {
+            tabelaProduto.getColumnModel().getColumn(0).setMaxWidth(60);
+            tabelaProduto.getColumnModel().getColumn(1).setMinWidth(150);
+            tabelaProduto.getColumnModel().getColumn(2).setMinWidth(250);
+            tabelaProduto.getColumnModel().getColumn(3).setMaxWidth(75);
+            tabelaProduto.getColumnModel().getColumn(4).setMaxWidth(75);
+            tabelaProduto.getColumnModel().getColumn(5).setMinWidth(65);
+        }
 
+        botaoExcluir.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/list_remove.png")); // NOI18N
         botaoExcluir.setText("Excluir");
         botaoExcluir.setEnabled(false);
         botaoExcluir.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -385,6 +421,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoEditar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit.png")); // NOI18N
         botaoEditar.setText("Editar");
         botaoEditar.setEnabled(false);
         botaoEditar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -405,9 +442,10 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(comboPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoPesquisaProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(campoPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,6 +470,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                     .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        botaoFechar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/editdelete.png")); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoFechar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -449,7 +488,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 710, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -464,7 +503,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -472,11 +511,10 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         salvarProduto();
-        listaProdutos();
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
-        listaProdutos();
+        pesquisarProduto();
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
     private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
@@ -484,7 +522,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharActionPerformed
 
     private void botaoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNovoActionPerformed
-        cadastrarProduto();
+        novoProduto();
     }//GEN-LAST:event_botaoNovoActionPerformed
 
     private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
@@ -494,17 +532,11 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         excluirProduto();
-        listaProdutos();
+        pesquisarProduto();
     }//GEN-LAST:event_botaoExcluirActionPerformed
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
         editarProduto();
-
-
     }//GEN-LAST:event_botaoEditarActionPerformed
-
-    private void comboPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPesquisaProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboPesquisaProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -520,7 +552,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoPesquisaProduto;
     private javax.swing.JTextField campoUnidade;
-    private javax.swing.JTextField campoValorUnit;
+    private javax.swing.JFormattedTextField campoValorUnit;
     private javax.swing.JComboBox comboPesquisaProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

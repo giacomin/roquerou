@@ -2,6 +2,8 @@ package telas;
 
 import dao.CidadeDAO;
 import entidades.Cidade;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,44 +19,121 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    // Método salvarCidade()
+    // *** Método novaCidade(): prepara os campos (limpa) ***
+    public void novaCidade() {
+
+        tabelaCidade.clearSelection();
+
+        botaoEditar.setEnabled(false);
+        botaoExcluir.setEnabled(false);
+
+        campoNome.setEnabled(true);
+        campoCEP.setEnabled(true);
+        comboUF.setEnabled(true);
+
+        botaoSalvar.setEnabled(true);
+        botaoNovo.setEnabled(false);
+    }
+
+    // *** Método salvarCidade() ***
     public void salvarCidade() {
 
         Cidade cid = new Cidade();
 
-        if ("".equals(campoId.getText())) {
-            cid.setNome(campoNome.getText());
-            cid.setUf((String) comboUF.getSelectedItem());
-            cid.setCep(Integer.parseInt(campoCEP.getText()));
-        } else {
-            cid.setIdCidade(Integer.parseInt(campoId.getText()));
-            cid.setNome(campoNome.getText());
-            cid.setUf((String) comboUF.getSelectedItem());
-            cid.setCep(Integer.parseInt(campoCEP.getText()));
+        boolean nomeCidade = cid.validaNomeCidade(campoNome.getText());
+        boolean cepCidade = cid.validaCepCidade(campoCEP.getText());
+
+        campoNome.setBackground(Color.white);
+        campoCEP.setBackground(Color.white);
+
+        // Se todos os campos estiverem OK...
+        if (nomeCidade == true && cepCidade == true) {
+
+            // Quando for uma nova cidade (o campo ID vai estar vazio)
+            if ("".equals(campoId.getText())) {
+                cid.setNome(campoNome.getText());
+                cid.setUf((String) comboUF.getSelectedItem());
+                cid.setCep(Integer.parseInt(campoCEP.getText()));
+
+            } // Quando for uma edição
+            else {
+                cid.setIdCidade(Integer.parseInt(campoId.getText()));
+                cid.setNome(campoNome.getText());
+                cid.setUf((String) comboUF.getSelectedItem());
+                cid.setCep(Integer.parseInt(campoCEP.getText()));
+
+            }
+
+            String retorno = new CidadeDAO().salvar(cid);
+
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
+            }
+
+            campoId.setText("");
+            campoNome.setText("");
+            campoCEP.setText("");
+            campoNome.setEnabled(false);
+            campoCEP.setEnabled(false);
+            comboUF.setEnabled(false);
+
+            botaoSalvar.setEnabled(false);
+            botaoNovo.setEnabled(true);
+
+            pesquisarCidade();
+
+        } // Caso contrário (se algum dos campos não estiver validado)...
+        else {
+            if (cid.validaNomeCidade(campoNome.getText()) == false) {
+                campoNome.setBackground(Color.pink);
+            }
+
+            if (cid.validaCepCidade(campoCEP.getText()) == false) {
+                campoCEP.setBackground(Color.pink);
+            }
+
+            JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
         }
-
-        String retorno = new CidadeDAO().salvar(cid);
-
-        if (retorno == null) {
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
-        }
-
-        campoId.setText("");
-        campoNome.setText("");
-        campoCEP.setText("");
-
-        campoNome.setEnabled(false);
-        campoCEP.setEnabled(false);
-        comboUF.setEnabled(false);
-
-        botaoSalvar.setEnabled(false);
-        botaoNovo.setEnabled(true);
     }
 
-    // Método listaCidades()
-    public void listaCidades() {
+    // *** Método editarCidade(): Carrega os campos na tela de salvamento ***
+    public void editarCidade() {
+
+        botaoNovo.setEnabled(false);
+        botaoSalvar.setEnabled(true);
+
+        campoNome.setBackground(Color.white);
+        campoCEP.setBackground(Color.white);
+
+        int row = tabelaCidade.getSelectedRow();
+
+        Object id = tabelaCidade.getValueAt(row, 0);
+        Object nome = tabelaCidade.getValueAt(row, 1);
+        Object cep = tabelaCidade.getValueAt(row, 2);
+        Object uf = tabelaCidade.getValueAt(row, 3);
+
+        Cidade cid = new Cidade();
+
+        cid.setIdCidade(Integer.parseInt(id.toString()));
+        cid.setNome(nome.toString());
+        cid.setUf(uf.toString());
+        cid.setCep(Integer.parseInt(cep.toString()));
+
+        campoId.setText(cid.getIdCidade().toString());
+        campoNome.setText(cid.getNome());
+        campoCEP.setText(cid.getCep().toString());
+        comboUF.setSelectedItem(cep);
+
+        campoNome.setEnabled(true);
+        campoCEP.setEnabled(true);
+        comboUF.setEnabled(true);
+    }
+
+    // *** Método pesquisarCidades() ***
+    public void pesquisarCidade() {
 
         botaoSalvar.setEnabled(false);
         botaoEditar.setEnabled(false);
@@ -78,22 +157,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         pesquisa.listarCidade(tabelaCidade, cid);
     }
 
-    // Método cadastrarCidade(): limpa campos e deixa apto a salvar
-    public void cadastrarCidade() {
-
-        tabelaCidade.clearSelection();
-
-        botaoEditar.setEnabled(false);
-        botaoExcluir.setEnabled(false);
-
-        campoNome.setEnabled(true);
-        campoCEP.setEnabled(true);
-        comboUF.setEnabled(true);
-
-        botaoSalvar.setEnabled(true);
-        botaoNovo.setEnabled(false);
-    }
-
+    // *** Método excluirCidade() ***
     public void excluirCidade() {
 
         if (JOptionPane.showConfirmDialog(null, "Deseja mesmo remover o registro?", "Cuidado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -120,15 +184,9 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover a cidade.");
             }
-        } else {
-            // Não faz nada.
         }
     }
 
-    ;
-   
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,14 +232,15 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         comboUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RS", "SC", "PR" }));
         comboUF.setEnabled(false);
-        comboUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboUFActionPerformed(evt);
+
+        campoCEP.setEnabled(false);
+        campoCEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoCEPKeyTyped(evt);
             }
         });
 
-        campoCEP.setEnabled(false);
-
+        botaoNovo.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_add.png")); // NOI18N
         botaoNovo.setText("Novo");
         botaoNovo.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoNovo.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -192,6 +251,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoSalvar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/dialog_ok_apply.png")); // NOI18N
         botaoSalvar.setText("Salvar");
         botaoSalvar.setEnabled(false);
         botaoSalvar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -207,31 +267,27 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(comboUF, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCEP))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(campoNome)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(7, 392, Short.MAX_VALUE)
-                        .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(botaoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(comboUF, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(campoNome))
+                .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,12 +316,8 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         comboPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "UF" }));
-        comboPesquisaCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboPesquisaCidadeActionPerformed(evt);
-            }
-        });
 
+        botaoBuscar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_find.png")); // NOI18N
         botaoBuscar.setText("Buscar");
         botaoBuscar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoBuscar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -294,7 +346,13 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tabelaCidade);
+        if (tabelaCidade.getColumnModel().getColumnCount() > 0) {
+            tabelaCidade.getColumnModel().getColumn(0).setMaxWidth(60);
+            tabelaCidade.getColumnModel().getColumn(1).setMinWidth(175);
+            tabelaCidade.getColumnModel().getColumn(3).setMaxWidth(30);
+        }
 
+        botaoExcluir.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/list_remove.png")); // NOI18N
         botaoExcluir.setText("Excluir");
         botaoExcluir.setEnabled(false);
         botaoExcluir.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -305,6 +363,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoEditar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit.png")); // NOI18N
         botaoEditar.setText("Editar");
         botaoEditar.setEnabled(false);
         botaoEditar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -320,21 +379,20 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(comboPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoPesquisaCidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(comboPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(campoPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,12 +404,13 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                     .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        botaoFechar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/editdelete.png")); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoFechar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -369,8 +428,8 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(botaoFechar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -383,7 +442,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botaoFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -391,11 +450,10 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         salvarCidade();
-        listaCidades();
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
-        listaCidades();
+        pesquisarCidade();
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
     private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
@@ -403,16 +461,8 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharActionPerformed
 
     private void botaoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNovoActionPerformed
-        cadastrarCidade();
+        novaCidade();
     }//GEN-LAST:event_botaoNovoActionPerformed
-
-    private void comboUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboUFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboUFActionPerformed
-
-    private void comboPesquisaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPesquisaCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboPesquisaCidadeActionPerformed
 
     private void tabelaCidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCidadeMouseClicked
         botaoEditar.setEnabled(true);
@@ -421,37 +471,23 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         excluirCidade();
-        listaCidades();
+        pesquisarCidade();
     }//GEN-LAST:event_botaoExcluirActionPerformed
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        
-        botaoNovo.setEnabled(false);
-        botaoSalvar.setEnabled(true);
-
-        int row = tabelaCidade.getSelectedRow();
-
-        Object id = tabelaCidade.getValueAt(row, 0);
-        Object nome = tabelaCidade.getValueAt(row, 1);
-        Object cep = tabelaCidade.getValueAt(row, 2);
-        Object uf = tabelaCidade.getValueAt(row, 3);
-
-        Cidade cid = new Cidade();
-
-        cid.setIdCidade(Integer.parseInt(id.toString()));
-        cid.setNome(nome.toString());
-        cid.setCep(Integer.parseInt(cep.toString()));
-        cid.setUf(uf.toString());
-
-        campoId.setText(cid.getIdCidade().toString());
-        campoNome.setText(cid.getNome());
-        campoCEP.setText(cid.getCep().toString());
-        comboUF.setSelectedItem(cep);
-
-        campoNome.setEnabled(true);
-        campoCEP.setEnabled(true);
-        comboUF.setEnabled(true);
-
+        editarCidade();
     }//GEN-LAST:event_botaoEditarActionPerformed
+
+    private void campoCEPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCEPKeyTyped
+        // Permite apenas digitar números
+        int k = evt.getKeyChar();
+        if ((k > 47 && k < 58)) {
+            if (campoCEP.getText().length() == 8) {
+                evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            }
+        } else {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+        }
+    }//GEN-LAST:event_campoCEPKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

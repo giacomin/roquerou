@@ -44,16 +44,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Roquerou");
 
         jDesktopPane1PRINCIPAL.setBackground(new java.awt.Color(0, 102, 102));
+        jDesktopPane1PRINCIPAL.setName("Roquerou"); // NOI18N
+        jDesktopPane1PRINCIPAL.setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout jDesktopPane1PRINCIPALLayout = new javax.swing.GroupLayout(jDesktopPane1PRINCIPAL);
         jDesktopPane1PRINCIPAL.setLayout(jDesktopPane1PRINCIPALLayout);
         jDesktopPane1PRINCIPALLayout.setHorizontalGroup(
             jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1158, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jDesktopPane1PRINCIPALLayout.setVerticalGroup(
             jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 626, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
         menuArquivo.setText("Arquivo");
@@ -111,15 +113,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1PRINCIPAL)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1PRINCIPAL)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
