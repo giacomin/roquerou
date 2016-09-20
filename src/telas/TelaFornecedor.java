@@ -185,7 +185,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         String email = campoEmailForn.getText().trim();
         String endereco = campoEnderecoForn.getText().trim();
         String bairro = campoBairroForn.getText().trim();
-        int cnpj = Integer.parseInt(campoCnpjForn.getText().trim());
+        //int cnpj = Integer.parseInt(campoCnpjForn.getText());
 
         if (nome == null || nome.isEmpty()) {
             jbNome.setText("Digite o Nome");
@@ -213,7 +213,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                             forn.setEmail(campoEmailForn.getText());
                             forn.setEndereco(campoEnderecoForn.getText());
                             forn.setBairro(campoBairroForn.getText());
-                            forn.setCnpj(Integer.parseInt(campoCnpjForn.getText().trim()));
+                            forn.setCnpj(Integer.parseInt(campoCnpjForn.getText()));
                             cid.setIdCidade(comboCidadeForn.getSelectedIndex());
                             if (comboCidadeForn.getSelectedIndex() == 0) {
                                 jbCidade.setText("Selecione a Cidade");
@@ -281,8 +281,9 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                 fornecedorrow.getEmail(),
                 fornecedorrow.getEndereco(),
                 fornecedorrow.getBairro(),
-                fornecedorrow.getCnpj(),
-                fornecedorrow.getCidade().getIdCidade()
+                fornecedorrow.getCidade().getIdCidade(),
+                fornecedorrow.getCnpj()
+                
             });
 
         }
@@ -352,6 +353,9 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         botaoEditarForn = new javax.swing.JButton();
         botaoExcluirForn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+
+        setClosable(true);
+        setTitle("Fornecedor");
 
         jpForn1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -632,7 +636,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 48, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpForn2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoEditarForn)
@@ -665,27 +669,20 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpForn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpForn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jpForn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpForn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(30, 30, 30))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jpForn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpForn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jButton2))
         );
 
         pack();
