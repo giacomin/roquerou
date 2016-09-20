@@ -15,11 +15,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
-        
+
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
 
-       
     }
 
     /**
@@ -39,6 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ItemCadastroCliente = new javax.swing.JMenuItem();
         itemCadastroProduto = new javax.swing.JMenuItem();
         itemCadastroCidade = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Roquerou");
@@ -95,6 +95,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroCidade);
 
+        jMenuItem1.setText("Fornecedor");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(jMenuItem1);
+
         menuPrincipal.add(menuCadastro);
 
         setJMenuBar(menuPrincipal);
@@ -122,7 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaCidade.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaCidade);
         telaCidade.moveToFront();
-        
+
     }//GEN-LAST:event_itemCadastroCidadeActionPerformed
 
     private void itemArquivoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArquivoSairActionPerformed
@@ -145,6 +153,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1PRINCIPAL.add(telaProduto);
         telaProduto.moveToFront();
     }//GEN-LAST:event_itemCadastroProdutoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        TelaFornecedor telaFornecedor = new TelaFornecedor();
+        telaFornecedor.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaFornecedor);
+        telaFornecedor.moveToFront();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,7 +194,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
-                
+
             }
         });
     }
@@ -188,6 +205,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCadastroCidade;
     private javax.swing.JMenuItem itemCadastroProduto;
     private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;

@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
-  <NonVisualComponents>
-    <Container class="javax.swing.JFrame" name="jFrame1">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-  </NonVisualComponents>
-  <Properties>
-    <Property name="closable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Cliente"/>
-  </Properties>
-  <AccessibilityProperties>
-    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Cliente"/>
-  </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -44,20 +20,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="botaoFechar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jpCliente1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jpCliente2" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jpForn1" max="32767" attributes="0"/>
+                  <Component id="jpForn2" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,18 +38,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpCliente1" min="-2" max="-2" attributes="0"/>
+              <Component id="jpForn1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jpCliente2" min="-2" max="-2" attributes="0"/>
+              <Component id="jpForn2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="botaoFechar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jpCliente1">
+    <Container class="javax.swing.JPanel" name="jpForn1">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -88,61 +61,73 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jbNome" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="campoBairroCliente" max="32767" attributes="0"/>
-                                              <Component id="campoEnderecoCliente" alignment="0" pref="249" max="32767" attributes="0"/>
-                                              <Component id="campoEmailCliente" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jbNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="campoBairroForn" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="campoEnderecoForn" alignment="0" pref="249" max="32767" attributes="0"/>
+                                                      <Component id="campoEmailForn" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Component id="jbEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jbBairro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jbCidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jbFone" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="campoFoneForn" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="comboCidadeForn" alignment="0" pref="145" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
-                                      <Component id="jbEndereco" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbBairro" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="campoNomeForn" alignment="0" min="-2" pref="460" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jbCidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbFone" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="campoFoneCliente" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="comboCidadeCliente" alignment="0" pref="145" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="botaoNovoCliente" min="-2" pref="91" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="botaoSalvarCliente" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="botaoCancelarCliente" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="campoNomeCliente" min="-2" pref="460" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="campoCnpjForn" min="-2" pref="204" max="-2" attributes="0"/>
+                                      <Component id="jbCnpj" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="botaoNovoForn" min="-2" pref="91" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="botaoSalvarForn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="botaoCancelarForn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="campoCodCliente" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="campoCodForn" min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -155,11 +140,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoCodCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoCodForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="campoNomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoNomeForn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -168,8 +153,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoEmailCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoFoneCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoEmailForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoFoneForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -178,36 +163,43 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboCidadeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboCidadeForn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoBairroCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoBairroForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jbBairro" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbCidade" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jbBairro" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbCidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="campoEnderecoForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jbEndereco" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="campoEnderecoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoNovoForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoSalvarForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoCancelarForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="campoCnpjForn" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jbEndereco" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="botaoNovoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botaoSalvarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botaoCancelarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jbCnpj" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -248,41 +240,41 @@
             <Property name="text" type="java.lang.String" value="Cidade:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoCodCliente">
+        <Component class="javax.swing.JTextField" name="campoCodForn">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoCodClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoCodFornActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoNomeCliente">
+        <Component class="javax.swing.JTextField" name="campoNomeForn">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoNomeClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoNomeFornActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoEmailCliente">
+        <Component class="javax.swing.JTextField" name="campoEmailForn">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoEmailClienteFocusLost"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoEmailFornFocusLost"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoEnderecoCliente">
+        <Component class="javax.swing.JTextField" name="campoEnderecoForn">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoBairroCliente">
+        <Component class="javax.swing.JTextField" name="campoBairroForn">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboCidadeCliente">
+        <Component class="javax.swing.JComboBox" name="comboCidadeForn">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
@@ -292,27 +284,27 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCidadeClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCidadeFornActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="botaoSalvarCliente">
+        <Component class="javax.swing.JButton" name="botaoSalvarForn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSalvarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSalvarFornActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="botaoNovoCliente">
+        <Component class="javax.swing.JButton" name="botaoNovoForn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Novo"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoNovoClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoNovoFornActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jbEmail">
@@ -348,27 +340,42 @@
             <Property name="text" type="java.lang.String" value="nome invalido"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoFoneCliente">
+        <Component class="javax.swing.JTextField" name="campoFoneForn">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoFoneClienteFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoFoneClienteActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoFoneFornFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoFoneFornActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="botaoCancelarCliente">
+        <Component class="javax.swing.JButton" name="botaoCancelarForn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarFornActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CNPJ:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="campoCnpjForn">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jbCnpj">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CNPJ inv&#xe1;lido"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jpCliente2">
+    <Container class="javax.swing.JPanel" name="jpForn2">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -383,21 +390,21 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jTextField7" min="-2" pref="499" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="38" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="botaoEditarCliente" min="-2" max="-2" attributes="0"/>
+                          <Component id="botaoEditarForn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="botaoExcluirCliente" min="-2" max="-2" attributes="0"/>
+                          <Component id="botaoExcluirForn" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -405,7 +412,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -415,8 +422,8 @@
                   <Component id="jScrollPane1" min="-2" pref="111" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="botaoEditarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="botaoExcluirCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botaoEditarForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botaoExcluirForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -440,10 +447,10 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tabelaCliente">
+            <Component class="javax.swing.JTable" name="tabelaForn">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="4">
+                  <Table columnCount="8" rowCount="4">
                     <Column editable="true" title="ID" type="java.lang.Object"/>
                     <Column editable="true" title="Nome" type="java.lang.Object"/>
                     <Column editable="true" title="Fone" type="java.lang.Object"/>
@@ -451,10 +458,16 @@
                     <Column editable="true" title="Endere&#xe7;o" type="java.lang.Object"/>
                     <Column editable="true" title="Bairro" type="java.lang.Object"/>
                     <Column editable="true" title="Cidade" type="java.lang.Object"/>
+                    <Column editable="true" title="Cnpj" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -497,37 +510,37 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tabelaClienteFocusGained"/>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tabelaFornFocusGained"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="botaoEditarCliente">
+        <Component class="javax.swing.JButton" name="botaoEditarForn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarFornActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="botaoExcluirCliente">
+        <Component class="javax.swing.JButton" name="botaoExcluirForn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoExcluirClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoExcluirFornActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="botaoFechar">
+    <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFecharActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

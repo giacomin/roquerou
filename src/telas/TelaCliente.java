@@ -84,7 +84,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoBairroCliente.setEnabled(false);
         campoEmailCliente.setEnabled(false);
         campoEnderecoCliente.setEnabled(false);
-        
 
         botaoSalvarCliente.setEnabled(false);
         botaoNovoCliente.setEnabled(true);
@@ -144,24 +143,28 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     public void excluirCliente() {
 
-        Cidade cid = new Cidade();
-        Cliente cli = new Cliente();
+        if (JOptionPane.showConfirmDialog(null, "Deseja mesmo remover o registro?", "Cuidado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            Cidade cid = new Cidade();
+            Cliente cli = new Cliente();
 
-        cid.setIdCidade((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 6));
-        cli.setIdCliente((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
-        cli.setCidade(cid);
-        cli.setNome((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 1));
+            cid.setIdCidade((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 6));
+            cli.setIdCliente((int) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
+            cli.setCidade(cid);
+            cli.setNome((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 1));
 
-        String retorno = new ClienteDAO().deletar(cli);
+            String retorno = new ClienteDAO().deletar(cli);
 
-        buscarCliente();
+            buscarCliente();
 
-        if (retorno == null) {
-            System.out.println("Cliente Excluído");
+            if (retorno == null) {
+                System.out.println("Cliente Excluído");
+            } else {
+                System.out.println("ERRO na EXCLUSÃO");
+            }
+
         } else {
-            System.out.println("ERRO na EXCLUSÃO");
-        }
 
+        }
     }
 
     public void salvarCliente() {
@@ -346,6 +349,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
+        setClosable(true);
+        setTitle("Cliente");
 
         jpCliente1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -605,7 +611,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 38, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoEditarCliente)
@@ -615,7 +621,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jpCliente2Layout.setVerticalGroup(
             jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCliente2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
@@ -638,19 +644,17 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jpCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoFechar)))
+                        .addComponent(botaoFechar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 38, Short.MAX_VALUE)
-                .addComponent(jpCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,11 +662,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jpCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jpCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar)
                 .addGap(23, 23, 23))
         );
+
+        getAccessibleContext().setAccessibleName("Cliente");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -777,24 +783,30 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void campoEmailClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEmailClienteFocusLost
 
-        if (campoEmailCliente.isEnabled())
-        {
-            
-        if ((campoEmailCliente.getText().contains("@"))
-                && (campoEmailCliente.getText().contains("."))
-                && (!campoEmailCliente.getText().contains(" "))) {
+        if (campoEmailCliente.isEnabled()) {
 
-            String usuario = new String(campoEmailCliente.getText().substring(0,
-                    campoEmailCliente.getText().lastIndexOf('@')));
+            if ((campoEmailCliente.getText().contains("@"))
+                    && (campoEmailCliente.getText().contains("."))
+                    && (!campoEmailCliente.getText().contains(" "))) {
 
-            String dominio = new String(campoEmailCliente.getText().substring(campoEmailCliente.getText().lastIndexOf('@') + 1, campoEmailCliente.getText().length()));
+                String usuario = new String(campoEmailCliente.getText().substring(0,
+                        campoEmailCliente.getText().lastIndexOf('@')));
 
-            if ((usuario.length() >= 1) && (!usuario.contains("@"))
-                    && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
-                    >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+                String dominio = new String(campoEmailCliente.getText().substring(campoEmailCliente.getText().lastIndexOf('@') + 1, campoEmailCliente.getText().length()));
 
-                jbEmail.setText("");
-                
+                if ((usuario.length() >= 1) && (!usuario.contains("@"))
+                        && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".")
+                        >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+                    jbEmail.setText("");
+
+                } else {
+
+                    jbEmail.setText("E-mail Inválido");
+
+                    campoEmailCliente.requestFocus();
+
+                }
 
             } else {
 
@@ -805,14 +817,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
 
         } else {
-
-            jbEmail.setText("E-mail Inválido");
-
-            campoEmailCliente.requestFocus();
-
-        }
-
-        }else{
             jbEmail.setText("");
         }
 
@@ -838,7 +842,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         setarLabels();
         zerarCampos();
         bloquearCampos();
-       
+
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoCancelarClienteActionPerformed
 
