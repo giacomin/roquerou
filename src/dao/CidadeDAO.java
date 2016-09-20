@@ -77,10 +77,10 @@ public class CidadeDAO implements IDAO {
 
         String sql = "";
         
-        if (comboPesquisa == "Nome") {
+        if ("Nome".equals(comboPesquisa)) {
             sql = "FROM Cidade as cidade WHERE cidade.nome LIKE '%" + campoPesquisa + "%'";
         }
-        if (comboPesquisa == "UF") {
+        if ("UF".equals(comboPesquisa)) {
             sql = "FROM Cidade as cidade WHERE cidade.uf LIKE '%" + campoPesquisa + "%'";
         }
         Query query = session.createQuery(sql);
