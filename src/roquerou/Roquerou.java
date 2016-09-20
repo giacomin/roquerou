@@ -7,6 +7,7 @@ package roquerou;
 
 import config.HibernateUtil;
 import entidades.Cidade;
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import org.hibernate.Session;
@@ -25,16 +26,18 @@ public class Roquerou {
      */
     public static void main(String[] args) {
 
+        
         // Tema Nimbus
         try {
+
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+                        
+          
         } catch (Exception e) {
         }
 
-        
         new TelaPrincipal().setVisible(true);
         
-
 
         // Criar ou atualizar
         /*
@@ -54,8 +57,7 @@ public class Roquerou {
         session.flush();
         session.close();
         sf.close();
-        */       
-              
+         */
         // Deletar
         /*
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -71,9 +73,7 @@ public class Roquerou {
         session.flush();
         session.close();
         sf.close();
-        */
-        
-        
+         */
     }
-    
+
 }
