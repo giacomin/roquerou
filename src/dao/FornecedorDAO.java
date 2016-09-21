@@ -8,13 +8,16 @@ package dao;
 import config.HibernateUtil;
 import entidades.Cidade;
 import entidades.Cliente;
+import entidades.Fornecedor;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import telas.TelaCliente;
+import telas.TelaFornecedor;
 
 /**
  *
@@ -60,6 +63,43 @@ public class FornecedorDAO implements IDAO {
         } finally {
             sessao.close();
         }
+    }
+
+    public void listarFornecedor(JTable tabelaForn, Fornecedor forn) {
+
+        String campoPesquisa = forn.getCampoPesquisaFornecedor();
+
+        DefaultTableModel modelTable = (DefaultTableModel) tabelaForn.getModel();
+        modelTable.setNumRows(0);
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        String sql = "";
+
+        sql = "FROM Fornecedor as fornecedor WHERE fornecedor.nome LIKE '%" + campoPesquisa + "%'";
+
+        Query query = session.createQuery(sql);
+
+        List<Fornecedor> dados_fornecedor = query.list();
+
+        for (Fornecedor fornecedorrow : dados_fornecedor) {
+
+            modelTable.addRow(new Object[]{
+                fornecedorrow.getIdFornecedor(),
+                fornecedorrow.getNome(),
+                fornecedorrow.getFone(),
+                fornecedorrow.getEmail(),
+                fornecedorrow.getEndereco(),
+                fornecedorrow.getBairro(),
+                fornecedorrow.getCidade().getIdCidade(),
+                fornecedorrow.getCnpj()
+            });
+        }
+        session.getTransaction().commit();
+        session.close();
+
     }
 
 }

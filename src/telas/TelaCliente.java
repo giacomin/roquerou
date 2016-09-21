@@ -6,6 +6,7 @@
 package telas;
 
 import config.HibernateUtil;
+import dao.CidadeDAO;
 import dao.ClienteDAO;
 import entidades.Cidade;
 import entidades.Cliente;
@@ -252,30 +253,14 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     public void buscarCliente() {
 
-        DefaultTableModel modelTable = (DefaultTableModel) tabelaCliente.getModel();
-        modelTable.setNumRows(0);
+        ClienteDAO pesquisa = new ClienteDAO();
+        Cliente cli = new Cliente();
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
+        String campoPesquisa = campoPesquisaCliente.getText();
 
-        Query query = session.createQuery("from Cliente");
-        List<Cliente> dados_cliente = query.list();
+        cli.setCampoPesquisaCliente(campoPesquisa);
 
-        for (Cliente clienterow : dados_cliente) {
-
-            modelTable.addRow(new Object[]{
-                clienterow.getIdCliente(),
-                clienterow.getNome(),
-                clienterow.getFone(),
-                clienterow.getEmail(),
-                clienterow.getEndereco(),
-                clienterow.getBairro(),
-                clienterow.getCidade().getIdCidade()
-            });
-
-        }
-        session.getTransaction().commit();
+        pesquisa.listarCliente(tabelaCliente, cli);
 
     }
 
@@ -331,7 +316,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoFoneCliente = new javax.swing.JTextField();
         botaoCancelarCliente = new javax.swing.JButton();
         jpCliente2 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        campoPesquisaCliente = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
@@ -350,8 +335,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setClosable(true);
         setTitle("Cliente");
+        setPreferredSize(new java.awt.Dimension(613, 562));
 
         jpCliente1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -459,7 +446,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jpCliente1Layout.setHorizontalGroup(
             jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCliente1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCliente1Layout.createSequentialGroup()
                         .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,27 +456,27 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbNome)
+                            .addComponent(jbBairro)
+                            .addComponent(jbEmail)
                             .addGroup(jpCliente1Layout.createSequentialGroup()
                                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpCliente1Layout.createSequentialGroup()
-                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(campoBairroCliente)
-                                            .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                            .addComponent(campoEmailCliente))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel7)))
-                                    .addComponent(jbEndereco)
-                                    .addComponent(jbBairro)
-                                    .addComponent(jbEmail))
+                                    .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(campoBairroCliente)
+                                        .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                        .addComponent(campoEmailCliente))
+                                    .addComponent(jbEndereco))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbCidade)
-                                    .addComponent(jbFone)
-                                    .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(campoFoneCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(comboCidadeCliente, javax.swing.GroupLayout.Alignment.LEADING, 0, 145, Short.MAX_VALUE))
+                                    .addGroup(jpCliente1Layout.createSequentialGroup()
+                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(campoFoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jbCidade)
+                                            .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jbFone)))
                                     .addGroup(jpCliente1Layout.createSequentialGroup()
                                         .addComponent(botaoNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,8 +488,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addGroup(jpCliente1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(campoCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(campoCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jpCliente1Layout.setVerticalGroup(
             jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -534,24 +520,24 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(campoBairroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbBairro)
+                    .addComponent(jbCidade))
+                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCliente1Layout.createSequentialGroup()
-                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbBairro)
-                            .addComponent(jbCidade))
-                        .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbEndereco)
-                        .addGap(0, 4, Short.MAX_VALUE))
-                    .addGroup(jpCliente1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botaoNovoCliente)
                             .addComponent(botaoSalvarCliente)
-                            .addComponent(botaoCancelarCliente))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(botaoCancelarCliente))
+                        .addGap(20, 20, 20))))
         );
 
         jpCliente2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -604,30 +590,28 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             .addGroup(jpCliente2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpCliente2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jpCliente2Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 38, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoEditarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoExcluirCliente))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoExcluirCliente))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente2Layout.createSequentialGroup()
+                        .addComponent(campoPesquisaCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         jpCliente2Layout.setVerticalGroup(
             jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCliente2Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEditarCliente)
                     .addComponent(botaoExcluirCliente)))
@@ -644,17 +628,14 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoFechar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jpCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(botaoFechar)
+                        .addComponent(jpCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -665,10 +646,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addComponent(jpCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
-
-        getAccessibleContext().setAccessibleName("Cliente");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -860,6 +839,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoEnderecoCliente;
     private javax.swing.JTextField campoFoneCliente;
     private javax.swing.JTextField campoNomeCliente;
+    private javax.swing.JTextField campoPesquisaCliente;
     private javax.swing.JComboBox<String> comboCidadeCliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
@@ -871,7 +851,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel jbBairro;
     private javax.swing.JLabel jbCidade;
     private javax.swing.JLabel jbEmail;

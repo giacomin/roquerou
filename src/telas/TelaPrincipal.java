@@ -35,10 +35,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuArquivo = new javax.swing.JMenu();
         itemArquivoSair = new javax.swing.JMenuItem();
         menuCadastro = new javax.swing.JMenu();
-        ItemCadastroCliente = new javax.swing.JMenuItem();
-        itemCadastroProduto = new javax.swing.JMenuItem();
         itemCadastroCidade = new javax.swing.JMenuItem();
+        ItemCadastroCliente = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        itemCadastroProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Roquerou");
@@ -73,22 +73,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuCadastro.setText("Cadastro");
 
-        ItemCadastroCliente.setText("Cliente");
-        ItemCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ItemCadastroClienteActionPerformed(evt);
-            }
-        });
-        menuCadastro.add(ItemCadastroCliente);
-
-        itemCadastroProduto.setText("Produto");
-        itemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemCadastroProdutoActionPerformed(evt);
-            }
-        });
-        menuCadastro.add(itemCadastroProduto);
-
         itemCadastroCidade.setText("Cidade");
         itemCadastroCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +81,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroCidade);
 
+        ItemCadastroCliente.setText("Cliente");
+        ItemCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCadastroClienteActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(ItemCadastroCliente);
+
         jMenuItem1.setText("Fornecedor");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +96,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(jMenuItem1);
+
+        itemCadastroProduto.setText("Produto");
+        itemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCadastroProdutoActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(itemCadastroProduto);
 
         menuPrincipal.add(menuCadastro);
 

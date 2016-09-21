@@ -37,8 +37,8 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         popularCombo();
         setarLabels();
     }
-    
-        public void setarLabels() {
+
+    public void setarLabels() {
 
         jbEmail.setText("");
         jbEmail.setForeground(Color.red);
@@ -57,7 +57,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
         jbCidade.setText("");
         jbCidade.setForeground(Color.red);
-        
+
         jbCnpj.setText("");
         jbCnpj.setForeground(Color.red);
 
@@ -151,14 +151,16 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     public void excluirFornecedor() {
 
         if (JOptionPane.showConfirmDialog(null, "Deseja mesmo remover o registro?", "Cuidado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
             Cidade cid = new Cidade();
             Fornecedor forn = new Fornecedor();
 
-            
             cid.setIdCidade((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 6));
             forn.setIdFornecedor((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 0));
             forn.setCidade(cid);
             forn.setNome((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 1));
+            forn.setFone((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 2));
+            forn.setEndereco((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 4));
 
             String retorno = new FornecedorDAO().deletar(forn);
 
@@ -262,35 +264,18 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
     public void buscarFornecedor() {
 
-        DefaultTableModel modelTable = (DefaultTableModel) tabelaForn.getModel();
-        modelTable.setNumRows(0);
+        FornecedorDAO pesquisa = new FornecedorDAO();
+        Fornecedor forn = new Fornecedor();
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
+        String campoPesquisa = campoPesquisaFornecedor.getText();
 
-        Query query = session.createQuery("from Fornecedor");
-        List<Fornecedor> dados_fornecedor = query.list();
+        forn.setCampoPesquisaFornecedor(campoPesquisa);
 
-        for (Fornecedor fornecedorrow : dados_fornecedor) {
-
-            modelTable.addRow(new Object[]{
-                fornecedorrow.getIdFornecedor(),
-                fornecedorrow.getNome(),
-                fornecedorrow.getFone(),
-                fornecedorrow.getEmail(),
-                fornecedorrow.getEndereco(),
-                fornecedorrow.getBairro(),
-                fornecedorrow.getCidade().getIdCidade(),
-                fornecedorrow.getCnpj()
-                
-            });
-
-        }
-        session.getTransaction().commit();
+        pesquisa.listarFornecedor(tabelaForn, forn);
 
     }
-/*
+
+    /*
     public void editarFornecedor() {
 
         Fornecedor forn = new Fornecedor();
@@ -307,8 +292,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
         // return cli;
     }
-*/
-
+     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -346,7 +330,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         campoCnpjForn = new javax.swing.JTextField();
         jbCnpj = new javax.swing.JLabel();
         jpForn2 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        campoPesquisaFornecedor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaForn = new javax.swing.JTable();
@@ -354,8 +338,10 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         botaoExcluirForn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setClosable(true);
         setTitle("Fornecedor");
+        setPreferredSize(new java.awt.Dimension(613, 562));
 
         jpForn1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -469,7 +455,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         jpForn1Layout.setHorizontalGroup(
             jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpForn1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpForn1Layout.createSequentialGroup()
                         .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,50 +464,42 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbNome)
+                            .addComponent(campoNomeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpForn1Layout.createSequentialGroup()
+                                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoBairroForn)
+                                    .addComponent(campoEnderecoForn, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(campoEmailForn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbNome)
                                     .addGroup(jpForn1Layout.createSequentialGroup()
                                         .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jpForn1Layout.createSequentialGroup()
-                                                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(campoBairroForn)
-                                                    .addComponent(campoEnderecoForn, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                                    .addComponent(campoEmailForn))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(jLabel7)))
-                                            .addComponent(jbEndereco)
-                                            .addComponent(jbBairro)
-                                            .addComponent(jbEmail))
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel7))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jbCidade)
+                                            .addComponent(comboCidadeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jbFone)
-                                            .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(campoFoneForn, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(comboCidadeForn, javax.swing.GroupLayout.Alignment.LEADING, 0, 145, Short.MAX_VALUE))))
-                                    .addComponent(campoNomeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(87, 87, 87))
-                            .addGroup(jpForn1Layout.createSequentialGroup()
-                                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoCnpjForn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbCnpj))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botaoNovoForn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoSalvarForn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoCancelarForn)
-                                .addGap(8, 8, 8))))
+                                            .addComponent(campoFoneForn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jbCidade)))
+                                    .addGroup(jpForn1Layout.createSequentialGroup()
+                                        .addComponent(botaoNovoForn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(botaoSalvarForn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(botaoCancelarForn))))
+                            .addComponent(jbEndereco)
+                            .addComponent(jbBairro)
+                            .addComponent(jbEmail)
+                            .addComponent(campoCnpjForn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbCnpj)))
                     .addComponent(jLabel4)
                     .addGroup(jpForn1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(campoCodForn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(campoCodForn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jpForn1Layout.setVerticalGroup(
             jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,7 +554,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                             .addComponent(campoCnpjForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbCnpj)
-                        .addContainerGap(22, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jpForn2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -629,33 +607,33 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
             .addGroup(jpForn2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpForn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpForn2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jpForn2Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 48, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpForn2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoEditarForn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoExcluirForn))))
+                        .addComponent(botaoExcluirForn))
+                    .addGroup(jpForn2Layout.createSequentialGroup()
+                        .addGroup(jpForn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpForn2Layout.createSequentialGroup()
+                                .addComponent(campoPesquisaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 10, Short.MAX_VALUE))))
         );
         jpForn2Layout.setVerticalGroup(
             jpForn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpForn2Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpForn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPesquisaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpForn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoEditarForn)
-                    .addComponent(botaoExcluirForn)))
+                    .addComponent(botaoExcluirForn)
+                    .addComponent(botaoEditarForn)))
         );
 
         jButton2.setText("Fechar");
@@ -669,20 +647,25 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpForn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpForn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jpForn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpForn2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpForn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jpForn1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpForn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2))
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         pack();
@@ -854,6 +837,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     private void botaoExcluirFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirFornActionPerformed
 
         excluirFornecedor();
+
     }//GEN-LAST:event_botaoExcluirFornActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -876,6 +860,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoEnderecoForn;
     private javax.swing.JTextField campoFoneForn;
     private javax.swing.JTextField campoNomeForn;
+    private javax.swing.JTextField campoPesquisaFornecedor;
     private javax.swing.JComboBox<String> comboCidadeForn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -888,7 +873,6 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel jbBairro;
     private javax.swing.JLabel jbCidade;
     private javax.swing.JLabel jbCnpj;

@@ -9,6 +9,8 @@ import config.HibernateUtil;
 import entidades.Cidade;
 import entidades.Cliente;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -60,6 +62,44 @@ public class ClienteDAO implements IDAO {
         } finally {
             sessao.close();
         }
+    }
+    
+        public void listarCliente(JTable tabelaCliente, Cliente cli) {
+        
+        
+        String campoPesquisa = cli.getCampoPesquisaCliente();
+
+        DefaultTableModel modelTable = (DefaultTableModel) tabelaCliente.getModel();
+        modelTable.setNumRows(0);
+        
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        String sql = "";
+        
+        sql = "FROM Cliente as cliente WHERE cliente.nome LIKE '%" + campoPesquisa + "%'";
+        
+        Query query = session.createQuery(sql);
+               
+        List <Cliente> dados_cliente = query.list();
+        
+        for (Cliente clienterow : dados_cliente) {
+            
+            modelTable.addRow(new Object[] {
+                clienterow.getIdCliente(),
+                clienterow.getNome(),
+                clienterow.getFone(),
+                clienterow.getEmail(),
+                clienterow.getEndereco(),
+                clienterow.getBairro(),
+                clienterow.getCidade().getIdCidade()
+            });
+        }
+        session.getTransaction().commit();
+        session.close();
+        
+        
     }
 
 }
