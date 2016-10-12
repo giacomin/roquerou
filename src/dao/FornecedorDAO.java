@@ -102,4 +102,25 @@ public class FornecedorDAO implements IDAO {
 
     }
 
+    // Pesquisar ID de um fornecedor através do Nome (necessário para registrar compra)
+    public Integer getIdFromName(String nome) {
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        String sql = "FROM Fornecedor as fornecedor WHERE fornecedor.nome = " + nome;
+
+        Query query = session.createQuery(sql);
+
+        session.getTransaction().commit();
+        session.close();
+        
+        
+        System.out.println("teste: " + query.getFirstResult());
+        
+        return query.getFirstResult();
+
+    }
+
 }

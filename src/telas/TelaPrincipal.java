@@ -37,8 +37,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastro = new javax.swing.JMenu();
         itemCadastroCidade = new javax.swing.JMenuItem();
         ItemCadastroCliente = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itemCadastroFornecedor = new javax.swing.JMenuItem();
         itemCadastroProduto = new javax.swing.JMenuItem();
+        itemCadastroCompra = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Roquerou");
@@ -89,13 +90,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(ItemCadastroCliente);
 
-        jMenuItem1.setText("Fornecedor");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itemCadastroFornecedor.setText("Fornecedor");
+        itemCadastroFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itemCadastroFornecedorActionPerformed(evt);
             }
         });
-        menuCadastro.add(jMenuItem1);
+        menuCadastro.add(itemCadastroFornecedor);
 
         itemCadastroProduto.setText("Produto");
         itemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +105,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(itemCadastroProduto);
+
+        itemCadastroCompra.setText("Compra");
+        itemCadastroCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCadastroCompraActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(itemCadastroCompra);
 
         menuPrincipal.add(menuCadastro);
 
@@ -152,14 +161,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaProduto.moveToFront();
     }//GEN-LAST:event_itemCadastroProdutoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void itemCadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroFornecedorActionPerformed
 
         TelaFornecedor telaFornecedor = new TelaFornecedor();
         telaFornecedor.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaFornecedor);
         telaFornecedor.moveToFront();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_itemCadastroFornecedorActionPerformed
+
+    private void itemCadastroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroCompraActionPerformed
+        TelaCompra telaCompra = new TelaCompra();
+        telaCompra.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaCompra);
+        telaCompra.moveToFront();
+    }//GEN-LAST:event_itemCadastroCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,9 +217,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem ItemCadastroCliente;
     private javax.swing.JMenuItem itemArquivoSair;
     private javax.swing.JMenuItem itemCadastroCidade;
+    private javax.swing.JMenuItem itemCadastroCompra;
+    private javax.swing.JMenuItem itemCadastroFornecedor;
     private javax.swing.JMenuItem itemCadastroProduto;
     private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;

@@ -148,5 +148,10 @@ public class Fornecedor implements java.io.Serializable {
     public String getCampoPesquisaFornecedor() {
         return campoPesquisa;
     }
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 
 }
