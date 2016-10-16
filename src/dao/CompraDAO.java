@@ -7,6 +7,7 @@ package dao;
 
 import config.HibernateUtil;
 import entidades.Compra;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -65,6 +66,8 @@ public class CompraDAO implements IDAO {
 
     public void listarCompra(JTable tabelaCompra, Compra comp) {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
         String comboPesquisa = comp.getComboPesquisaCompra();
         String campoPesquisa = comp.getCampoPesquisaCompra();
 
@@ -77,11 +80,19 @@ public class CompraDAO implements IDAO {
 
         String sql = "";
 
-        //if ("Produto".equals(comboPesquisa)) {
-            sql = "FROM Compra as compra";
-//            sql = "FROM Compra as compra WHERE compra.id_produto LIKE '%" + campoPesquisa + "%'"; // Fazer depois
-        //}
+        if ("Produto".equals(comboPesquisa)) {
+
+            sql = "FROM Compra as compra WHERE produto.nome LIKE '%" + campoPesquisa + "%'";
+        }
         
+        if (comboPesquisa == "Fornecedor") {
+            sql = "FROM Compra as compra WHERE fornecedor.nome LIKE '%" + campoPesquisa + "%'";
+        }
+        
+        if (comboPesquisa == "Operador") {
+            sql = "FROM Compra as compra WHERE usuario.nome LIKE '%" + campoPesquisa + "%'";
+        }
+
         Query query = session.createQuery(sql);
 
         List<Compra> dados_compra = query.list();
@@ -94,13 +105,13 @@ public class CompraDAO implements IDAO {
                 comprarow.getFornecedor().getNome(),
                 comprarow.getQuantidade(),
                 comprarow.getCustoUnit(),
-                comprarow.getData(),
+                sdf.format(comprarow.getData()), // Data
                 comprarow.getUsuario().getNome(),});
-            
+
         }
         session.getTransaction().commit();
         session.close();
 
     }
-   
+
 }

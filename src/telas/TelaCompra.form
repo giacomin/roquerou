@@ -237,9 +237,6 @@
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoDataActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="campoCusto">
           <Properties>
@@ -295,9 +292,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="comboPesquisaProduto" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="comboPesquisaCompra" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="campoPesquisaProduto" min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="campoPesquisaCompra" min="-2" pref="206" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="botaoBuscar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -319,8 +316,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboPesquisaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoPesquisaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboPesquisaCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoPesquisaCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="botaoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -335,16 +332,18 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JComboBox" name="comboPesquisaProduto">
+        <Component class="javax.swing.JComboBox" name="comboPesquisaCompra">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="Nome"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Produto"/>
+                <StringItem index="1" value="Fornecedor"/>
+                <StringItem index="2" value="Operador"/>
               </StringArray>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoPesquisaProduto">
+        <Component class="javax.swing.JTextField" name="campoPesquisaCompra">
         </Component>
         <Component class="javax.swing.JButton" name="botaoBuscar">
           <Properties>
@@ -380,7 +379,7 @@
                     <Column editable="false" title="Qtde" type="java.lang.Object"/>
                     <Column editable="false" title="Custo" type="java.lang.Object"/>
                     <Column editable="false" title="Data" type="java.lang.Object"/>
-                    <Column editable="false" title="Usu&#xe1;rio" type="java.lang.Object"/>
+                    <Column editable="false" title="Operador" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

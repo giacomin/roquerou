@@ -7,8 +7,12 @@ import entidades.Fornecedor;
 import entidades.Produto;
 import entidades.Usuario;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -101,13 +105,14 @@ public class TelaCompra extends javax.swing.JInternalFrame {
         Produto prod = new Produto();
         Fornecedor forn = new Fornecedor();
         Usuario usua = new Usuario();
+        Date data = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         boolean bnomeProduto = comp.validaProduto(comboProduto.getSelectedItem().toString());
         boolean bnomeFornecedor = comp.validaFornecedor(comboFornecedor.getSelectedItem().toString());
         boolean bquantidade = comp.validaQuantidade(campoQuantidade.getText());
         boolean bcusto = comp.validaCusto(campoCusto.getText());
         boolean bdata = comp.validaData(campoData.getText());
-        
 
         // Se todos os campos estiverem OK...
         if (bnomeProduto == true && bnomeFornecedor == true && bquantidade == true && bcusto == true && bdata == true) {
@@ -120,7 +125,14 @@ public class TelaCompra extends javax.swing.JInternalFrame {
 
                 comp.setQuantidade(Integer.parseInt(campoQuantidade.getText()));
                 comp.setCustoUnit(Float.parseFloat(campoCusto.getText()));
-                comp.setData(new Date()); // Provisório - Preciso ver como manipular datas
+
+                //Data
+                try {
+                    comp.setData(sdf.parse(campoData.getText()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaCompra.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 comp.setProduto(prod);
                 comp.setFornecedor(forn);
                 comp.setUsuario(usua);
@@ -157,7 +169,7 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             if (bnomeProduto == false) {
                 comboProduto.setForeground(Color.red);
                 comboProduto.setBackground(Color.red);
-                
+
             }
             if (bnomeFornecedor == false) {
                 comboFornecedor.setForeground(Color.pink);
@@ -166,11 +178,11 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             if (bquantidade == false) {
                 campoQuantidade.setBackground(Color.pink);
             }
-            
+
             if (bcusto == false) {
                 campoCusto.setBackground(Color.pink);
             }
-            
+
             if (bdata == false) {
                 campoData.setBackground(Color.pink);
             }
@@ -207,10 +219,11 @@ public class TelaCompra extends javax.swing.JInternalFrame {
         CompraDAO pesquisa = new CompraDAO();
         Compra comp = new Compra();
 
-        String comboPesquisa = comboPesquisaProduto.getSelectedItem().toString();
-        String campoPesquisa = campoPesquisaProduto.getText();
+        String comboPesquisa = comboPesquisaCompra.getSelectedItem().toString();
+        String campoPesquisa = campoPesquisaCompra.getText();
 
         comp.setComboPesquisaCompra(comboPesquisa);
+        comp.setCampoPesquisaCompra(campoPesquisa);
 
         pesquisa.listarCompra(tabelaCompra, comp);
     }
@@ -307,8 +320,8 @@ public class TelaCompra extends javax.swing.JInternalFrame {
         comboProduto = new javax.swing.JComboBox();
         comboFornecedor = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
-        comboPesquisaProduto = new javax.swing.JComboBox();
-        campoPesquisaProduto = new javax.swing.JTextField();
+        comboPesquisaCompra = new javax.swing.JComboBox();
+        campoPesquisaCompra = new javax.swing.JTextField();
         botaoBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCompra = new javax.swing.JTable();
@@ -361,11 +374,6 @@ public class TelaCompra extends javax.swing.JInternalFrame {
         jLabel6.setText("Data");
 
         campoData.setEnabled(false);
-        campoData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDataActionPerformed(evt);
-            }
-        });
 
         campoCusto.setEnabled(false);
 
@@ -454,7 +462,7 @@ public class TelaCompra extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        comboPesquisaProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome" }));
+        comboPesquisaCompra.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Produto", "Fornecedor", "Operador" }));
 
         botaoBuscar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_find.png")); // NOI18N
         botaoBuscar.setText("Buscar");
@@ -476,7 +484,7 @@ public class TelaCompra extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cód.", "Produto", "Fornecedor", "Qtde", "Custo", "Data", "Usuário"
+                "Cód.", "Produto", "Fornecedor", "Qtde", "Custo", "Data", "Operador"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -532,9 +540,9 @@ public class TelaCompra extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(comboPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboPesquisaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campoPesquisaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -551,8 +559,8 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPesquisaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPesquisaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -630,10 +638,6 @@ public class TelaCompra extends javax.swing.JInternalFrame {
         //editarCompra();
     }//GEN-LAST:event_botaoEditarActionPerformed
 
-    private void campoDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoDataActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoBuscar;
@@ -645,11 +649,11 @@ public class TelaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField campoCusto;
     private javax.swing.JTextField campoData;
     private javax.swing.JTextField campoId;
-    private javax.swing.JTextField campoPesquisaProduto;
+    private javax.swing.JTextField campoPesquisaCompra;
     private javax.swing.JTextField campoQuantidade;
     private javax.swing.JTextField campoUsuario;
     private javax.swing.JComboBox comboFornecedor;
-    private javax.swing.JComboBox comboPesquisaProduto;
+    private javax.swing.JComboBox comboPesquisaCompra;
     private javax.swing.JComboBox comboProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
