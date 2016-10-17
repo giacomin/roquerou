@@ -31,6 +31,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1PRINCIPAL = new javax.swing.JDesktopPane();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         menuPrincipal = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         itemArquivoSair = new javax.swing.JMenuItem();
@@ -56,12 +62,79 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1PRINCIPALLayout.setVerticalGroup(
             jDesktopPane1PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 597, Short.MAX_VALUE)
         );
+
+        jToolBar2.setFloatable(false);
+        jToolBar2.setRollover(true);
+
+        jButton1.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/People.png"))); // NOI18N
+        jButton1.setText("Clientes");
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setDisabledIcon(null);
+        jButton1.setDisabledSelectedIcon(null);
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setMaximumSize(new java.awt.Dimension(75, 55));
+        jButton1.setMinimumSize(new java.awt.Dimension(75, 55));
+        jButton1.setPreferredSize(new java.awt.Dimension(75, 55));
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton1);
+
+        jButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
+        jButton2.setText("Fornecedores");
+        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setDisabledIcon(null);
+        jButton2.setDisabledSelectedIcon(null);
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMaximumSize(new java.awt.Dimension(75, 55));
+        jButton2.setMinimumSize(new java.awt.Dimension(75, 55));
+        jButton2.setPreferredSize(new java.awt.Dimension(75, 55));
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton2);
+        jToolBar2.add(jSeparator2);
+
+        jButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Close.png"))); // NOI18N
+        jButton3.setText("Sair");
+        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setDisabledIcon(null);
+        jButton3.setDisabledSelectedIcon(null);
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setMaximumSize(new java.awt.Dimension(75, 55));
+        jButton3.setMinimumSize(new java.awt.Dimension(75, 55));
+        jButton3.setPreferredSize(new java.awt.Dimension(75, 55));
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton3);
+        jToolBar2.add(jSeparator1);
 
         menuArquivo.setText("Arquivo");
         menuArquivo.setToolTipText("");
 
+        itemArquivoSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        itemArquivoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Close.png"))); // NOI18N
         itemArquivoSair.setText("Sair");
         itemArquivoSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +155,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroCidade);
 
+        ItemCadastroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/People.png"))); // NOI18N
         ItemCadastroCliente.setText("Cliente");
         ItemCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +164,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(ItemCadastroCliente);
 
+        itemCadastroFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
         itemCadastroFornecedor.setText("Fornecedor");
         itemCadastroFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,10 +198,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,8 +229,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaCliente.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaCliente);
         telaCliente.moveToFront();
-
-// TODO add your handling code here:
     }//GEN-LAST:event_ItemCadastroClienteActionPerformed
 
     private void itemCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroProdutoActionPerformed
@@ -162,12 +239,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCadastroProdutoActionPerformed
 
     private void itemCadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroFornecedorActionPerformed
-
         TelaFornecedor telaFornecedor = new TelaFornecedor();
         telaFornecedor.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaFornecedor);
         telaFornecedor.moveToFront();
-        // TODO add your handling code here:
     }//GEN-LAST:event_itemCadastroFornecedorActionPerformed
 
     private void itemCadastroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroCompraActionPerformed
@@ -176,6 +251,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1PRINCIPAL.add(telaCompra);
         telaCompra.moveToFront();
     }//GEN-LAST:event_itemCadastroCompraActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TelaCliente telaCliente = new TelaCliente();
+        telaCliente.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaCliente);
+        telaCliente.moveToFront();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        TelaFornecedor telaFornecedor = new TelaFornecedor();
+        telaFornecedor.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaFornecedor);
+        telaFornecedor.moveToFront();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,7 +313,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCadastroCompra;
     private javax.swing.JMenuItem itemCadastroFornecedor;
     private javax.swing.JMenuItem itemCadastroProduto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;
