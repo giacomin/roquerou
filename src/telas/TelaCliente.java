@@ -286,7 +286,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEmailCliente = new javax.swing.JTextField();
         campoEnderecoCliente = new javax.swing.JTextField();
         campoBairroCliente = new javax.swing.JTextField();
-        comboCidadeCliente = new javax.swing.JComboBox<>();
+        comboCidadeCliente = new javax.swing.JComboBox<String>();
         botaoSalvarCliente = new javax.swing.JButton();
         botaoNovoCliente = new javax.swing.JButton();
         jbEmail = new javax.swing.JLabel();
@@ -363,7 +363,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         campoBairroCliente.setEnabled(false);
 
-        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         comboCidadeCliente.setEnabled(false);
         comboCidadeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

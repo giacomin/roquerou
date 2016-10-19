@@ -157,5 +157,9 @@ public class Produto implements java.io.Serializable {
     public String getCampoPesquisaProduto() {
         return campoPesquisa;
     }
-
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }

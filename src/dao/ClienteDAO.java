@@ -61,30 +61,29 @@ public class ClienteDAO implements IDAO {
             sessao.close();
         }
     }
-    
-        public void listarCliente(JTable tabelaCliente, Cliente cli) {
-        
-        
+
+    public void listarCliente(JTable tabelaCliente, Cliente cli) {
+
         String campoPesquisa = cli.getCampoPesquisaCliente();
 
         DefaultTableModel modelTable = (DefaultTableModel) tabelaCliente.getModel();
         modelTable.setNumRows(0);
-        
+
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         session.beginTransaction();
 
         String sql = "";
-        
+
         sql = "FROM Cliente as cliente WHERE cliente.nome LIKE '%" + campoPesquisa + "%'";
-        
+
         Query query = session.createQuery(sql);
-               
-        List <Cliente> dados_cliente = query.list();
-        
+
+        List<Cliente> dados_cliente = query.list();
+
         for (Cliente clienterow : dados_cliente) {
-            
-            modelTable.addRow(new Object[] {
+
+            modelTable.addRow(new Object[]{
                 clienterow.getIdCliente(),
                 clienterow.getNome(),
                 clienterow.getFone(),
@@ -96,8 +95,7 @@ public class ClienteDAO implements IDAO {
         }
         session.getTransaction().commit();
         session.close();
-        
-        
+
     }
 
 }

@@ -6,7 +6,8 @@
 package dao;
 
 import config.HibernateUtil;
-import entidades.Produto;
+import entidades.Compra;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +21,7 @@ import org.hibernate.Transaction;
  *
  * @author giacomin
  */
-public class ProdutoDAO implements IDAO {
+public class CompraDAO implements IDAO {
 
     @Override
     public String salvar(Object o) {
@@ -63,12 +64,14 @@ public class ProdutoDAO implements IDAO {
 
     }
 
-    public void listarProduto(JTable tabelaProduto, Produto prod) {
+    public void listarCompra(JTable tabelaCompra, Compra comp) {
 
-        String comboPesquisa = prod.getComboPesquisaProduto();
-        String campoPesquisa = prod.getCampoPesquisaProduto();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        DefaultTableModel modelTable = (DefaultTableModel) tabelaProduto.getModel();
+        String comboPesquisa = comp.getComboPesquisaCompra();
+        String campoPesquisa = comp.getCampoPesquisaCompra();
+
+        DefaultTableModel modelTable = (DefaultTableModel) tabelaCompra.getModel();
         modelTable.setNumRows(0);
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -77,47 +80,37 @@ public class ProdutoDAO implements IDAO {
 
         String sql = "";
 
-        if (comboPesquisa == "Nome") {
-            sql = "FROM Produto as produto WHERE produto.nome LIKE '%" + campoPesquisa + "%'";
+        if ("Produto".equals(comboPesquisa)) {
+
+            sql = "FROM Compra as compra WHERE produto.nome LIKE '%" + campoPesquisa + "%'";
+        }
+        
+        if (comboPesquisa == "Fornecedor") {
+            sql = "FROM Compra as compra WHERE fornecedor.nome LIKE '%" + campoPesquisa + "%'";
+        }
+        
+        if (comboPesquisa == "Operador") {
+            sql = "FROM Compra as compra WHERE usuario.nome LIKE '%" + campoPesquisa + "%'";
         }
 
         Query query = session.createQuery(sql);
 
-        List<Produto> dados_produto = query.list();
+        List<Compra> dados_compra = query.list();
 
-        for (Produto produtorow : dados_produto) {
+        for (Compra comprarow : dados_compra) {
 
             modelTable.addRow(new Object[]{
-                produtorow.getIdProduto(),
-                produtorow.getNome(),
-                produtorow.getDescricao(),
-                produtorow.getUnidade(),
-                produtorow.getValorUnit(),
-                produtorow.getEstoque(),});
+                comprarow.getIdCompra(),
+                comprarow.getProduto().getNome(),
+                comprarow.getFornecedor().getNome(),
+                comprarow.getQuantidade(),
+                comprarow.getCustoUnit(),
+                sdf.format(comprarow.getData()), // Data
+                comprarow.getUsuario().getNome(),});
+
         }
         session.getTransaction().commit();
         session.close();
-
-    }
-
-    // Pesquisar ID de um produto através do Nome (necessário para registrar compra)
-    public Integer getIdFromName(String nome) {
-
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
-
-        String sql = "FROM Produto as produto WHERE produto.nome = " + nome;
-
-        Query query = session.createQuery(sql);
-
-        session.getTransaction().commit();
-        session.close();
-
-        
-        System.out.println("teste: " + query.getFirstResult());
-        
-        return query.getFirstResult();
 
     }
 
