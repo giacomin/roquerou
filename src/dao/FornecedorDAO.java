@@ -6,8 +6,6 @@
 package dao;
 
 import config.HibernateUtil;
-import entidades.Cidade;
-import entidades.Cliente;
 import entidades.Fornecedor;
 import java.util.List;
 import javax.swing.JTable;
@@ -17,7 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import telas.TelaFornecedor;
+
 
 /**
  *
@@ -93,7 +91,7 @@ public class FornecedorDAO implements IDAO {
                 fornecedorrow.getEmail(),
                 fornecedorrow.getEndereco(),
                 fornecedorrow.getBairro(),
-                fornecedorrow.getCidade().getIdCidade(),
+                fornecedorrow.getCidade().getNome(),
                 fornecedorrow.getCnpj()
             });
         }

@@ -6,10 +6,8 @@
 package telas;
 
 import config.HibernateUtil;
-import dao.ClienteDAO;
 import dao.FornecedorDAO;
 import entidades.Cidade;
-import entidades.Cliente;
 import entidades.Fornecedor;
 import java.awt.Color;
 import java.util.List;
@@ -18,7 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -275,24 +272,6 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
     }
 
-    /*
-    public void editarFornecedor() {
-
-        Fornecedor forn = new Fornecedor();
-        Cidade cid = new Cidade();
-
-        forn.setIdFornecedor((Integer) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 0));
-        forn.setNome((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 1));
-        forn.setFone((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 2));
-        forn.setEmail((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 3));
-        forn.setEndereco((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 4));
-        forn.setBairro((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 5));
-        forn.setIdCidade((Integer) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 6));
-        forn.setCidade(cid);
-
-        // return cli;
-    }
-     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

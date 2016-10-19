@@ -6,7 +6,6 @@
 package telas;
 
 import config.HibernateUtil;
-import dao.CidadeDAO;
 import dao.ClienteDAO;
 import entidades.Cidade;
 import entidades.Cliente;
@@ -17,7 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -108,6 +106,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     }
 
+    //método para permitir apenas números no campo Fone
     public void ValidaNumero(JTextField Numero) {
         long valor;
         if (Numero.getText().length() != 0) {
@@ -262,23 +261,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         pesquisa.listarCliente(tabelaCliente, cli);
 
-    }
-
-    public void editarCliente() {
-
-        Cliente cli = new Cliente();
-        Cidade cid = new Cidade();
-
-        cli.setIdCliente((Integer) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
-        cli.setNome((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 1));
-        cli.setFone((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 2));
-        cli.setEmail((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 3));
-        cli.setEndereco((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 4));
-        cli.setBairro((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 5));
-        cid.setIdCidade((Integer) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 6));
-        cli.setCidade(cid);
-
-        // return cli;
     }
 
     /**
@@ -510,9 +492,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addComponent(campoEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoFoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbEmail)
-                    .addComponent(jbFone))
+                .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbFone, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -724,7 +706,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         Object bairro = tabelaCliente.getValueAt(row, 5);
 
         Cidade cid = new Cidade();
-        cid.setIdCidade((Integer) tabelaCliente.getValueAt(row, 6));
+        cid.setNome((String) tabelaCliente.getValueAt(row, 6));
+        //cid.setIdCidade((Integer) tabelaCliente.getValueAt(row, 6));
 
         Cliente cli = new Cliente();
 
@@ -742,7 +725,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEmailCliente.setText(cli.getEmail());
         campoEnderecoCliente.setText(cli.getEndereco());
         campoBairroCliente.setText(cli.getBairro());
-        comboCidadeCliente.setSelectedIndex(cli.getCidade().getIdCidade());
+        comboCidadeCliente.setSelectedItem(cid);
+        //comboCidadeCliente.setSelectedIndex(cli.getCidade().getIdCidade());
 
         campoNomeCliente.setEnabled(true);
         campoFoneCliente.setEnabled(true);

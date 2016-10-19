@@ -6,7 +6,6 @@
 package dao;
 
 import config.HibernateUtil;
-import entidades.Cidade;
 import entidades.Cliente;
 import java.util.List;
 import javax.swing.JTable;
@@ -16,7 +15,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import telas.TelaCliente;
 
 /**
  *
@@ -93,7 +91,7 @@ public class ClienteDAO implements IDAO {
                 clienterow.getEmail(),
                 clienterow.getEndereco(),
                 clienterow.getBairro(),
-                clienterow.getCidade().getIdCidade()
+                clienterow.getCidade().getNome()
             });
         }
         session.getTransaction().commit();
