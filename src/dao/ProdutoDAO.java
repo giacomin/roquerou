@@ -15,6 +15,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -100,25 +102,23 @@ public class ProdutoDAO implements IDAO {
 
     }
 
-    // Pesquisar ID de um produto através do Nome (necessário para registrar compra)
-    public Integer getIdFromName(String nome) {
+    // *** Método popularComboItensProduto() ***
+    public void popularComboItensProduto(JComboBox comboProduto, Produto produto) {
+
+        //ComboBoxModel modelCombo = comboProduto.getModel();
+        Produto prod = new Produto();
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         session.beginTransaction();
 
-        String sql = "FROM Produto as produto WHERE produto.nome = " + nome;
+        Query query = session.createQuery("from Produto");
+        List<Produto> dados_produto = query.list();
 
-        Query query = session.createQuery(sql);
-
+        for (Produto produtorow : dados_produto) {
+            comboProduto.addItem(produtorow);
+        }
         session.getTransaction().commit();
-        session.close();
-
-        
-        System.out.println("teste: " + query.getFirstResult());
-        
-        return query.getFirstResult();
-
     }
 
 }

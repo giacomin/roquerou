@@ -46,6 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemCadastroFornecedor = new javax.swing.JMenuItem();
         itemCadastroProduto = new javax.swing.JMenuItem();
         itemCadastroCompra = new javax.swing.JMenuItem();
+        ItenCadastroVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Roquerou");
@@ -91,6 +92,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
         jButton2.setText("Fornecedores");
+        jButton2.setToolTipText("Fornecedores");
         jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDisabledIcon(null);
@@ -189,6 +191,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroCompra);
 
+        ItenCadastroVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Accounting.png"))); // NOI18N
+        ItenCadastroVenda.setText("Venda");
+        ItenCadastroVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItenCadastroVendaActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(ItenCadastroVenda);
+
         menuPrincipal.add(menuCadastro);
 
         setJMenuBar(menuPrincipal);
@@ -220,7 +231,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCadastroCidadeActionPerformed
 
     private void itemArquivoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArquivoSairActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_itemArquivoSairActionPerformed
 
     private void ItemCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCadastroClienteActionPerformed
@@ -267,8 +278,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void ItenCadastroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItenCadastroVendaActionPerformed
+        TelaItens telaItens = new TelaItens();
+        telaItens.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaItens);
+        telaItens.moveToFront();
+    }//GEN-LAST:event_ItenCadastroVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,13 +319,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
-
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemCadastroCliente;
+    private javax.swing.JMenuItem ItenCadastroVenda;
     private javax.swing.JMenuItem itemArquivoSair;
     private javax.swing.JMenuItem itemCadastroCidade;
     private javax.swing.JMenuItem itemCadastroCompra;
@@ -316,7 +334,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
+    public static javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar2;
