@@ -3,6 +3,7 @@
   <persistence-unit name="roquedb?zeroDateTimeBehavior=convertToNullPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entidades.Cidade</class>
+    <class>entidades.Cargo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://webserver:3306/roquedb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="mysql"/>

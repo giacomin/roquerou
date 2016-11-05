@@ -8,11 +8,11 @@
             <column name="id_usuario" />
             <generator class="identity" />
         </id>
+        <many-to-one name="cargo" class="entidades.Cargo" fetch="select">
+            <column name="id_cargo" not-null="true" />
+        </many-to-one>
         <property name="nome" type="string">
             <column name="nome" length="150" not-null="true" />
-        </property>
-        <property name="gerente" type="boolean">
-            <column name="gerente" not-null="true" />
         </property>
         <property name="login" type="string">
             <column name="login" length="25" />

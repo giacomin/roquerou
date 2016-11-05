@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2016 23:28:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Cargo" table="cargo" catalog="roquedb" optimistic-lock="version">
+        <id name="idCargo" type="java.lang.Integer">
+            <column name="id_cargo" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="50" not-null="true" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cargo" not-null="true" />
+            </key>
+            <one-to-many class="entidades.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

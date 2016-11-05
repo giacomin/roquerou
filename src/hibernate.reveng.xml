@@ -10,4 +10,5 @@
   <table-filter match-name="pedido"/>
   <table-filter match-name="cliente"/>
   <table-filter match-name="produto"/>
+  <table-filter match-name="cargo"/>
 </hibernate-reverse-engineering>

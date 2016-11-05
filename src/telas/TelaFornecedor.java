@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -153,8 +154,10 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
             Fornecedor forn = new Fornecedor();
 
             cid.setIdCidade((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 6));
-            forn.setIdFornecedor((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 0));
+            
             forn.setCidade(cid);
+
+            forn.setIdFornecedor((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 0));
             forn.setNome((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 1));
             forn.setFone((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 2));
             forn.setEndereco((String) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 4));

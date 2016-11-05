@@ -706,8 +706,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         Object bairro = tabelaCliente.getValueAt(row, 5);
 
         Cidade cid = new Cidade();
-        cid.setNome((String) tabelaCliente.getValueAt(row, 6));
-        //cid.setIdCidade((Integer) tabelaCliente.getValueAt(row, 6));
+        //cid.setNome((String) tabelaCliente.getValueAt(row, 6));
+        cid.setIdCidade((Integer) tabelaCliente.getValueAt(row, 6));
 
         Cliente cli = new Cliente();
 
@@ -725,8 +725,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEmailCliente.setText(cli.getEmail());
         campoEnderecoCliente.setText(cli.getEndereco());
         campoBairroCliente.setText(cli.getBairro());
-        comboCidadeCliente.setSelectedItem(cid);
-        //comboCidadeCliente.setSelectedIndex(cli.getCidade().getIdCidade());
+        //comboCidadeCliente.setSelectedItem(cid);
+        comboCidadeCliente.setSelectedIndex(cid.getIdCidade());
 
         campoNomeCliente.setEnabled(true);
         campoFoneCliente.setEnabled(true);

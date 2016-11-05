@@ -5,6 +5,8 @@
  */
 package telas;
 
+import entidades.Usuario;
+
 /**
  *
  * @author giacomin
@@ -21,6 +23,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
 
+    public Integer nivel(int a) {
+
+        if (a == 2) {
+            jbUsuarios.setVisible(false);
+            jbFornecedores.setVisible(false);
+            itemCadastroFornecedor.setVisible(false);
+            itemCadastroUsuario.setVisible(false);
+            itemCadastroCidade.setVisible(false);
+        }
+
+        return null;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,10 +48,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1PRINCIPAL = new javax.swing.JDesktopPane();
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jbUsuarios = new javax.swing.JButton();
+        jbFornecedores = new javax.swing.JButton();
+        jbFornecedores1 = new javax.swing.JButton();
+        jbFornecedores2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         menuPrincipal = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         itemArquivoSair = new javax.swing.JMenuItem();
@@ -46,6 +62,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemCadastroFornecedor = new javax.swing.JMenuItem();
         itemCadastroProduto = new javax.swing.JMenuItem();
         itemCadastroCompra = new javax.swing.JMenuItem();
+        itemCadastroUsuario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Roquerou");
@@ -88,26 +105,77 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jToolBar2.add(jButton1);
 
-        jButton2.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
-        jButton2.setText("Fornecedores");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setDisabledIcon(null);
-        jButton2.setDisabledSelectedIcon(null);
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMaximumSize(new java.awt.Dimension(75, 55));
-        jButton2.setMinimumSize(new java.awt.Dimension(75, 55));
-        jButton2.setPreferredSize(new java.awt.Dimension(75, 55));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
+        jbUsuarios.setText("Usuarios");
+        jbUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbUsuarios.setFocusable(false);
+        jbUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbUsuarios.setMaximumSize(new java.awt.Dimension(75, 55));
+        jbUsuarios.setMinimumSize(new java.awt.Dimension(75, 55));
+        jbUsuarios.setPreferredSize(new java.awt.Dimension(75, 55));
+        jbUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbUsuariosActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton2);
-        jToolBar2.add(jSeparator2);
+        jToolBar2.add(jbUsuarios);
+
+        jbFornecedores.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jbFornecedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
+        jbFornecedores.setText("Fornecedores");
+        jbFornecedores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbFornecedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbFornecedores.setDisabledIcon(null);
+        jbFornecedores.setDisabledSelectedIcon(null);
+        jbFornecedores.setFocusable(false);
+        jbFornecedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbFornecedores.setMaximumSize(new java.awt.Dimension(75, 55));
+        jbFornecedores.setMinimumSize(new java.awt.Dimension(75, 55));
+        jbFornecedores.setPreferredSize(new java.awt.Dimension(75, 55));
+        jbFornecedores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbFornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFornecedoresActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jbFornecedores);
+
+        jbFornecedores1.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jbFornecedores1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produtos2.png"))); // NOI18N
+        jbFornecedores1.setText("Produtos");
+        jbFornecedores1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbFornecedores1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbFornecedores1.setFocusable(false);
+        jbFornecedores1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbFornecedores1.setMaximumSize(new java.awt.Dimension(75, 55));
+        jbFornecedores1.setMinimumSize(new java.awt.Dimension(75, 55));
+        jbFornecedores1.setPreferredSize(new java.awt.Dimension(75, 55));
+        jbFornecedores1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbFornecedores1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFornecedores1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jbFornecedores1);
+
+        jbFornecedores2.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jbFornecedores2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/shop-cart-icon.png"))); // NOI18N
+        jbFornecedores2.setText("Compra");
+        jbFornecedores2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbFornecedores2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbFornecedores2.setFocusable(false);
+        jbFornecedores2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbFornecedores2.setMaximumSize(new java.awt.Dimension(75, 55));
+        jbFornecedores2.setMinimumSize(new java.awt.Dimension(75, 55));
+        jbFornecedores2.setPreferredSize(new java.awt.Dimension(75, 55));
+        jbFornecedores2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbFornecedores2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFornecedores2ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jbFornecedores2);
 
         jButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Close.png"))); // NOI18N
@@ -128,7 +196,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButton3);
-        jToolBar2.add(jSeparator1);
 
         menuArquivo.setText("Arquivo");
         menuArquivo.setToolTipText("");
@@ -147,6 +214,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuCadastro.setText("Cadastro");
 
+        itemCadastroCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cidade.png"))); // NOI18N
         itemCadastroCidade.setText("Cidade");
         itemCadastroCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,6 +241,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroFornecedor);
 
+        itemCadastroProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produtos2.png"))); // NOI18N
         itemCadastroProduto.setText("Produto");
         itemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +250,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroProduto);
 
+        itemCadastroCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/shop-cart-icon.png"))); // NOI18N
         itemCadastroCompra.setText("Compra");
         itemCadastroCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +258,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(itemCadastroCompra);
+
+        itemCadastroUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
+        itemCadastroUsuario.setText("Usuario");
+        itemCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCadastroUsuarioActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(itemCadastroUsuario);
 
         menuPrincipal.add(menuCadastro);
 
@@ -259,16 +338,52 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaCliente.moveToFront();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFornecedoresActionPerformed
         TelaFornecedor telaFornecedor = new TelaFornecedor();
         telaFornecedor.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaFornecedor);
         telaFornecedor.moveToFront();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbFornecedoresActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void itemCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroUsuarioActionPerformed
+
+        TelaUsuario telaUsuario = new TelaUsuario();
+        telaUsuario.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaUsuario);
+        telaUsuario.moveToFront();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCadastroUsuarioActionPerformed
+
+    private void jbUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsuariosActionPerformed
+
+        TelaUsuario telaUsuario = new TelaUsuario();
+        telaUsuario.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaUsuario);
+        telaUsuario.moveToFront();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbUsuariosActionPerformed
+
+    private void jbFornecedores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFornecedores1ActionPerformed
+
+        TelaProduto telaProduto = new TelaProduto();
+        telaProduto.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaProduto);
+        telaProduto.moveToFront();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbFornecedores1ActionPerformed
+
+    private void jbFornecedores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFornecedores2ActionPerformed
+
+        TelaCompra telaCompra = new TelaCompra();
+        telaCompra.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaCompra);
+        telaCompra.moveToFront();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbFornecedores2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,7 +420,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemCadastroCliente;
     private javax.swing.JMenuItem itemArquivoSair;
@@ -313,13 +427,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCadastroCompra;
     private javax.swing.JMenuItem itemCadastroFornecedor;
     private javax.swing.JMenuItem itemCadastroProduto;
+    private javax.swing.JMenuItem itemCadastroUsuario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JButton jbFornecedores;
+    private javax.swing.JButton jbFornecedores1;
+    private javax.swing.JButton jbFornecedores2;
+    private javax.swing.JButton jbUsuarios;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;

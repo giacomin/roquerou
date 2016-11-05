@@ -6,7 +6,8 @@
 package dao;
 
 import config.HibernateUtil;
-import entidades.Cliente;
+import entidades.Fornecedor;
+import entidades.Usuario;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,14 +16,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Eduardo
  */
-public class ClienteDAO implements IDAO {
+public class UsuarioDAO {
 
-    @Override
     public String salvar(Object o) {
 
         Session sessao = null;
@@ -62,11 +63,11 @@ public class ClienteDAO implements IDAO {
         }
     }
 
-    public void listarCliente(JTable tabelaCliente, Cliente cli) {
+    public void listarUsuario(JTable tabelaUsuario, Usuario usu) {
 
-        String campoPesquisa = cli.getCampoPesquisaCliente();
+        String campoPesquisa = usu.getCampoPesquisaUsuario();
 
-        DefaultTableModel modelTable = (DefaultTableModel) tabelaCliente.getModel();
+        DefaultTableModel modelTable = (DefaultTableModel) tabelaUsuario.getModel();
         modelTable.setNumRows(0);
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -75,28 +76,47 @@ public class ClienteDAO implements IDAO {
 
         String sql = "";
 
-        sql = "FROM Cliente as cliente WHERE cliente.nome LIKE '%" + campoPesquisa + "%'";
+        sql = "FROM Usuario as usuario WHERE usuario.nome LIKE '%" + campoPesquisa + "%'";
 
         Query query = session.createQuery(sql);
 
-        List<Cliente> dados_cliente = query.list();
+        List<Usuario> dados_usuario = query.list();
 
-        for (Cliente clienterow : dados_cliente) {
+        for (Usuario usuariorow : dados_usuario) {
 
             modelTable.addRow(new Object[]{
-                clienterow.getIdCliente(),
-                clienterow.getNome(),
-                clienterow.getFone(),
-                clienterow.getEmail(),
-                clienterow.getEndereco(),
-                clienterow.getBairro(),
-                clienterow.getCidade().getIdCidade()
-               // clienterow.getCidade().getNome()
+                usuariorow.getIdUsuario(),
+                usuariorow.getNome(),
+                usuariorow.getLogin(),
+                usuariorow.getSenha(),
+                usuariorow.getCargo().getIdCargo()
+
             });
         }
         session.getTransaction().commit();
         session.close();
 
+    }
+
+    public Usuario getUsuarioLoginSenha(String login, String senha) {
+
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        sessao.getTransaction();
+        
+        
+        // AQUI VAI ME RETORNAR UM OBJETO DA CLASSE USUÁRIO
+        
+        return (Usuario) sessao.createCriteria(Usuario.class)
+                 // AQUI DIGO QUE DEVE TER O LOGIN IGUAL AO PASSADO POR PARAMETRO 
+                .add(Restrictions.eq("login", login))
+                // AQUI DIGO QUE DEVE TER O SENHA IGUAL AO PASSADO POR PARAMETRO
+                .add(Restrictions.eq("senha", senha))
+                // AQUI SETO PARA ME RETORNAR APENAS 1 RESULTADO
+                // AFINAL LOGIN E SENHA É UNICO NO SISTEMA
+              
+                .uniqueResult();
+        
+        
     }
 
 }

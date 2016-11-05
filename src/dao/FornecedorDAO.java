@@ -91,7 +91,7 @@ public class FornecedorDAO implements IDAO {
                 fornecedorrow.getEmail(),
                 fornecedorrow.getEndereco(),
                 fornecedorrow.getBairro(),
-                fornecedorrow.getCidade().getNome(),
+                fornecedorrow.getCidade().getIdCidade(),
                 fornecedorrow.getCnpj()
             });
         }
