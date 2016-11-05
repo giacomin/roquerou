@@ -6,6 +6,7 @@
 package telas;
 
 import entidades.Usuario;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -63,6 +64,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemCadastroProduto = new javax.swing.JMenuItem();
         itemCadastroCompra = new javax.swing.JMenuItem();
         itemCadastroUsuario = new javax.swing.JMenuItem();
+        itemCadastroVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Roquerou");
@@ -124,6 +126,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbFornecedores.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         jbFornecedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
         jbFornecedores.setText("Fornecedores");
+        jbFornecedores.setToolTipText("Fornecedores");
         jbFornecedores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jbFornecedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbFornecedores.setDisabledIcon(null);
@@ -268,6 +271,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(itemCadastroUsuario);
 
+        itemCadastroVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Accounting.png"))); // NOI18N
+        itemCadastroVenda.setText("Venda");
+        itemCadastroVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCadastroVendaActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(itemCadastroVenda);
+
         menuPrincipal.add(menuCadastro);
 
         setJMenuBar(menuPrincipal);
@@ -299,7 +311,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCadastroCidadeActionPerformed
 
     private void itemArquivoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArquivoSairActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_itemArquivoSairActionPerformed
 
     private void ItemCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCadastroClienteActionPerformed
@@ -346,7 +358,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbFornecedoresActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void itemCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroUsuarioActionPerformed
@@ -385,6 +397,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbFornecedores2ActionPerformed
 
+    private void itemCadastroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroVendaActionPerformed
+        
+        TelaItens telaItens = new TelaItens();
+        telaItens.setVisible(true);
+        jDesktopPane1PRINCIPAL.add(telaItens);
+        telaItens.moveToFront();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCadastroVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -416,7 +437,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
-
             }
         });
     }
@@ -428,9 +448,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCadastroFornecedor;
     private javax.swing.JMenuItem itemCadastroProduto;
     private javax.swing.JMenuItem itemCadastroUsuario;
+    private javax.swing.JMenuItem itemCadastroVenda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
+    public static javax.swing.JDesktopPane jDesktopPane1PRINCIPAL;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JButton jbFornecedores;
     private javax.swing.JButton jbFornecedores1;

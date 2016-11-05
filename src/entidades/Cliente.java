@@ -134,5 +134,10 @@ public class Cliente implements java.io.Serializable {
     public String getCampoPesquisaCliente() {
         return campoPesquisa;
     }
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 
 }
