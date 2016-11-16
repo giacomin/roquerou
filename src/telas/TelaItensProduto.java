@@ -9,6 +9,7 @@ import config.HibernateUtil;
 import dao.ProdutoDAO;
 import entidades.Produto;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -163,6 +164,11 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
 
         botaoOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Good mark.png"))); // NOI18N
         botaoOk.setText("Ok");
+        botaoOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoOkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,32 +200,7 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /* 
-    
-     // *** Método (provisório) popularProduto() ***
-
-     public void popularProduto() {
-
-     SessionFactory sf = HibernateUtil.getSessionFactory();
-     Session session = sf.openSession();
-     session.beginTransaction();
-
-     Query query = session.createQuery("from Produto");
-     List<Produto> dados_produto = query.list();
-     Produto prod = new Produto();
-
-     for (Produto produtorow : dados_produto) {
-
-     prod.setIdProduto(produtorow.getIdProduto());
-     prod.setNome(produtorow.getNome());
-     comboProduto.addItem(produtorow); // Adiciona o objeto inteiro
-
-     }
-
-     session.getTransaction().commit();
-     }
-     */
-
+   
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
@@ -244,6 +225,29 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
         Float total = (Integer.parseInt(campoQuantidade.getText()) * Float.parseFloat(campoValorUnitario.getText()));
         campoValorTotal.setText(total.toString());
     }//GEN-LAST:event_campoQuantidadeFocusLost
+
+    private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
+        produto = (Produto) comboProduto.getSelectedItem(); // Carrega o produto selecionado no objeto "produto"
+
+        DefaultTableModel modelTable = (DefaultTableModel) TelaItens.tabelaProduto.getModel();
+
+        int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
+        modelTable.setNumRows(linha); // Adiciona nova linha em tabelaProduto
+
+        // Adiciona as informações do produto em tabelaProduto
+        modelTable.addRow(new Object[]{
+            produto.getIdProduto(),
+            produto.getNome(),
+            campoQuantidade.getText(),
+            campoValorUnitario.getText(),
+            campoValorTotal.getText(),
+            produto.getEstoque()
+        });
+        
+        
+
+        dispose();
+    }//GEN-LAST:event_botaoOkActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

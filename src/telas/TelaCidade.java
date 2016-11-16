@@ -4,7 +4,16 @@ import dao.CidadeDAO;
 import entidades.Cidade;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
+
+//Logs
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -12,15 +21,37 @@ import javax.swing.JOptionPane;
  */
 public class TelaCidade extends javax.swing.JInternalFrame {
 
+    private static final Logger LOG = Logger.getLogger(TelaCidade.class.getName());
+
     /**
      * Creates new form TelaCidade
      */
     public TelaCidade() {
+
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            file.setFormatter(new SimpleFormatter());
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+        }
+        catch(IOException io){
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+        
         initComponents();
+
+        LOG.info("Abertura da Tela de Cidades");
+
     }
 
     // *** Método novaCidade(): prepara os campos (limpa) ***
     public void novaCidade() {
+
+        LOG.info("Insersão de registro");
 
         tabelaCidade.clearSelection();
 
@@ -63,13 +94,14 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 cid.setCep(Integer.parseInt(campoCEP.getText()));
 
             }
-
             String retorno = new CidadeDAO().salvar(cid);
 
             if (retorno == null) {
+                LOG.info("Registro de id " + cid.getIdCidade() + " salvo com sucesso!");
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
             } else {
+                LOG.severe("Problemas ao salvar registro.");
                 JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
             }
 
@@ -87,6 +119,9 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         } // Caso contrário (se algum dos campos não estiver validado)...
         else {
+
+            LOG.severe("Erro no preenchimento dos campos ao salvar registro");
+
             if (cid.validaNomeCidade(campoNome.getText()) == false) {
                 campoNome.setBackground(Color.pink);
             }
@@ -130,10 +165,14 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         campoNome.setEnabled(true);
         campoCEP.setEnabled(true);
         comboUF.setEnabled(true);
+
+        LOG.info("Edição do registro de id " + cid.getIdCidade());
     }
 
     // *** Método pesquisarCidades() ***
     public void pesquisarCidade() {
+
+        LOG.info("Pesquisa por registros");
 
         botaoSalvar.setEnabled(false);
         botaoEditar.setEnabled(false);
@@ -160,6 +199,8 @@ public class TelaCidade extends javax.swing.JInternalFrame {
     // *** Método excluirCidade() ***
     public void excluirCidade() {
 
+        LOG.warning("Exclusão de registro");
+
         if (JOptionPane.showConfirmDialog(null, "Deseja mesmo remover o registro?", "Cuidado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
             int row = tabelaCidade.getSelectedRow();
@@ -180,8 +221,10 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             String retorno = cidDAO.remover(cid);
 
             if (retorno == null) {
+                LOG.info("Registro de id " + cid.getIdCidade() + " excluído com sucesso!");
                 JOptionPane.showMessageDialog(null, "Cidade removida com sucesso!");
             } else {
+                LOG.severe("Não foi possível excluir o registro");
                 JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover a cidade.");
             }
         }

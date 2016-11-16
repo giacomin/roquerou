@@ -112,21 +112,10 @@ public class TelaItens extends javax.swing.JInternalFrame {
 
         tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código", "Nome", "Quantidade", "Valor Unit.", "Valor Total"
             }
         ));
         jScrollPane1.setViewportView(tabelaProduto);
@@ -158,6 +147,11 @@ public class TelaItens extends javax.swing.JInternalFrame {
         campoTotalValor.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         campoTotalValor.setForeground(new java.awt.Color(255, 0, 0));
         campoTotalValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        campoTotalValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoTotalValorFocusGained(evt);
+            }
+        });
 
         campoTotalItens.setBackground(new java.awt.Color(255, 255, 153));
         campoTotalItens.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
@@ -289,10 +283,8 @@ public class TelaItens extends javax.swing.JInternalFrame {
      Feito isso, para chamá-lo deve-se inserir o código abaixo:
      */
     private void botaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarActionPerformed
-       
-        TelaPrincipal telaPrincipal = new TelaPrincipal();
         TelaItensProduto telaItensProduto = new TelaItensProduto();
-        telaPrincipal.jDesktopPane1PRINCIPAL.add(telaItensProduto);
+        TelaPrincipal.jDesktopPane1PRINCIPAL.add(telaItensProduto);
         telaItensProduto.setVisible(true);
         telaItensProduto.moveToFront();
     }//GEN-LAST:event_botaoAdicionarActionPerformed
@@ -306,6 +298,20 @@ public class TelaItens extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_botaoOkActionPerformed
+
+    private void campoTotalValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoTotalValorFocusGained
+        int row = tabelaProduto.getRowCount() - 1;
+        Object valor;
+
+        Float soma = new Float(0);
+
+        for (int i = 0; i <= row; i++) {
+            valor = tabelaProduto.getValueAt(i, 4);
+            soma = soma + (Float.parseFloat(valor.toString()));
+        }
+
+        campoTotalValor.setText(Float.toString(soma));
+    }//GEN-LAST:event_campoTotalValorFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAdicionar;
@@ -326,6 +332,6 @@ public class TelaItens extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tabelaProduto;
+    public static javax.swing.JTable tabelaProduto;
     // End of variables declaration//GEN-END:variables
 }

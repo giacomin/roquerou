@@ -10,7 +10,14 @@ import dao.ClienteDAO;
 import entidades.Cidade;
 import entidades.Cliente;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -26,13 +33,31 @@ import org.hibernate.SessionFactory;
  */
 public class TelaCliente extends javax.swing.JInternalFrame {
 
+    private static final Logger LOG = Logger.getLogger(TelaCliente.class.getName());
+
     /**
      * Creates new form TelaCliente
      */
     public TelaCliente() {
+
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            file.setFormatter(new SimpleFormatter());
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+
         initComponents();
         popularCombo();
         setarLabels();
+
+        LOG.info("Abertura da Tela de Clientes");
 
     }
 
@@ -157,8 +182,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             buscarCliente();
 
             if (retorno == null) {
+                LOG.info("Registro de id " + cli.getIdCliente() + " excluído com sucesso.");
                 System.out.println("Cliente Excluído");
             } else {
+                LOG.info("Problemas ao excluir registro");
                 System.out.println("ERRO na EXCLUSÃO");
             }
 
@@ -217,10 +244,14 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                     String retorno = new ClienteDAO().salvar(cli);
 
                                     if (retorno == null) {
+
+                                        LOG.info("Registro de id " + cli.getIdCliente() + " salvo com sucesso!");
                                         JOptionPane.showMessageDialog(null, "Cliente Adicionado!");
                                         zerarCampos();
                                         bloquearCampos();
+
                                     } else {
+                                        LOG.info("Problemas ao adicionar registro");
                                         JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente!");
                                     }
 
@@ -233,10 +264,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                     String retorno = new ClienteDAO().salvar(cli);
 
                                     if (retorno == null) {
+                                        LOG.info("Registro de id " + cli.getIdCliente() + " salvo com sucesso!");
                                         JOptionPane.showMessageDialog(null, "Cliente Adicionado!");
                                         zerarCampos();
                                         bloquearCampos();
                                     } else {
+                                        LOG.info("Problemas ao adicionar registro");
                                         JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente!");
                                     }
 
@@ -251,6 +284,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }
 
     public void buscarCliente() {
+
+        LOG.info("Pesquisa por registros");
 
         ClienteDAO pesquisa = new ClienteDAO();
         Cliente cli = new Cliente();
@@ -647,6 +682,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         habilitarCampos();
         habilitarSalvar();
         zerarCampos();
+        LOG.info("Inserção de cliente");
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoNovoClienteActionPerformed
 
@@ -734,6 +770,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEnderecoCliente.setEnabled(true);
         campoBairroCliente.setEnabled(true);
         comboCidadeCliente.setEnabled(true);
+
+        LOG.info("Edição do registro de id " + cli.getIdCliente());
 
 
     }//GEN-LAST:event_botaoEditarClienteActionPerformed

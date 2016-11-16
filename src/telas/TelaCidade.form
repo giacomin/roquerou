@@ -181,9 +181,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoNovo">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_add.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[80, 27]"/>
@@ -201,9 +198,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoSalvar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/dialog_ok_apply.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -288,9 +282,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoBuscar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_find.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[80, 27]"/>
@@ -356,9 +347,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="botaoExcluir">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/list_remove.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -374,9 +362,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoEditar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -394,9 +379,6 @@
     </Container>
     <Component class="javax.swing.JButton" name="botaoFechar">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/editdelete.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Fechar"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[80, 27]"/>
