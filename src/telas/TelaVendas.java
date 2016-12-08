@@ -6,10 +6,20 @@
 package telas;
 
 import config.HibernateUtil;
+import dao.PedidoDAO;
 import entidades.Cliente;
+import entidades.ItensPedido;
+import entidades.Pedido;
+import entidades.Produto;
+import entidades.Usuario;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,12 +28,12 @@ import org.hibernate.SessionFactory;
  *
  * @author giacomin
  */
-public class TelaItens extends javax.swing.JInternalFrame {
+public class TelaVendas extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Teste
      */
-    public TelaItens() {
+    public TelaVendas() {
         initComponents();
 
         novoVenda();
@@ -53,8 +63,6 @@ public class TelaItens extends javax.swing.JInternalFrame {
         botaoOk = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         campoTotalValor = new javax.swing.JTextField();
-        campoTotalItens = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         botaoFechar = new javax.swing.JButton();
 
@@ -118,6 +126,11 @@ public class TelaItens extends javax.swing.JInternalFrame {
                 "Código", "Nome", "Quantidade", "Valor Unit.", "Valor Total"
             }
         ));
+        tabelaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProdutoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaProduto);
 
         botaoAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Add.png"))); // NOI18N
@@ -130,10 +143,13 @@ public class TelaItens extends javax.swing.JInternalFrame {
 
         botaoRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Remove.png"))); // NOI18N
         botaoRemover.setText("Remover");
-        botaoRemover.setEnabled(false);
+        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverActionPerformed(evt);
+            }
+        });
 
         botaoOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Good mark.png"))); // NOI18N
-        botaoOk.setEnabled(false);
         botaoOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoOkActionPerformed(evt);
@@ -147,46 +163,31 @@ public class TelaItens extends javax.swing.JInternalFrame {
         campoTotalValor.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         campoTotalValor.setForeground(new java.awt.Color(255, 0, 0));
         campoTotalValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        campoTotalValor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                campoTotalValorFocusGained(evt);
-            }
-        });
-
-        campoTotalItens.setBackground(new java.awt.Color(255, 255, 153));
-        campoTotalItens.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        campoTotalItens.setForeground(new java.awt.Color(255, 0, 0));
-        campoTotalItens.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Sum.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botaoRemover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoAdicionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoOk))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
+                        .addComponent(botaoRemover)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoTotalItens, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
+                        .addComponent(botaoAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(botaoOk))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +196,7 @@ public class TelaItens extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(campoTotalItens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,6 +267,11 @@ public class TelaItens extends javax.swing.JInternalFrame {
 
     public void novoVenda() {
 
+        botaoRemover.setEnabled(false);
+        botaoOk.setEnabled(false);
+        campoTotalValor.setText("");
+        
+
         // Preencher o campo Data com a Data do dia (no formato dd/MM/YYYY)
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date data = new Date();
@@ -283,7 +287,7 @@ public class TelaItens extends javax.swing.JInternalFrame {
      Feito isso, para chamá-lo deve-se inserir o código abaixo:
      */
     private void botaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarActionPerformed
-        TelaItensProduto telaItensProduto = new TelaItensProduto();
+        TelaItensVenda telaItensProduto = new TelaItensVenda();
         TelaPrincipal.jDesktopPane1PRINCIPAL.add(telaItensProduto);
         telaItensProduto.setVisible(true);
         telaItensProduto.moveToFront();
@@ -294,12 +298,84 @@ public class TelaItens extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharActionPerformed
 
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
-        // Habilitar botão apenas quando tiver pelo menos 1 iten na lista.
+        /*
+         Passos:
+        
+         1 - Criar o pedido;
+         2 - Cadastrar os itens de pedido
+                
+         */
+        // PEDIDO
+        Pedido ped = new Pedido();
+        Cliente cli = new Cliente();
+        Date data = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Usuario usu = new Usuario();
+
+        cli = (Cliente) comboCliente.getSelectedItem();
+        usu.setIdUsuario(1); // Corrigir quando for possível pegar o usuário da sessão. Por enquanto será o usuáriode ID 1
+
+        ped.setCliente(cli);
+        ped.setValorTotal(Float.parseFloat(campoTotalValor.getText())); // Não esquecer de fazer o valor aparecer automaticamente no campo
+
+        ped.setUsuario(usu);
+
+        //Data
+        try {
+            ped.setData(sdf.parse(campoData.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String retorno = new PedidoDAO().salvar(ped); // Salva o pedido
+
+        // ITENS
+        PedidoDAO pdao = new PedidoDAO();
+
+        int ultimoPed = new PedidoDAO().ultimoPedido(); // Resgata o id do pedido salvo
+        DefaultTableModel modelTable = (DefaultTableModel) TelaVendas.tabelaProduto.getModel();
+        int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
+        
+
+        for (int i = 0; i < linha; i++) {
+
+            ItensPedido iped = new ItensPedido();
+            Produto prod = new Produto();
+            Pedido ped2 = new Pedido();
+            int quantidade = 0;
+
+            prod.setIdProduto((Integer) modelTable.getValueAt(i, 0));
+            quantidade = Integer.parseInt((String) modelTable.getValueAt(i, 2));
+            ped2.setIdPedido(ultimoPed);
+
+            iped.setPedido(ped2);
+            iped.setProduto(prod);
+            iped.setQuantidade(quantidade);
+
+            pdao.salvar(iped); // Salva o item do pedido
+
+        }
+
+        if (retorno == null) {
+            JOptionPane.showMessageDialog(null, "Venda registrada com sucesso!");
+            modelTable.setNumRows(0);
+            novoVenda();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro! Verifique os pedido da venda.");
+        }
+        
 
 
     }//GEN-LAST:event_botaoOkActionPerformed
 
-    private void campoTotalValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoTotalValorFocusGained
+    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
+        ((DefaultTableModel) tabelaProduto.getModel()).removeRow(tabelaProduto.getSelectedRow()); // Remove o item selecionado
+        if (tabelaProduto.getRowCount() == 0) {
+            botaoOk.setEnabled(false);
+        }
+        botaoRemover.setEnabled(false);
+
         int row = tabelaProduto.getRowCount() - 1;
         Object valor;
 
@@ -311,22 +387,25 @@ public class TelaItens extends javax.swing.JInternalFrame {
         }
 
         campoTotalValor.setText(Float.toString(soma));
-    }//GEN-LAST:event_campoTotalValorFocusGained
+
+    }//GEN-LAST:event_botaoRemoverActionPerformed
+
+    private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
+        botaoRemover.setEnabled(true);
+    }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAdicionar;
     private javax.swing.JButton botaoFechar;
-    private javax.swing.JButton botaoOk;
+    public static javax.swing.JButton botaoOk;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JTextField campoCodigo;
     private javax.swing.JTextField campoData;
-    private javax.swing.JTextField campoTotalItens;
-    private javax.swing.JTextField campoTotalValor;
+    public static javax.swing.JTextField campoTotalValor;
     private javax.swing.JComboBox comboCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

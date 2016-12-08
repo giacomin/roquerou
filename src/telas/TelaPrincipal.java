@@ -399,7 +399,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void itemCadastroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroVendaActionPerformed
         
-        TelaItens telaItens = new TelaItens();
+        TelaVendas telaItens = new TelaVendas();
         telaItens.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaItens);
         telaItens.moveToFront();

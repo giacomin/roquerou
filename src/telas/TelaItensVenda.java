@@ -13,12 +13,14 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import static telas.TelaVendas.campoTotalValor;
+import static telas.TelaVendas.tabelaProduto;
 
 /**
  *
  * @author giacomin
  */
-public class TelaItensProduto extends javax.swing.JInternalFrame {
+public class TelaItensVenda extends javax.swing.JInternalFrame {
 
     ProdutoDAO pdao = new ProdutoDAO();
     Produto produto = new Produto();
@@ -26,7 +28,7 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaPesquisaProduto
      */
-    public TelaItensProduto() {
+    public TelaItensVenda() {
         initComponents();
 
         pdao.popularComboItensProduto(comboProduto, produto);
@@ -200,7 +202,7 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
@@ -222,6 +224,9 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoQuantidadeKeyTyped
 
     private void campoQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoQuantidadeFocusLost
+        //Float total = (Integer.parseInt(campoQuantidade.getText()) * Float.parseFloat(campoValorUnitario.getText()));
+        //campoValorTotal.setText(total.toString());
+
         Float total = (Integer.parseInt(campoQuantidade.getText()) * Float.parseFloat(campoValorUnitario.getText()));
         campoValorTotal.setText(total.toString());
     }//GEN-LAST:event_campoQuantidadeFocusLost
@@ -229,7 +234,7 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
         produto = (Produto) comboProduto.getSelectedItem(); // Carrega o produto selecionado no objeto "produto"
 
-        DefaultTableModel modelTable = (DefaultTableModel) TelaItens.tabelaProduto.getModel();
+        DefaultTableModel modelTable = (DefaultTableModel) TelaVendas.tabelaProduto.getModel();
 
         int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
         modelTable.setNumRows(linha); // Adiciona nova linha em tabelaProduto
@@ -243,9 +248,24 @@ public class TelaItensProduto extends javax.swing.JInternalFrame {
             campoValorTotal.getText(),
             produto.getEstoque()
         });
-        
-        
 
+        // Atualiza o campo de valor total em TelaVendas (outra tela)
+        int row = tabelaProduto.getRowCount() - 1;
+        Object valor;
+
+        Float soma = new Float(0);
+
+        for (int i = 0; i <= row; i++) {
+            valor = tabelaProduto.getValueAt(i, 4);
+            soma = soma + (Float.parseFloat(valor.toString()));
+        }
+
+        campoTotalValor.setText(Float.toString(soma));
+        
+        if (row >= 0) {
+            TelaVendas.botaoOk.setEnabled(true);
+        }
+        
         dispose();
     }//GEN-LAST:event_botaoOkActionPerformed
 
