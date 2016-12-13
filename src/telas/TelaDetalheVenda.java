@@ -37,7 +37,6 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaProduto = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
         campoTotalValor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         botaoFechar = new javax.swing.JButton();
@@ -62,7 +61,7 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Cod", "Nome", "Quant", "Valor Unit.", "Subtotal"
+                "Cod.", "Nome", "Quant", "Valor Unit.", "Subtotal"
             }
         ));
         tabelaProduto.setEnabled(false);
@@ -80,9 +79,6 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
             tabelaProduto.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Dollar.png"))); // NOI18N
-
         campoTotalValor.setBackground(new java.awt.Color(255, 255, 153));
         campoTotalValor.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         campoTotalValor.setForeground(new java.awt.Color(255, 0, 0));
@@ -90,7 +86,7 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
         campoTotalValor.setFocusable(false);
 
         jLabel6.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
-        jLabel6.setText("TOTAL");
+        jLabel6.setText("TOTAL R$");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,8 +94,6 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,15 +103,13 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5)))
+                    .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Close.png"))); // NOI18N
+        botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dialog_close.png"))); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +203,7 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,7 +225,6 @@ public class TelaDetalheVenda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

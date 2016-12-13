@@ -89,7 +89,7 @@ public class CompraDAO implements IDAO {
             sql = "FROM Compra as compra WHERE fornecedor.nome LIKE '%" + campoPesquisa + "%'";
         }
         
-        if (comboPesquisa == "Operador") {
+        if (comboPesquisa == "Vendedor") {
             sql = "FROM Compra as compra WHERE usuario.nome LIKE '%" + campoPesquisa + "%'";
         }
 

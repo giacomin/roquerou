@@ -59,6 +59,8 @@ public class TelaItensVenda extends javax.swing.JInternalFrame {
         botaoCancelar = new javax.swing.JButton();
         botaoOk = new javax.swing.JButton();
 
+        setTitle("Item");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         campoCodigo.setEnabled(false);
@@ -156,15 +158,15 @@ public class TelaItensVenda extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        botaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Bad mark.png"))); // NOI18N
-        botaoCancelar.setText("Cancelar");
+        botaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dialog_close.png"))); // NOI18N
+        botaoCancelar.setText("Fechar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
             }
         });
 
-        botaoOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Good mark.png"))); // NOI18N
+        botaoOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/button_ok.png"))); // NOI18N
         botaoOk.setText("Ok");
         botaoOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +198,7 @@ public class TelaItensVenda extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCancelar)
                     .addComponent(botaoOk))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();

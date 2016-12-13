@@ -51,7 +51,7 @@
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="botaoFechar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -183,7 +183,7 @@
         <Component class="javax.swing.JButton" name="botaoNovo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_add.png"/>
+              <Image iconType="3" name="/icons/list_add.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -203,7 +203,7 @@
         <Component class="javax.swing.JButton" name="botaoSalvar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/dialog_ok_apply.png"/>
+              <Image iconType="3" name="/icons/document_save_all.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -338,7 +338,7 @@
               <StringArray count="3">
                 <StringItem index="0" value="Produto"/>
                 <StringItem index="1" value="Fornecedor"/>
-                <StringItem index="2" value="Operador"/>
+                <StringItem index="2" value="Vendedor"/>
               </StringArray>
             </Property>
           </Properties>
@@ -348,7 +348,7 @@
         <Component class="javax.swing.JButton" name="botaoBuscar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_find.png"/>
+              <Image iconType="3" name="/icons/document_preview.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -379,7 +379,7 @@
                     <Column editable="false" title="Qtde" type="java.lang.Object"/>
                     <Column editable="false" title="Custo" type="java.lang.Object"/>
                     <Column editable="false" title="Data" type="java.lang.Object"/>
-                    <Column editable="false" title="Operador" type="java.lang.Object"/>
+                    <Column editable="false" title="Vendedor" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -434,7 +434,7 @@
         <Component class="javax.swing.JButton" name="botaoExcluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/list_remove.png"/>
+              <Image iconType="3" name="/icons/list_remove.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -452,7 +452,7 @@
         <Component class="javax.swing.JButton" name="botaoEditar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit.png"/>
+              <Image iconType="3" name="/icons/edit2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -472,7 +472,7 @@
     <Component class="javax.swing.JButton" name="botaoFechar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/editdelete.png"/>
+          <Image iconType="3" name="/icons/dialog_close.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fechar"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

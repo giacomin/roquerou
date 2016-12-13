@@ -283,7 +283,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
-        botaoNovo.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_add.png")); // NOI18N
+        botaoNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/list_add.png"))); // NOI18N
         botaoNovo.setText("Novo");
         botaoNovo.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoNovo.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -294,7 +294,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
-        botaoSalvar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/dialog_ok_apply.png")); // NOI18N
+        botaoSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_save_all.png"))); // NOI18N
         botaoSalvar.setText("Salvar");
         botaoSalvar.setEnabled(false);
         botaoSalvar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -360,7 +360,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
 
         comboPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "UF" }));
 
-        botaoBuscar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit_find.png")); // NOI18N
+        botaoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
         botaoBuscar.setText("Buscar");
         botaoBuscar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoBuscar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -395,7 +395,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             tabelaCidade.getColumnModel().getColumn(3).setMaxWidth(30);
         }
 
-        botaoExcluir.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/list_remove.png")); // NOI18N
+        botaoExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/list_remove.png"))); // NOI18N
         botaoExcluir.setText("Excluir");
         botaoExcluir.setEnabled(false);
         botaoExcluir.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -406,7 +406,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             }
         });
 
-        botaoEditar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/edit.png")); // NOI18N
+        botaoEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit2.png"))); // NOI18N
         botaoEditar.setText("Editar");
         botaoEditar.setEnabled(false);
         botaoEditar.setMaximumSize(new java.awt.Dimension(80, 27));
@@ -453,7 +453,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                     .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        botaoFechar.setIcon(new javax.swing.ImageIcon("/home/giacomin/Documentos/NetBeansProjects/Roquerou/icons/editdelete.png")); // NOI18N
+        botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dialog_close.png"))); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.setMaximumSize(new java.awt.Dimension(80, 27));
         botaoFechar.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -485,7 +485,7 @@ public class TelaCidade extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botaoFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();

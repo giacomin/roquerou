@@ -77,7 +77,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         botaoSalvarUsuario.setEnabled(false);
         botaoNovoUsuario.setEnabled(true);
-        botaoCancelarUsuario.setEnabled(false);
+        //botaoCancelarUsuario.setEnabled(false);
     }
 
     public void zerarCampos() {
@@ -92,7 +92,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     // método habilitarSalvar()
     public void habilitarSalvar() {
         botaoSalvarUsuario.setEnabled(true);
-        botaoCancelarUsuario.setEnabled(true);
+        //botaoCancelarUsuario.setEnabled(true);
 
     }
 
@@ -247,14 +247,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         campoLoginUsuario = new javax.swing.JTextField();
         campoSenhaUsuario = new javax.swing.JTextField();
-        botaoCancelarUsuario = new javax.swing.JButton();
         botaoSalvarUsuario = new javax.swing.JButton();
         botaoNovoUsuario = new javax.swing.JButton();
         jbNome = new javax.swing.JLabel();
         jbLogin = new javax.swing.JLabel();
         jbSenha = new javax.swing.JLabel();
         jbCargo = new javax.swing.JLabel();
-        comboCargo = new javax.swing.JComboBox<>();
+        comboCargo = new javax.swing.JComboBox<String>();
+        jLabel5 = new javax.swing.JLabel();
         jpUsuario = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaUsuario = new javax.swing.JTable();
@@ -286,7 +286,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Login");
 
-        jLabel4.setText("Senha");
+        jLabel4.setText("Senha:");
 
         campoLoginUsuario.setEnabled(false);
 
@@ -298,14 +298,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        botaoCancelarUsuario.setText("Cancelar");
-        botaoCancelarUsuario.setEnabled(false);
-        botaoCancelarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCancelarUsuarioActionPerformed(evt);
-            }
-        });
-
+        botaoSalvarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_save_all.png"))); // NOI18N
         botaoSalvarUsuario.setText("Salvar");
         botaoSalvarUsuario.setEnabled(false);
         botaoSalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -314,6 +307,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoNovoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/list_add.png"))); // NOI18N
         botaoNovoUsuario.setText("Novo");
         botaoNovoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,13 +323,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jbCargo.setText("cargo invalido");
 
-        comboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        comboCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         comboCargo.setEnabled(false);
         comboCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboCargoActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Cargo:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -345,46 +341,42 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(89, 89, 89)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(botaoNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoSalvarUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoCancelarUsuario))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(233, 233, 233)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jbCargo)
-                                        .addGap(78, 78, 78))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 29, Short.MAX_VALUE))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(campoCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(25, 25, 25)
+                                    .addComponent(jbLogin)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(campoLoginUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(campoSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campoLoginUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbNome)
-                                    .addComponent(campoNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbLogin)
-                                    .addComponent(jbSenha))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jbSenha)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(botaoNovoUsuario)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(botaoSalvarUsuario))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(campoNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel5))
+                                        .addComponent(jbNome))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jbCargo)
+                                        .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +389,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(campoNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNome)
@@ -405,23 +398,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(campoLoginUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbLogin))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(campoSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                    .addComponent(campoLoginUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(campoSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbLogin)
+                    .addComponent(jbSenha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoNovoUsuario)
-                    .addComponent(botaoSalvarUsuario)
-                    .addComponent(botaoCancelarUsuario))
+                    .addComponent(botaoSalvarUsuario))
                 .addContainerGap())
         );
 
@@ -435,7 +422,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Login", "Senha", "Cargo"
+                "Cod.", "Nome", "Login", "Senha", "Cargo"
             }
         ));
         tabelaUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -444,7 +431,25 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tabelaUsuario);
+        if (tabelaUsuario.getColumnModel().getColumnCount() > 0) {
+            tabelaUsuario.getColumnModel().getColumn(0).setMinWidth(50);
+            tabelaUsuario.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tabelaUsuario.getColumnModel().getColumn(0).setMaxWidth(50);
+            tabelaUsuario.getColumnModel().getColumn(1).setMinWidth(200);
+            tabelaUsuario.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tabelaUsuario.getColumnModel().getColumn(1).setMaxWidth(200);
+            tabelaUsuario.getColumnModel().getColumn(2).setMinWidth(150);
+            tabelaUsuario.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tabelaUsuario.getColumnModel().getColumn(2).setMaxWidth(150);
+            tabelaUsuario.getColumnModel().getColumn(3).setMinWidth(0);
+            tabelaUsuario.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tabelaUsuario.getColumnModel().getColumn(3).setMaxWidth(0);
+            tabelaUsuario.getColumnModel().getColumn(4).setMinWidth(100);
+            tabelaUsuario.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tabelaUsuario.getColumnModel().getColumn(4).setMaxWidth(100);
+        }
 
+        botaoEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit2.png"))); // NOI18N
         botaoEditarUsuario.setText("Editar");
         botaoEditarUsuario.setEnabled(false);
         botaoEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -453,6 +458,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoExcluirUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/list_remove.png"))); // NOI18N
         botaoExcluirUsuario.setText("Excluir");
         botaoExcluirUsuario.setEnabled(false);
         botaoExcluirUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -461,6 +467,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBuscarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
         jbBuscarUsuario.setText("Buscar");
         jbBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -475,14 +482,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             .addGroup(jpUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpUsuarioLayout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
-                        .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpUsuarioLayout.createSequentialGroup()
-                                .addComponent(botaoEditarUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoExcluirUsuario))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoEditarUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoExcluirUsuario))
                     .addGroup(jpUsuarioLayout.createSequentialGroup()
                         .addComponent(campoPesquisaUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -496,8 +501,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoPesquisaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscarUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEditarUsuario)
@@ -505,6 +510,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dialog_close.png"))); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,11 +525,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoFechar)))
+                        .addComponent(botaoFechar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -535,7 +541,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addComponent(jpUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -560,7 +566,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         
         botaoNovoUsuario.setEnabled(false);
         botaoSalvarUsuario.setEnabled(true);
-        botaoCancelarUsuario.setEnabled(true);
+        //botaoCancelarUsuario.setEnabled(true);
 
         int row = tabelaUsuario.getSelectedRow();
 
@@ -631,15 +637,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoSalvarUsuarioActionPerformed
 
-    private void botaoCancelarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarUsuarioActionPerformed
-
-        // setarLabels();
-        zerarCampos();
-        bloquearCampos();
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCancelarUsuarioActionPerformed
-
     private void campoSenhaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoSenhaUsuarioActionPerformed
@@ -659,7 +656,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoCancelarUsuario;
     private javax.swing.JButton botaoEditarUsuario;
     private javax.swing.JButton botaoExcluirUsuario;
     private javax.swing.JButton botaoFechar;
@@ -679,6 +675,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBuscarUsuario;

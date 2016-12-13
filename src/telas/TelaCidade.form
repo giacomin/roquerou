@@ -50,7 +50,7 @@
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="botaoFechar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -181,6 +181,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoNovo">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/list_add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[80, 27]"/>
@@ -198,6 +201,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoSalvar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/document_save_all.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -282,6 +288,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoBuscar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/document_preview.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[80, 27]"/>
@@ -347,6 +356,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="botaoExcluir">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/list_remove.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -362,6 +374,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoEditar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/edit2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -379,6 +394,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="botaoFechar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/dialog_close.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fechar"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[80, 27]"/>

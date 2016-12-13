@@ -121,6 +121,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
             tabelaVenda.getColumnModel().getColumn(4).setMinWidth(80);
         }
 
+        botaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/button_cancel.png"))); // NOI18N
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +129,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoDetalhes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit_redo.png"))); // NOI18N
         botaoDetalhes.setText("Detalhes");
         botaoDetalhes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +137,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
         botaoBuscar.setText("Buscar");
         botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,6 +215,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dialog_close.png"))); // NOI18N
         botaoFechar.setText("Fechar");
         botaoFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +243,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoFechar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();

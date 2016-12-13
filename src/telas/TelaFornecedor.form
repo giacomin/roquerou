@@ -31,16 +31,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jpForn1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jpForn2" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jpForn1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jpForn2" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,12 +49,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpForn1" min="-2" pref="273" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jpForn1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jpForn2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,76 +72,107 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="campoCodForn" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="jbNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="campoEmailForn" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
+                              <Component id="jbEmail" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jbFone" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="campoFoneForn" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="campoNomeForn" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jbEndereco" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="369" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="campoEnderecoForn" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jbNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoNomeForn" alignment="0" min="-2" pref="460" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="campoBairroForn" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="campoEnderecoForn" alignment="0" pref="249" max="32767" attributes="0"/>
-                                      <Component id="campoEmailForn" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbCnpj" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="comboCidadeForn" min="-2" pref="145" max="-2" attributes="0"/>
-                                              <Component id="jbFone" min="-2" max="-2" attributes="0"/>
-                                              <Component id="campoFoneForn" min="-2" pref="145" max="-2" attributes="0"/>
-                                              <Component id="jbCidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Component id="jbBairro" min="-2" max="-2" attributes="0"/>
+                                      <Component id="campoBairroForn" min="-2" pref="132" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                          <Component id="jbCidade" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="botaoNovoForn" min="-2" pref="91" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="botaoSalvarForn" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="botaoCancelarForn" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="comboCidadeForn" min="-2" pref="133" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="jbEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbBairro" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoCnpjForn" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
-                              <Component id="jbCnpj" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="campoCodForn" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="campoCnpjForn" min="-2" pref="204" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="botaoNovoForn" min="-2" pref="91" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="botaoSalvarForn" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoCodForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="campoNomeForn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -149,54 +181,46 @@
                   <Component id="jbNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoEmailForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoFoneForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jbEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbFone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboCidadeForn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoBairroForn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jbBairro" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbCidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="campoEnderecoForn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoEnderecoForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jbEndereco" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="botaoNovoForn" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botaoSalvarForn" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botaoCancelarForn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoCnpjForn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jbCnpj" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="campoBairroForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboCidadeForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jbBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbCidade" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="campoCnpjForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jbCnpj" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="botaoSalvarForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botaoNovoForn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -290,6 +314,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoSalvarForn">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/document_save_all.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -299,6 +326,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="botaoNovoForn">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/list_add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
           </Properties>
           <Events>
@@ -343,17 +373,8 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoFoneFornFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoFoneFornActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="botaoCancelarForn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarFornActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoFoneFornFocusLost"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
@@ -385,34 +406,23 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="campoPesquisaFornecedor" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="botaoEditarForn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="botaoExcluirForn" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="campoPesquisaFornecedor" min="-2" pref="482" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane1" min="-2" pref="551" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="botaoEditarForn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="botaoExcluirForn" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="campoPesquisaFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -433,6 +443,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/document_preview.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
@@ -450,54 +463,54 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="8" rowCount="4">
-                    <Column editable="true" title="ID" type="java.lang.Object"/>
+                    <Column editable="true" title="Cod." type="java.lang.Object"/>
                     <Column editable="true" title="Nome" type="java.lang.Object"/>
                     <Column editable="true" title="Fone" type="java.lang.Object"/>
                     <Column editable="true" title="Email" type="java.lang.Object"/>
                     <Column editable="true" title="Endere&#xe7;o" type="java.lang.Object"/>
                     <Column editable="true" title="Bairro" type="java.lang.Object"/>
                     <Column editable="true" title="Cidade" type="java.lang.Object"/>
-                    <Column editable="true" title="Cnpj" type="java.lang.Object"/>
+                    <Column editable="true" title="CNPJ" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="50" minWidth="50" prefWidth="50" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -514,17 +527,11 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="botaoEditarForn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Editar"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarFornActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="botaoExcluirForn">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/list_remove.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -532,10 +539,25 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoExcluirFornActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="botaoEditarForn">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/edit2.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Editar"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarFornActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/dialog_close.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
