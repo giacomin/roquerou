@@ -64,6 +64,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         campoTotalValor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
         botaoFechar = new javax.swing.JButton();
 
         setTitle("Itens");
@@ -123,7 +124,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Quantidade", "Valor Unit.", "Valor Total"
+                "Código", "Nome", "Quantidade", "Valor Unit.", "Subtotal"
             }
         ));
         tabelaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,6 +165,9 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         campoTotalValor.setForeground(new java.awt.Color(255, 0, 0));
         campoTotalValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jLabel4.setText("TOTAL");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -184,6 +188,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                             .addComponent(jSeparator1)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -196,7 +202,9 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -317,8 +325,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
         ped.setCliente(cli);
         ped.setValorTotal(Float.parseFloat(campoTotalValor.getText())); // Não esquecer de fazer o valor aparecer automaticamente no campo
-
         ped.setUsuario(usu);
+        ped.setStatus(0); // Novo campo para determinar se pedido/venda está cancelado ou não
 
         //Data
         try {
@@ -406,6 +414,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

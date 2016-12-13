@@ -91,11 +91,28 @@ public class ClienteDAO implements IDAO {
                 clienterow.getEndereco(),
                 clienterow.getBairro(),
                 clienterow.getCidade().getIdCidade()
-               // clienterow.getCidade().getNome()
             });
         }
         session.getTransaction().commit();
         session.close();
+
+    }
+
+    // Método para descobrir o Id do cliente através do nome do Cliente
+    public int descobrirId(Cliente cli) {
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        String sql = "";
+        sql = "SELECT idCliente FROM Cliente as cliente WHERE cliente.nome = '" + cli.getNome() + "'";
+        Query query = session.createQuery(sql);
+        List<Integer> dado = query.list();
+        session.getTransaction().commit();
+        session.close();
+
+        return dado.get(0); // Retorna o Id o Cliente
 
     }
 

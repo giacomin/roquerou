@@ -6,7 +6,6 @@
 package dao;
 
 import config.HibernateUtil;
-import entidades.Fornecedor;
 import entidades.Usuario;
 import java.util.List;
 import javax.swing.JTable;
@@ -102,21 +101,35 @@ public class UsuarioDAO {
 
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         sessao.getTransaction();
-        
-        
+
         // AQUI VAI ME RETORNAR UM OBJETO DA CLASSE USUÁRIO
-        
         return (Usuario) sessao.createCriteria(Usuario.class)
-                 // AQUI DIGO QUE DEVE TER O LOGIN IGUAL AO PASSADO POR PARAMETRO 
+                // AQUI DIGO QUE DEVE TER O LOGIN IGUAL AO PASSADO POR PARAMETRO 
                 .add(Restrictions.eq("login", login))
                 // AQUI DIGO QUE DEVE TER O SENHA IGUAL AO PASSADO POR PARAMETRO
                 .add(Restrictions.eq("senha", senha))
                 // AQUI SETO PARA ME RETORNAR APENAS 1 RESULTADO
                 // AFINAL LOGIN E SENHA É UNICO NO SISTEMA
-              
+
                 .uniqueResult();
-        
-        
+    }
+
+    // Método para descobrir Id do usuário através do nome do usuário
+    public int descobrirId(Usuario usu) {
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        String sql = "";
+        sql = "SELECT idUsuario FROM Usuario as usuario WHERE usuario.nome = '" + usu.getNome() + "'";
+        Query query = session.createQuery(sql);
+        List<Integer> dado = query.list();
+        session.getTransaction().commit();
+        session.close();
+
+        return dado.get(0); // Retorna o Id o Cliente
+
     }
 
 }

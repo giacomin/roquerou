@@ -20,6 +20,9 @@
         <property name="valorTotal" type="float">
             <column name="valor_total" precision="12" scale="0" not-null="true" />
         </property>
+        <property name="status" type="int">
+            <column name="status" scale="0" not-null="true" />
+        </property>
         <set name="itensPedidos" table="itens_pedido" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_pedido" not-null="true" />
