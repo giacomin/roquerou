@@ -58,8 +58,8 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
         LOG.info("Abertura da Tela de Consulta de Vendas");
 
-        popularComboCliente();
-        popularComboVendedor();
+        //popularComboCliente();
+        //popularComboVendedor();
 
     }
 
@@ -77,16 +77,12 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         campoDataIni = new javax.swing.JTextField();
         campoDataFin = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        comboVendedor = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVenda = new javax.swing.JTable();
         botaoCancelar = new javax.swing.JButton();
         botaoDetalhes = new javax.swing.JButton();
         botaoBuscar = new javax.swing.JButton();
         checkCancelada = new javax.swing.JCheckBox();
-        comboCliente = new javax.swing.JComboBox();
         botaoFechar = new javax.swing.JButton();
 
         setClosable(true);
@@ -97,12 +93,6 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
         jLabel1.setText("Datas entre");
 
         jLabel2.setText("e");
-
-        jLabel3.setText("Cliente");
-
-        comboVendedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<todos>" }));
-
-        jLabel4.setText("Vendedor");
 
         tabelaVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,9 +137,6 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
         checkCancelada.setText("Canceladas");
 
-        comboCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<todos>" }));
-        comboCliente.setToolTipText("");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,61 +145,42 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDataFin, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkCancelada)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoBuscar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoDetalhes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoCancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoDataFin, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(comboCliente, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboVendedor, javax.swing.GroupLayout.Alignment.LEADING, 0, 271, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botaoBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkCancelada)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoBuscar)
+                    .addComponent(checkCancelada)
                     .addComponent(jLabel1)
                     .addComponent(campoDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(campoDataFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(botaoBuscar)
-                    .addComponent(checkCancelada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCancelar)
                     .addComponent(botaoDetalhes))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dialog_close.png"))); // NOI18N
@@ -277,12 +245,8 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField campoDataFin;
     public static javax.swing.JTextField campoDataIni;
     private javax.swing.JCheckBox checkCancelada;
-    private javax.swing.JComboBox comboCliente;
-    private javax.swing.JComboBox comboVendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tabelaVenda;
@@ -316,13 +280,13 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
         // prod = (Produto) comboProduto.getSelectedItem(); // prod receberá todo o objeto Produto (com id e nome)
         // forn = (Fornecedor) comboFornecedor.getSelectedItem(); // forn receberá todo o objeto Fornecedor (com id e nome)
-        cli = (Cliente) comboCliente.getSelectedItem();
-        usu = (Usuario) comboVendedor.getSelectedItem();
+        //cli = (Cliente) comboCliente.getSelectedItem();
+        //usu = (Usuario) comboVendedor.getSelectedItem();
 
         VendaDAO pesquisa = new VendaDAO();
         Pedido ped = new Pedido();
 
-        pesquisa.listarVenda(tabelaVenda, ped, status, dataIni, dataFin, cli, usu);
+        pesquisa.listarVenda(tabelaVenda, ped, status, dataIni, dataFin);
         
         
         // NAO ESTA FUNCIONANDO QUANDO NAO SELECIONA CLIENTE OU USUARIO. VERIFICAR TAMBPEM A QUESTAO DA DATA
@@ -374,6 +338,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
     }
 
+    /*
     // *** Método (provisório) popularComboCliente() ***
     public void popularComboCliente() {
 
@@ -415,5 +380,6 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
         session.getTransaction().commit();
     }
+    */
 
 }

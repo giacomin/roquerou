@@ -26,17 +26,18 @@ import org.hibernate.SessionFactory;
  */
 public class VendaDAO {
 
-    public void listarVenda(JTable tabelaVenda, Pedido ped, boolean status, String dataIni, String dataFin, Cliente cli, Usuario usu) {
+    public void listarVenda(JTable tabelaVenda, Pedido ped, boolean status, String dataIni, String dataFin) {
 
+        System.out.println(dataIni);
+        System.out.println(dataFin);
+        
         /*
          Status:
          0 ou null = Vendas ativas
          1 = Vendas canceladas
          */
-               
-        int idCliente = cli.getIdCliente();
-        int idUsuario = usu.getIdUsuario();
-
+        //int idCliente = cli.getIdCliente();
+        //int idUsuario = usu.getIdUsuario();
         DefaultTableModel modelTable = (DefaultTableModel) tabelaVenda.getModel();
         modelTable.setNumRows(0);
 
@@ -48,45 +49,19 @@ public class VendaDAO {
 
         if (status == false) {
 
-            if ((cli.getIdCliente() != null) && (usu.getIdUsuario() != null)) {
-
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND id_cliente = " + idCliente + " AND  id_usuario = " + idUsuario + "";
-            }
-
-            if ((cli.getIdCliente() != null) && (usu.getIdUsuario() == null)) {
-
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND id_cliente = " + idCliente + "";
-            }
-
-            if ((cli.getIdCliente() == null) && (usu.getIdUsuario() != null)) {
-
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND id_usuario = " + idUsuario + "";
-            } 
-            
-            if ((cli.getIdCliente() == null) && (usu.getIdUsuario() == null)) {
-                
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "";
+            if ((!"".equals(dataIni)) && (!"".equals(dataFin))) {
+                // sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "";
+                sql = "FROM Pedido WHERE data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND status = 0";
+            } else {
+                sql = "FROM Pedido WHERE status = 0";
             }
 
         } else {
 
-            if ((cli.getIdCliente() != null) && (usu.getIdUsuario() != null)) {
-
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND id_cliente = " + idCliente + " AND  id_usuario = " + idUsuario + " AND status =  1";
-            }
-
-            if ((cli.getIdCliente() != null) && (usu.getIdUsuario() == null)) {
-
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND id_cliente = " + idCliente + " AND status =  1";
-            }
-
-            if ((cli.getIdCliente() == null) && (usu.getIdUsuario() != null)) {
-
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND id_usuario = " + idUsuario + " AND status =  1";
-            } 
-            
-            if ((cli.getIdCliente() == null) && (usu.getIdUsuario() == null)) {
-                sql = "FROM Pedido WHERE status = 0 AND data BETWEEN '" + dataIni + "' AND '" + dataFin + " AND status =  1";
+            if ((!"".equals(dataIni)) && (!"".equals(dataFin))) {
+                sql = "FROM Pedido WHERE data BETWEEN '" + dataIni + "' AND '" + dataFin + "' AND status = 1";
+            } else {
+                sql = "FROM Pedido WHERE status = 1";
             }
 
         }
@@ -104,7 +79,9 @@ public class VendaDAO {
                 pedidorow.getData(),
                 pedidorow.getValorTotal(),});
         }
-        session.getTransaction().commit();
+
+        session.getTransaction()
+                .commit();
         session.close();
 
     }

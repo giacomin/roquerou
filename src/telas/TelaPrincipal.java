@@ -5,51 +5,20 @@
  */
 package telas;
 
-import chat.Clientechat;
-import dao.NivelDAO;
 import entidades.Usuario;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  *
  * @author giacomin
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    
-        private static final Logger LOG = Logger.getLogger(TelaPrincipal.class.getName());
-
 
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
 
-        try {
-            Handler console = new ConsoleHandler();
-            Handler file = new FileHandler("/tmp/roquerou.log");
-            console.setLevel(Level.WARNING);
-            file.setLevel(Level.ALL);
-            LOG.addHandler(file);
-            LOG.addHandler(console);
-            LOG.setUseParentHandlers(false);
-            
-            file.setFormatter(new SimpleFormatter());
-        } catch (IOException io) {
-            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
-        }
-
-        initComponents();
-
-        LOG.info("Abertura da tela principal do programa");
-        
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
 
@@ -343,7 +312,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,13 +367,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCadastroCompraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaCliente);
         telaCliente.moveToFront();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFornecedoresActionPerformed

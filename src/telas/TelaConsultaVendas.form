@@ -65,75 +65,49 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="campoDataIni" min="-2" pref="99" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="campoDataFin" min="-2" pref="99" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="checkCancelada" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="botaoBuscar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="botaoDetalhes" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="botaoCancelar" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="campoDataIni" min="-2" pref="99" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="campoDataFin" min="-2" pref="99" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="comboCliente" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="comboVendedor" alignment="0" pref="271" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="botaoBuscar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="checkCancelada" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
+                      <Component id="jScrollPane1" alignment="0" pref="628" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="jScrollPane1" alignment="0" pref="640" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="botaoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkCancelada" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoDataIni" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoDataFin" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="comboVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="botaoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="checkCancelada" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="175" max="-2" attributes="0"/>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="botaoCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="botaoDetalhes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,25 +132,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cliente"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="comboVendedor">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="&lt;todos&gt;"/>
-              </StringArray>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Vendedor"/>
-          </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -271,16 +226,6 @@
         <Component class="javax.swing.JCheckBox" name="checkCancelada">
           <Properties>
             <Property name="text" type="java.lang.String" value="Canceladas"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="comboCliente">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="&lt;todos&gt;"/>
-              </StringArray>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
       </SubComponents>

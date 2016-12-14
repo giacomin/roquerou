@@ -58,7 +58,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         NivelDAO nd = new NivelDAO();
         if (nd.buscar() == 3) {
             botaoNovoCliente.setEnabled(false);
-            buscarcli.setEnabled(false);
+            buscacli.setEnabled(false);
             tabelaCliente.setEnabled(false);
             popularCombo();
             setarLabels();
@@ -332,7 +332,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEmailCliente = new javax.swing.JTextField();
         campoEnderecoCliente = new javax.swing.JTextField();
         campoBairroCliente = new javax.swing.JTextField();
-        comboCidadeCliente = new javax.swing.JComboBox<>();
+        comboCidadeCliente = new javax.swing.JComboBox<String>();
         botaoSalvarCliente = new javax.swing.JButton();
         botaoNovoCliente = new javax.swing.JButton();
         jbEmail = new javax.swing.JLabel();
@@ -344,7 +344,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoFoneCliente = new javax.swing.JTextField();
         jpCliente2 = new javax.swing.JPanel();
         campoPesquisaCliente = new javax.swing.JTextField();
-        buscarcli = new javax.swing.JButton();
+        buscacli = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
         botaoEditarCliente = new javax.swing.JButton();
@@ -408,7 +408,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         campoBairroCliente.setEnabled(false);
 
-        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         comboCidadeCliente.setEnabled(false);
         comboCidadeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,9 +495,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                     .addComponent(jbCidade)
                                     .addComponent(comboCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jbFone)))
-                            .addGroup(jpCliente1Layout.createSequentialGroup()
-                                .addComponent(jbEndereco)
-                                .addGap(354, 354, 354))))
+                            .addComponent(jbEndereco)))
                     .addComponent(jLabel4)
                     .addGroup(jpCliente1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -557,13 +555,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         jpCliente2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        buscarcli.setText("Buscar");
-        buscarcli.addActionListener(new java.awt.event.ActionListener() {
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buscacli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
+        buscacli.setText("Buscar");
+        buscacli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarcliActionPerformed(evt);
+                buscacliActionPerformed(evt);
             }
         });
 
@@ -642,7 +638,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente2Layout.createSequentialGroup()
                         .addComponent(campoPesquisaCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buscarcli)))
+                        .addComponent(buscacli)))
                 .addContainerGap())
         );
         jpCliente2Layout.setVerticalGroup(
@@ -651,7 +647,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscarcli))
+                    .addComponent(buscacli))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -725,13 +721,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCidadeClienteActionPerformed
-
-    private void buscarcliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarcliActionPerformed
-
-        buscarCliente();
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarcliActionPerformed
 
     private void botaoExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirClienteActionPerformed
 
@@ -881,6 +870,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoFoneClienteFocusLost
 
+    private void buscacliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscacliActionPerformed
+
+        buscarCliente();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscacliActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoEditarCliente;
@@ -888,7 +884,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton botaoFechar;
     private javax.swing.JButton botaoNovoCliente;
     private javax.swing.JButton botaoSalvarCliente;
-    private javax.swing.JButton buscarcli;
+    private javax.swing.JButton buscacli;
     private javax.swing.JTextField campoBairroCliente;
     private javax.swing.JTextField campoCodCliente;
     private javax.swing.JTextField campoEmailCliente;
