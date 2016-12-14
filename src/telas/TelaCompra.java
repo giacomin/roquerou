@@ -7,12 +7,17 @@ import entidades.Fornecedor;
 import entidades.Produto;
 import entidades.Usuario;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,11 +29,31 @@ import org.hibernate.SessionFactory;
  */
 public class TelaCompra extends javax.swing.JInternalFrame {
 
+    private static final Logger LOG = Logger.getLogger(TelaCompra.class.getName());
+    
     /**
      * Creates new form TelaCompra
      */
     public TelaCompra() {
+        
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+        
+        
+        
         initComponents();
+        LOG.info("Abertura da tela de compra de produtos com fornecedores");
     }
 
     // *** Método (provisório) popularProduto() ***
@@ -163,6 +188,8 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             botaoNovo.setEnabled(true);
 
             pesquisarCompra();
+            
+            LOG.info("Compra salva com sucesso!");
 
         } // Caso contrário (se a validação não estiver OK)...
         else {
@@ -188,6 +215,7 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             }
 
             JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
+            LOG.severe("Erro ao salvar compra");
         }
 
     }

@@ -8,7 +8,9 @@ package telas;
 import config.HibernateUtil;
 import dao.ProdutoDAO;
 import entidades.Produto;
+import java.awt.Color;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,21 +18,52 @@ import org.hibernate.SessionFactory;
 import static telas.TelaVendas.campoTotalValor;
 import static telas.TelaVendas.tabelaProduto;
 
+//Logs
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
+
+
 /**
  *
  * @author giacomin
  */
 public class TelaItensVenda extends javax.swing.JInternalFrame {
 
+    private static final Logger LOG = Logger.getLogger(TelaItensVenda.class.getName());
+    
     ProdutoDAO pdao = new ProdutoDAO();
     Produto produto = new Produto();
+    
+    
 
     /**
      * Creates new form TelaPesquisaProduto
      */
     public TelaItensVenda() {
+        
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+        
         initComponents();
 
+        LOG.info("Abertura da Tela de Itens de Venda");
+        
         pdao.popularComboItensProduto(comboProduto, produto);
     }
 
@@ -234,41 +267,73 @@ public class TelaItensVenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoQuantidadeFocusLost
 
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
-        produto = (Produto) comboProduto.getSelectedItem(); // Carrega o produto selecionado no objeto "produto"
 
-        DefaultTableModel modelTable = (DefaultTableModel) TelaVendas.tabelaProduto.getModel();
+        int indice = comboProduto.getSelectedIndex();
+        String quant = campoQuantidade.getText();
 
-        int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
-        modelTable.setNumRows(linha); // Adiciona nova linha em tabelaProduto
+        comboProduto.setForeground(Color.gray);
+        comboProduto.setBackground(Color.gray);
+        
+        campoQuantidade.setBackground(Color.white);
 
-        // Adiciona as informações do produto em tabelaProduto
-        modelTable.addRow(new Object[]{
-            produto.getIdProduto(),
-            produto.getNome(),
-            campoQuantidade.getText(),
-            campoValorUnitario.getText(),
-            campoValorTotal.getText(),
-            produto.getEstoque()
-        });
+        // Se campos estiverem OK...
+        if ((indice != 0) && (!"".equals(quant))) {
 
-        // Atualiza o campo de valor total em TelaVendas (outra tela)
-        int row = tabelaProduto.getRowCount() - 1;
-        Object valor;
+            produto = (Produto) comboProduto.getSelectedItem(); // Carrega o produto selecionado no objeto "produto"
 
-        Float soma = new Float(0);
+            DefaultTableModel modelTable = (DefaultTableModel) TelaVendas.tabelaProduto.getModel();
 
-        for (int i = 0; i <= row; i++) {
-            valor = tabelaProduto.getValueAt(i, 4);
-            soma = soma + (Float.parseFloat(valor.toString()));
+            int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
+            modelTable.setNumRows(linha); // Adiciona nova linha em tabelaProduto
+
+            // Adiciona as informações do produto em tabelaProduto
+            modelTable.addRow(new Object[]{
+                produto.getIdProduto(),
+                produto.getNome(),
+                campoQuantidade.getText(),
+                campoValorUnitario.getText(),
+                campoValorTotal.getText(),
+                produto.getEstoque()
+            });
+
+            // Atualiza o campo de valor total em TelaVendas (outra tela)
+            int row = tabelaProduto.getRowCount() - 1;
+            Object valor;
+
+            Float soma = new Float(0);
+
+            for (int i = 0; i <= row; i++) {
+                valor = tabelaProduto.getValueAt(i, 4);
+                soma = soma + (Float.parseFloat(valor.toString()));
+            }
+
+            campoTotalValor.setText(Float.toString(soma));
+
+            if (row >= 0) {
+                TelaVendas.botaoOk.setEnabled(true);
+            }
+
+            dispose();
+            
+            LOG.info("Item adicionado");
+
+        } else {
+            //LOG.severe("Erro no preenchimento dos campos ao adicionar o item");
+
+            if (indice == 0) {
+                comboProduto.setForeground(Color.red);
+                comboProduto.setBackground(Color.red);
+            }
+
+            if ("".equals(quant)) {
+                campoQuantidade.setBackground(Color.pink);
+            }
+
+            JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
+            LOG.severe("Erro ao adicionar item");
         }
 
-        campoTotalValor.setText(Float.toString(soma));
-        
-        if (row >= 0) {
-            TelaVendas.botaoOk.setEnabled(true);
-        }
-        
-        dispose();
+
     }//GEN-LAST:event_botaoOkActionPerformed
 
 

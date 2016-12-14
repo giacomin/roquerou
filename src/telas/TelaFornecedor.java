@@ -10,7 +10,14 @@ import dao.FornecedorDAO;
 import entidades.Cidade;
 import entidades.Fornecedor;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -27,11 +34,32 @@ import org.hibernate.SessionFactory;
  */
 public class TelaFornecedor extends javax.swing.JInternalFrame {
 
+    private static final Logger LOG = Logger.getLogger(TelaFornecedor.class.getName());
+    
     /**
      * Creates new form TelaFornecedor
      */
     public TelaFornecedor() {
+        
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+        
+        
         initComponents();
+        
+        LOG.info("Abertura da Tela de Fornecedores");
+        
         popularCombo();
         setarLabels();
     }
@@ -168,8 +196,10 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
             if (retorno == null) {
                 System.out.println("Fornecedor Excluído");
+                LOG.warning("Fornecedor excluído com sucesso!");
             } else {
                 System.out.println("ERRO na EXCLUSÃO");
+                LOG.severe("Erro na exclusão do fornecedor");
             }
 
         } else {
@@ -246,10 +276,12 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
                                     if (retorno == null) {
                                         JOptionPane.showMessageDialog(null, "Fornecedor Adicionado!");
+                                        LOG.info("Fornecedor salvo com sucesso!");
                                         zerarCampos();
                                         bloquearCampos();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Erro ao adicionar fornecedor!");
+                                        LOG.severe("Erro ao salvar fornecedor");
                                     }
 
                                 }
@@ -471,26 +503,22 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbCnpj)
                     .addGroup(jpForn1Layout.createSequentialGroup()
                         .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbCnpj)
+                            .addComponent(jbBairro)
+                            .addComponent(campoBairroForn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpForn1Layout.createSequentialGroup()
-                                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbBairro)
-                                    .addComponent(campoBairroForn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpForn1Layout.createSequentialGroup()
-                                        .addGap(59, 59, 59)
-                                        .addComponent(jbCidade))
-                                    .addGroup(jpForn1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboCidadeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jpForn1Layout.createSequentialGroup()
-                        .addComponent(campoCnpjForn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(59, 59, 59)
+                                .addComponent(jbCidade))
+                            .addGroup(jpForn1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboCidadeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(campoCnpjForn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpForn1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botaoNovoForn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -532,9 +560,9 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(comboCidadeForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(7, 7, 7)
-                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBairro)
-                    .addComponent(jbCidade))
+                .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbCidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbBairro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpForn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoCnpjForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -679,7 +707,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                 .addComponent(jpForn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

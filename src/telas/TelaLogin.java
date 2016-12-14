@@ -7,6 +7,13 @@ package telas;
 
 import dao.UsuarioDAO;
 import entidades.Usuario;
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,10 +22,27 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
+    private static final Logger LOG = Logger.getLogger(TelaLogin.class.getName());
+
     /**
      * Creates new form TelaLogin
      */
     public TelaLogin() {
+
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+
         initComponents();
     }
 
@@ -130,17 +154,19 @@ public class TelaLogin extends javax.swing.JFrame {
         // AQUI SE FOR DIFERENTE DE NULL, ENTÃO ACHOU O USUARIO
         if (usuario != null) {
 
-                        
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             telaPrincipal.nivel(usuario.getCargo().getIdCargo());
             telaPrincipal.setVisible(true);
 
             this.dispose();
-            System.out.println(usuario.getNome());
 
+            LOG.info("Usuário " + usuario.getNome() + " autenticou com sucesso!");
+            
+            //System.out.println(usuario.getNome());
             // RETORNA O USUARIO ENCONTRADO
         } else {
 
+            LOG.severe("Erro na autenticação");
             JOptionPane.showMessageDialog(null, "Login ou Senha incorretos!");
 
         }

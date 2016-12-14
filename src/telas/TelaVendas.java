@@ -12,6 +12,7 @@ import entidades.ItensPedido;
 import entidades.Pedido;
 import entidades.Produto;
 import entidades.Usuario;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -271,7 +272,6 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         botaoRemover.setEnabled(false);
         botaoOk.setEnabled(false);
         campoTotalValor.setText("");
-        
 
         // Preencher o campo Data com a Data do dia (no formato dd/MM/YYYY)
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -299,73 +299,98 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharActionPerformed
 
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
-        /*
-         Passos:
+
+        String vdata = campoData.getText();
+        int vcliente = comboCliente.getSelectedIndex();
+
+        comboCliente.setBackground(Color.gray);
+        //comboCliente.setForeground(Color.gray);
+        campoData.setBackground(Color.white);
+
+        if ((!"".equals(vdata)) && (vcliente != 0)) {
+
+            /*
+             Passos:
         
-         1 - Criar o pedido;
-         2 - Cadastrar os itens de pedido
+             1 - Criar o pedido;
+             2 - Cadastrar os itens de pedido
                 
-         */
-        // PEDIDO
-        Pedido ped = new Pedido();
-        Cliente cli = new Cliente();
-        Date data = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Usuario usu = new Usuario();
+             */
+            // PEDIDO
+            Pedido ped = new Pedido();
+            Cliente cli = new Cliente();
+            Date data = null;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Usuario usu = new Usuario();
 
-        cli = (Cliente) comboCliente.getSelectedItem();
-        usu.setIdUsuario(1); // Corrigir quando for possível pegar o usuário da sessão. Por enquanto será o usuáriode ID 1
+            cli = (Cliente) comboCliente.getSelectedItem();
+            usu.setIdUsuario(1); // Corrigir quando for possível pegar o usuário da sessão. Por enquanto será o usuáriode ID 1
 
-        ped.setCliente(cli);
-        ped.setValorTotal(Float.parseFloat(campoTotalValor.getText())); // Não esquecer de fazer o valor aparecer automaticamente no campo
-        ped.setUsuario(usu);
-        ped.setStatus(0); // Novo campo para determinar se pedido/venda está cancelado ou não
+            ped.setCliente(cli);
+            ped.setValorTotal(Float.parseFloat(campoTotalValor.getText())); // Não esquecer de fazer o valor aparecer automaticamente no campo
+            ped.setUsuario(usu);
+            ped.setStatus(0); // Novo campo para determinar se pedido/venda está cancelado ou não
 
-        //Data
-        try {
-            ped.setData(sdf.parse(campoData.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            //Data
+            try {
+                ped.setData(sdf.parse(campoData.getText()));
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        String retorno = new PedidoDAO().salvar(ped); // Salva o pedido
+            String retorno = new PedidoDAO().salvar(ped); // Salva o pedido
 
-        // ITENS
-        PedidoDAO pdao = new PedidoDAO();
+            // ITENS
+            PedidoDAO pdao = new PedidoDAO();
 
-        int ultimoPed = new PedidoDAO().ultimoPedido(); // Resgata o id do pedido salvo
-        DefaultTableModel modelTable = (DefaultTableModel) TelaVendas.tabelaProduto.getModel();
-        int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
-        
+            int ultimoPed = new PedidoDAO().ultimoPedido(); // Resgata o id do pedido salvo
+            DefaultTableModel modelTable = (DefaultTableModel) TelaVendas.tabelaProduto.getModel();
+            int linha = modelTable.getRowCount(); // Conta o número de linhas existentes em tabelaProduto
 
-        for (int i = 0; i < linha; i++) {
+            for (int i = 0; i < linha; i++) {
 
-            ItensPedido iped = new ItensPedido();
-            Produto prod = new Produto();
-            Pedido ped2 = new Pedido();
-            int quantidade = 0;
+                ItensPedido iped = new ItensPedido();
+                Produto prod = new Produto();
+                Pedido ped2 = new Pedido();
+                int quantidade = 0;
 
-            prod.setIdProduto((Integer) modelTable.getValueAt(i, 0));
-            quantidade = Integer.parseInt((String) modelTable.getValueAt(i, 2));
-            ped2.setIdPedido(ultimoPed);
+                prod.setIdProduto((Integer) modelTable.getValueAt(i, 0));
+                quantidade = Integer.parseInt((String) modelTable.getValueAt(i, 2));
+                ped2.setIdPedido(ultimoPed);
 
-            iped.setPedido(ped2);
-            iped.setProduto(prod);
-            iped.setQuantidade(quantidade);
+                iped.setPedido(ped2);
+                iped.setProduto(prod);
+                iped.setQuantidade(quantidade);
 
-            pdao.salvar(iped); // Salva o item do pedido
+                pdao.salvar(iped); // Salva o item do pedido
 
-        }
+            }
 
-        if (retorno == null) {
-            JOptionPane.showMessageDialog(null, "Venda registrada com sucesso!");
-            modelTable.setNumRows(0);
-            novoVenda();
-            
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Venda registrada com sucesso!");
+                modelTable.setNumRows(0);
+                novoVenda();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro! Verifique os pedido da venda.");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(null, "Erro! Verifique os pedido da venda.");
+
+            //LOG.severe("Erro no preenchimento dos campos ao salvar o pedido");
+            if ("".equals(vdata)) {
+
+                campoData.setBackground(Color.pink);
+            }
+
+            if (vcliente == 0) {
+                comboCliente.setBackground(Color.red);
+                //comboCliente.setForeground(Color.gray);
+            }
+            
+            JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
+
         }
-        
 
 
     }//GEN-LAST:event_botaoOkActionPerformed

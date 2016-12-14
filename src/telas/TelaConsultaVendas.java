@@ -35,7 +35,7 @@ import org.hibernate.SessionFactory;
  */
 public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
-    private static final Logger LOG = Logger.getLogger(TelaCidade.class.getName());
+    private static final Logger LOG = Logger.getLogger(TelaConsultaVendas.class.getName());
 
     /**
      * Creates new form TelaConsultaVendas

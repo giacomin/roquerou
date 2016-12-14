@@ -13,7 +13,14 @@ import entidades.Cidade;
 import entidades.Cliente;
 import entidades.Usuario;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -27,11 +34,30 @@ import org.hibernate.SessionFactory;
  * @author Eduardo
  */
 public class TelaUsuario extends javax.swing.JInternalFrame {
+    
+    private static final Logger LOG = Logger.getLogger(TelaUsuario.class.getName());
 
     /**
      * Creates new form TelaUsuario
      */
     public TelaUsuario() {
+        
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+        
+        LOG.info("Abertura da tela de usuários");
+        
         initComponents();
         popularCombo();
         setarLabels();
@@ -171,10 +197,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             String retorno = new UsuarioDAO().salvar(usu);
 
                             if (retorno == null) {
+                                LOG.info("Usuário salvo");
                                 JOptionPane.showMessageDialog(null, "Usuário Adicionado!");
                                 zerarCampos();
                                 bloquearCampos();
                             } else {
+                                LOG.severe("Erro ao salvar o usuário");
                                 JOptionPane.showMessageDialog(null, "Erro ao adicionar usuário!");
                             }
 
@@ -215,8 +243,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             buscarUsuario();
 
             if (retorno == null) {
+                LOG.info("Usuário excluído");
                 System.out.println("Cliente Excluído");
             } else {
+                LOG.severe("Erro ao excluir o usuário");
                 System.out.println("ERRO na EXCLUSÃO");
             }
 

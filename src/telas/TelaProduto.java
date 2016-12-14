@@ -3,6 +3,13 @@ package telas;
 import dao.ProdutoDAO;
 import entidades.Produto;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,10 +18,31 @@ import javax.swing.JOptionPane;
  */
 public class TelaProduto extends javax.swing.JInternalFrame {
 
+    
+    private static final Logger LOG = Logger.getLogger(TelaProduto.class.getName());
     /**
      * Creates new form TelaProduto
      */
     public TelaProduto() {
+        
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+
+        initComponents();
+
+        LOG.info("Abertura da tela de produtos");
+        
         initComponents();
     }
 
@@ -55,8 +83,10 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             String retorno = new ProdutoDAO().salvar(prod);
 
             if (retorno == null) {
+                LOG.info("Produto salvo com sucesso!");
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             } else {
+                LOG.severe("Erro ao salvar produto");
                 JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
             }
 
@@ -91,7 +121,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 campoValorUnit.setBackground(Color.pink);
             }
 
+            LOG.severe("Problemas na validação dos campos");
             JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
+            
         }
     }
 
@@ -206,8 +238,10 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             String retorno = prodDAO.remover(prod);
 
             if (retorno == null) {
+                LOG.info("Produto excluído");
                 JOptionPane.showMessageDialog(null, "Produto removido com sucesso!");
             } else {
+                LOG.severe("Erro ao excluir produto");
                 JOptionPane.showMessageDialog(null, "Erro! Não foi possível remover o produto.");
             }
         }

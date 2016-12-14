@@ -7,18 +7,46 @@ package telas;
 
 import entidades.Usuario;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
  * @author giacomin
  */
 public class TelaPrincipal extends javax.swing.JFrame {
+    
+        private static final Logger LOG = Logger.getLogger(TelaPrincipal.class.getName());
+
 
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
 
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.WARNING);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+
+        initComponents();
+
+        LOG.info("Abertura da tela principal do programa");
+        
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
 
