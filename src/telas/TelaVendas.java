@@ -13,12 +13,17 @@ import entidades.Pedido;
 import entidades.Produto;
 import entidades.Usuario;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
@@ -30,11 +35,31 @@ import org.hibernate.SessionFactory;
  * @author giacomin
  */
 public class TelaVendas extends javax.swing.JInternalFrame {
+    
+    private static final Logger LOG = Logger.getLogger(TelaVendas.class.getName());
 
     /**
      * Creates new form Teste
      */
     public TelaVendas() {
+        
+        try {
+            Handler console = new ConsoleHandler();
+            Handler file = new FileHandler("/tmp/roquerou.log");
+            console.setLevel(Level.ALL);
+            file.setLevel(Level.ALL);
+            LOG.addHandler(file);
+            LOG.addHandler(console);
+            LOG.setUseParentHandlers(false);
+            
+            file.setFormatter(new SimpleFormatter());
+        } catch (IOException io) {
+            LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
+        }
+        
+        LOG.info("Abertura da tela de vendas");
+        
+        
         initComponents();
 
         novoVenda();
@@ -367,11 +392,13 @@ public class TelaVendas extends javax.swing.JInternalFrame {
             }
 
             if (retorno == null) {
+                LOG.info("Venda concluída com sucesso");
                 JOptionPane.showMessageDialog(null, "Venda registrada com sucesso!");
                 modelTable.setNumRows(0);
                 novoVenda();
 
             } else {
+                LOG.severe("Erro nos pedidos da venda");
                 JOptionPane.showMessageDialog(null, "Erro! Verifique os pedido da venda.");
             }
 
@@ -387,7 +414,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 comboCliente.setBackground(Color.red);
                 //comboCliente.setForeground(Color.gray);
             }
-            
+            LOG.severe("Campos inválidos");
             JOptionPane.showMessageDialog(null, "Verifique os campos em destaque", "Campo(s) inválidos", JOptionPane.WARNING_MESSAGE);
 
         }

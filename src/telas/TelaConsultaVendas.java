@@ -44,7 +44,7 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
         try {
             Handler console = new ConsoleHandler();
             Handler file = new FileHandler("/tmp/roquerou.log");
-            console.setLevel(Level.WARNING);
+            console.setLevel(Level.ALL);
             file.setLevel(Level.ALL);
             file.setFormatter(new SimpleFormatter());
             LOG.addHandler(file);

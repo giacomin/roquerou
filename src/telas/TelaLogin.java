@@ -37,7 +37,7 @@ public class TelaLogin extends javax.swing.JFrame {
         try {
             Handler console = new ConsoleHandler();
             Handler file = new FileHandler("/tmp/roquerou.log");
-            console.setLevel(Level.WARNING);
+            console.setLevel(Level.ALL);
             file.setLevel(Level.ALL);
             LOG.addHandler(file);
             LOG.addHandler(console);

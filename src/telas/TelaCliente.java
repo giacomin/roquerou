@@ -46,7 +46,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         try {
             Handler console = new ConsoleHandler();
             Handler file = new FileHandler("/tmp/roquerou.log");
-            console.setLevel(Level.WARNING);
+            console.setLevel(Level.ALL);
             file.setLevel(Level.ALL);
             file.setFormatter(new SimpleFormatter());
             LOG.addHandler(file);
@@ -260,7 +260,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
                                         LOG.info("Registro de id " + cli.getIdCliente() + " salvo com sucesso!");
                                         Email em = new Email();
-                                        em.sendEmail(cli.getNome(), cli.getFone(), cli.getEmail());
+                                        //em.sendEmail(cli.getNome(), cli.getFone(), cli.getEmail());
                                         JOptionPane.showMessageDialog(null, "Cliente Adicionado!");
                                         zerarCampos();
                                         bloquearCampos();

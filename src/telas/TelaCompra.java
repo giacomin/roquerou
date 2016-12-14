@@ -31,30 +31,30 @@ import wservice.SMSService;
 public class TelaCompra extends javax.swing.JInternalFrame {
 
     private static final Logger LOG = Logger.getLogger(TelaCompra.class.getName());
-    
+
     /**
      * Creates new form TelaCompra
      */
     public TelaCompra() {
-        
+
         try {
             Handler console = new ConsoleHandler();
             Handler file = new FileHandler("/tmp/roquerou.log");
-            console.setLevel(Level.WARNING);
+            console.setLevel(Level.ALL);
             file.setLevel(Level.ALL);
             LOG.addHandler(file);
             LOG.addHandler(console);
             LOG.setUseParentHandlers(false);
-            
+
             file.setFormatter(new SimpleFormatter());
         } catch (IOException io) {
             LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
         }
-        
-        
-        
-        initComponents();
+
         LOG.info("Abertura da tela de compra de produtos com fornecedores");
+
+        initComponents();
+
     }
 
     // *** Método (provisório) popularProduto() ***
@@ -167,13 +167,15 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             String retorno = new CompraDAO().salvar(comp);
 
             if (retorno == null) {
-                
-                SMSService sms = new SMSService("eduardopaa", "eduardo");
-                //sms.enviarSMS("51", "992150368","Compra\n"+ "Nome: "+prod.getNome()+"\n Quantidade: "+comp.getQuantidade()+"\n Custo unit: "+comp.getCustoUnit());
-             System.out.println("Compra\n"+ "Nome: "+prod.getNome()+"\n Quantidade: "+comp.getQuantidade()+"\n Custo unit: "+comp.getCustoUnit());
 
+                SMSService sms = new SMSService("aulafabricio", "aula");
+                sms.enviarSMS("51", "992150368", "Compra\n" + "Nome: " + prod.getNome() + "\n Quantidade: " + comp.getQuantidade() + "\n Custo unit: " + comp.getCustoUnit());
+                System.out.println("Compra\n" + "Nome: " + prod.getNome() + "\n Quantidade: " + comp.getQuantidade() + "\n Custo unit: " + comp.getCustoUnit());
+
+                LOG.info("Compra realizada com sucesso!");
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             } else {
+                LOG.info("Compra falhou");
                 JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
             }
 
@@ -194,9 +196,8 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             botaoNovo.setEnabled(true);
 
             pesquisarCompra();
-            
-            LOG.info("Compra salva com sucesso!");
 
+            
         } // Caso contrário (se a validação não estiver OK)...
         else {
             if (bnomeProduto == false) {

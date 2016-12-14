@@ -4,8 +4,6 @@ import dao.CidadeDAO;
 import entidades.Cidade;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-
-import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 //Logs
@@ -15,6 +13,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -23,7 +22,7 @@ import java.util.logging.Level;
 public class TelaCidade extends javax.swing.JInternalFrame {
 
     private static final Logger LOG = Logger.getLogger(TelaCidade.class.getName());
-
+    
     /**
      * Creates new form TelaCidade
      */
@@ -32,10 +31,10 @@ public class TelaCidade extends javax.swing.JInternalFrame {
         try {
             Handler console = new ConsoleHandler();
             Handler file = new FileHandler("/tmp/roquerou.log");
-            console.setLevel(Level.WARNING);
+            console.setLevel(Level.ALL);
             file.setLevel(Level.ALL);
             LOG.addHandler(file);
-            LOG.addHandler(console);
+            //LOG.addHandler(console);
             LOG.setUseParentHandlers(false);
             
             file.setFormatter(new SimpleFormatter());
@@ -43,9 +42,11 @@ public class TelaCidade extends javax.swing.JInternalFrame {
             LOG.warning("O ficheiro hellologgin.xml não pode ser criado");
         }
 
+        LOG.info("Abertura da Tela de Cidades");
+        
         initComponents();
 
-        LOG.info("Abertura da Tela de Cidades");
+        
 
     }
 
