@@ -74,6 +74,7 @@ public class CidadeDAO implements IDAO {
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         session.beginTransaction();
+        
 
         String sql = "";
         

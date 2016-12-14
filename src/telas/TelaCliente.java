@@ -7,6 +7,7 @@ package telas;
 
 import config.HibernateUtil;
 import dao.ClienteDAO;
+import dao.NivelDAO;
 import entidades.Cidade;
 import entidades.Cliente;
 import java.awt.Color;
@@ -54,11 +55,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
 
         initComponents();
-        popularCombo();
-        setarLabels();
+        NivelDAO nd = new NivelDAO();
+        if (nd.buscar() == 3) {
+            botaoNovoCliente.setEnabled(false);
+            buscarcli.setEnabled(false);
+            tabelaCliente.setEnabled(false);
+            popularCombo();
+            setarLabels();
 
-        LOG.info("Abertura da Tela de Clientes");
+            LOG.info("Abertura da Tela de Clientes");
+        } else {
+            popularCombo();
+            setarLabels();
 
+            LOG.info("Abertura da Tela de Clientes");
+        }
     }
 
     public void setarLabels() {
@@ -321,7 +332,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoEmailCliente = new javax.swing.JTextField();
         campoEnderecoCliente = new javax.swing.JTextField();
         campoBairroCliente = new javax.swing.JTextField();
-        comboCidadeCliente = new javax.swing.JComboBox<String>();
+        comboCidadeCliente = new javax.swing.JComboBox<>();
         botaoSalvarCliente = new javax.swing.JButton();
         botaoNovoCliente = new javax.swing.JButton();
         jbEmail = new javax.swing.JLabel();
@@ -334,7 +345,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         botaoCancelarCliente = new javax.swing.JButton();
         jpCliente2 = new javax.swing.JPanel();
         campoPesquisaCliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        buscarcli = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
         botaoEditarCliente = new javax.swing.JButton();
@@ -398,7 +409,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         campoBairroCliente.setEnabled(false);
 
-        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        comboCidadeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         comboCidadeCliente.setEnabled(false);
         comboCidadeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -559,10 +570,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         jpCliente2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buscarcli.setText("Buscar");
+        buscarcli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buscarcliActionPerformed(evt);
             }
         });
 
@@ -616,7 +627,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente2Layout.createSequentialGroup()
                         .addComponent(campoPesquisaCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(buscarcli)))
                 .addContainerGap())
         );
         jpCliente2Layout.setVerticalGroup(
@@ -625,7 +636,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(buscarcli))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -698,12 +709,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCidadeClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buscarcliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarcliActionPerformed
 
         buscarCliente();
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buscarcliActionPerformed
 
     private void botaoExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirClienteActionPerformed
 
@@ -713,15 +724,30 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void tabelaClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabelaClienteFocusGained
 
-        this.tabelaCliente.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-                //altera os botoes para ativados somente se houver linha selecionada
-                botaoExcluirCliente.setEnabled(!lsm.isSelectionEmpty());
-                botaoEditarCliente.setEnabled(!lsm.isSelectionEmpty());
-            }
-        });
+        NivelDAO nd = new NivelDAO();
+        if (nd.buscar() == 2) {
+
+            this.tabelaCliente.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                    //altera os botoes para ativados somente se houver linha selecionada
+                    //botaoExcluirCliente.setEnabled(!lsm.isSelectionEmpty());
+                    botaoEditarCliente.setEnabled(!lsm.isSelectionEmpty());
+                }
+            });
+
+        } else {
+            this.tabelaCliente.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                    //altera os botoes para ativados somente se houver linha selecionada
+                    botaoExcluirCliente.setEnabled(!lsm.isSelectionEmpty());
+                    botaoEditarCliente.setEnabled(!lsm.isSelectionEmpty());
+                }
+            });
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaClienteFocusGained
@@ -855,6 +881,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton botaoFechar;
     private javax.swing.JButton botaoNovoCliente;
     private javax.swing.JButton botaoSalvarCliente;
+    private javax.swing.JButton buscarcli;
     private javax.swing.JTextField campoBairroCliente;
     private javax.swing.JTextField campoCodCliente;
     private javax.swing.JTextField campoEmailCliente;
@@ -863,7 +890,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoNomeCliente;
     private javax.swing.JTextField campoPesquisaCliente;
     private javax.swing.JComboBox<String> comboCidadeCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

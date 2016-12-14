@@ -7,6 +7,7 @@ package telas;
 
 import config.HibernateUtil;
 import dao.FornecedorDAO;
+import dao.NivelDAO;
 import entidades.Cidade;
 import entidades.Fornecedor;
 import java.awt.Color;
@@ -32,6 +33,12 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
      */
     public TelaFornecedor() {
         initComponents();
+        NivelDAO nd = new NivelDAO();
+        if (nd.buscar() == 2) {
+            botaoNovoForn.setEnabled(false);
+            jButton1.setEnabled(false);
+            tabelaForn.setEnabled(false);
+        }
         popularCombo();
         setarLabels();
     }
@@ -154,7 +161,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
             Fornecedor forn = new Fornecedor();
 
             cid.setIdCidade((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 6));
-            
+
             forn.setCidade(cid);
 
             forn.setIdFornecedor((int) tabelaForn.getValueAt(tabelaForn.getSelectedRow(), 0));
@@ -755,15 +762,30 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
     private void tabelaFornFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabelaFornFocusGained
 
-        this.tabelaForn.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-                //altera os botoes para ativados somente se houver linha selecionada
-                botaoExcluirForn.setEnabled(!lsm.isSelectionEmpty());
-                botaoEditarForn.setEnabled(!lsm.isSelectionEmpty());
-            }
-        });
+        NivelDAO nd = new NivelDAO();
+        if (nd.buscar() == 3) {
+
+            this.tabelaForn.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                    //altera os botoes para ativados somente se houver linha selecionada
+                    //botaoExcluirForn.setEnabled(!lsm.isSelectionEmpty());
+                    botaoEditarForn.setEnabled(!lsm.isSelectionEmpty());
+                }
+            });
+
+        } else {
+            this.tabelaForn.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                    //altera os botoes para ativados somente se houver linha selecionada
+                    botaoExcluirForn.setEnabled(!lsm.isSelectionEmpty());
+                    botaoEditarForn.setEnabled(!lsm.isSelectionEmpty());
+                }
+            });
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaFornFocusGained

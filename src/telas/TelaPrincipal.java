@@ -5,8 +5,14 @@
  */
 package telas;
 
+import chat.Clientechat;
+import dao.NivelDAO;
 import entidades.Usuario;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,19 +28,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
 
-    }
-
-    public Integer nivel(int a) {
-
-        if (a == 2) {
-            jbUsuarios.setVisible(false);
-            jbFornecedores.setVisible(false);
-            itemCadastroFornecedor.setVisible(false);
-            itemCadastroUsuario.setVisible(false);
-            itemCadastroCidade.setVisible(false);
-        }
-
-        return null;
     }
 
     /**
@@ -53,6 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbFornecedores = new javax.swing.JButton();
         jbFornecedores1 = new javax.swing.JButton();
         jbFornecedores2 = new javax.swing.JButton();
+        jbchat = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
@@ -180,6 +174,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jToolBar2.add(jbFornecedores2);
 
+        jbchat.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        jbchat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/7140_32x32.png"))); // NOI18N
+        jbchat.setText("Chat");
+        jbchat.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbchat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbchat.setFocusable(false);
+        jbchat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbchat.setMaximumSize(new java.awt.Dimension(75, 55));
+        jbchat.setMinimumSize(new java.awt.Dimension(75, 55));
+        jbchat.setPreferredSize(new java.awt.Dimension(75, 55));
+        jbchat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbchat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbchatActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jbchat);
+
         jButton3.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Close.png"))); // NOI18N
         jButton3.setText("Sair");
@@ -289,7 +301,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,10 +356,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCadastroCompraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaCliente);
         telaCliente.moveToFront();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFornecedoresActionPerformed
@@ -398,13 +413,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbFornecedores2ActionPerformed
 
     private void itemCadastroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastroVendaActionPerformed
-        
+
         TelaItens telaItens = new TelaItens();
         telaItens.setVisible(true);
         jDesktopPane1PRINCIPAL.add(telaItens);
         telaItens.moveToFront();
         // TODO add your handling code here:
     }//GEN-LAST:event_itemCadastroVendaActionPerformed
+
+    private void jbchatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbchatActionPerformed
+
+        try {
+            TelaChat tc = new TelaChat();
+            tc.setVisible(true);
+            jDesktopPane1PRINCIPAL.add(tc);
+            tc.moveToFront();
+
+            // TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbchatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,6 +486,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbFornecedores1;
     private javax.swing.JButton jbFornecedores2;
     private javax.swing.JButton jbUsuarios;
+    private javax.swing.JButton jbchat;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuBar menuPrincipal;

@@ -11,4 +11,5 @@
   <table-filter match-name="cliente"/>
   <table-filter match-name="produto"/>
   <table-filter match-name="cargo"/>
+  <table-filter match-name="nivel"/>
 </hibernate-reverse-engineering>

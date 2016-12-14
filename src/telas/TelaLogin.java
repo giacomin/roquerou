@@ -5,9 +5,14 @@
  */
 package telas;
 
+import dao.NivelDAO;
 import dao.UsuarioDAO;
+import entidades.Cliente;
+import entidades.Nivel;
 import entidades.Usuario;
 import javax.swing.JOptionPane;
+import servidor.Clientecomunic;
+import servidor.Servidor;
 
 /**
  *
@@ -97,7 +102,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -113,7 +118,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(50, 50, 50))
+                .addGap(56, 56, 56))
         );
 
         pack();
@@ -130,9 +135,16 @@ public class TelaLogin extends javax.swing.JFrame {
         // AQUI SE FOR DIFERENTE DE NULL, ENTÃO ACHOU O USUARIO
         if (usuario != null) {
 
+            
+            int id = 1;
+            Nivel nv = new Nivel();
+            nv.setNivelacesso(usuario.getCargo().getIdCargo());
+            nv.setIdNivel(id);
+            NivelDAO ndao = new NivelDAO();
+            String retorno = new NivelDAO().salvar(nv);
                         
             TelaPrincipal telaPrincipal = new TelaPrincipal();
-            telaPrincipal.nivel(usuario.getCargo().getIdCargo());
+            //telaPrincipal.nivel(usuario.getCargo().getIdCargo());
             telaPrincipal.setVisible(true);
 
             this.dispose();

@@ -7,6 +7,7 @@ package telas;
 
 import config.HibernateUtil;
 import dao.ClienteDAO;
+import dao.NivelDAO;
 import dao.UsuarioDAO;
 import entidades.Cargo;
 import entidades.Cidade;
@@ -33,9 +34,23 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
      */
     public TelaUsuario() {
         initComponents();
+        NivelDAO nd = new NivelDAO();
+        if (nd.buscar() == 2 || nd.buscar()==3) {
+            botaoNovoUsuario.setEnabled(false);
+            jbBuscarUsuario.setEnabled(false);
+            tabelaUsuario.setEnabled(false);
+        }
+        
         popularCombo();
         setarLabels();
+
     }
+
+    public Integer nu(int a) {
+
+        return null;
+    }
+    int nivelusuario = 0;
 
     public void setarLabels() {
 
@@ -94,6 +109,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         botaoSalvarUsuario.setEnabled(true);
         botaoCancelarUsuario.setEnabled(true);
 
+    }
+
+    public void usunivelamento() {
+        if (nivelusuario == 2) {
+            botaoNovoUsuario.setEnabled(false);
+            jbBuscarUsuario.setEnabled(false);
+            tabelaUsuario.setEnabled(false);
+            campoPesquisaUsuario.setEditable(false);
+        }
     }
 
     public void popularCombo() {
@@ -263,6 +287,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         campoPesquisaUsuario = new javax.swing.JTextField();
         jbBuscarUsuario = new javax.swing.JButton();
         botaoFechar = new javax.swing.JButton();
+
+        setTitle("Usuário");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -557,7 +583,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tabelaUsuarioFocusGained
 
     private void botaoEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarUsuarioActionPerformed
-        
+
         botaoNovoUsuario.setEnabled(false);
         botaoSalvarUsuario.setEnabled(true);
         botaoCancelarUsuario.setEnabled(true);
@@ -568,16 +594,13 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         Object nome = tabelaUsuario.getValueAt(row, 1);
         Object login = tabelaUsuario.getValueAt(row, 2);
         Object senha = tabelaUsuario.getValueAt(row, 3);
-        Object cargo = tabelaUsuario.getValueAt (row, 4);
-        
-        Usuario usu = new Usuario();
+        Object cargo = tabelaUsuario.getValueAt(row, 4);
 
+        Usuario usu = new Usuario();
 
         Cargo car = new Cargo();
         car.setIdCargo((Integer) tabelaUsuario.getValueAt(row, 4));
         //cid.setIdCidade((Integer) tabelaCliente.getValueAt(row, 6));
-
-        
 
         usu.setIdUsuario(Integer.parseInt(id.toString()));
         usu.setNome(nome.toString());
@@ -591,12 +614,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         campoSenhaUsuario.setText(usu.getSenha());
         comboCargo.setSelectedIndex(car.getIdCargo());
         //comboCargo.setSelectedItem(car); ( Quando for utilizar o nome em vez de número na tabela
-        
+
         campoNomeUsuario.setEnabled(true);
         campoLoginUsuario.setEnabled(true);
         campoSenhaUsuario.setEnabled(true);
         comboCargo.setEnabled(true);
-         
+
     }//GEN-LAST:event_botaoEditarUsuarioActionPerformed
 
     private void botaoExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirUsuarioActionPerformed
