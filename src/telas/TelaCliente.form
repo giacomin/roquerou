@@ -123,10 +123,7 @@
                                       <Component id="jbFone" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jbEndereco" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="354" pref="354" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jbEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>

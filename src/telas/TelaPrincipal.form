@@ -393,6 +393,7 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbchatActionPerformed"/>
           </Events>
+		</Component>
         <Component class="javax.swing.JButton" name="jbFornecedores3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
