@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import wservice.SMSService;
 
 /**
  *
@@ -117,7 +118,7 @@ public class TelaCompra extends javax.swing.JInternalFrame {
     }
 
     // *** Método salvarCompra() ***
-    public void salvarCompra() {
+    public void salvarCompra() throws Exception {
 
         comboProduto.setBackground(Color.white);
         comboFornecedor.setBackground(Color.white);
@@ -166,6 +167,11 @@ public class TelaCompra extends javax.swing.JInternalFrame {
             String retorno = new CompraDAO().salvar(comp);
 
             if (retorno == null) {
+                
+                SMSService sms = new SMSService("eduardopaa", "eduardo");
+                //sms.enviarSMS("51", "992150368","Compra\n"+ "Nome: "+prod.getNome()+"\n Quantidade: "+comp.getQuantidade()+"\n Custo unit: "+comp.getCustoUnit());
+             System.out.println("Compra\n"+ "Nome: "+prod.getNome()+"\n Quantidade: "+comp.getQuantidade()+"\n Custo unit: "+comp.getCustoUnit());
+
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             } else {
                 JOptionPane.showMessageDialog(null, "Erro! Verifique os campos.");
@@ -638,7 +644,11 @@ public class TelaCompra extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        salvarCompra();
+        try {
+            salvarCompra();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed

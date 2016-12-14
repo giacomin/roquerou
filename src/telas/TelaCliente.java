@@ -5,6 +5,7 @@
  */
 package telas;
 
+import chat.Email;
 import config.HibernateUtil;
 import dao.ClienteDAO;
 import dao.NivelDAO;
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.apache.commons.mail.EmailException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -205,7 +207,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
     }
 
-    public void salvarCliente() {
+    public void salvarCliente() throws EmailException {
 
         Cliente cli = new Cliente();
         Cidade cid = new Cidade();
@@ -257,6 +259,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                     if (retorno == null) {
 
                                         LOG.info("Registro de id " + cli.getIdCliente() + " salvo com sucesso!");
+                                        Email em = new Email();
+                                        em.sendEmail(cli.getNome(), cli.getFone(), cli.getEmail());
                                         JOptionPane.showMessageDialog(null, "Cliente Adicionado!");
                                         zerarCampos();
                                         bloquearCampos();
@@ -555,9 +559,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         jpCliente2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        buscacli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
-        buscacli.setText("Buscar");
-        buscacli.addActionListener(new java.awt.event.ActionListener() {
+        buscarcli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document_preview.png"))); // NOI18N
+        buscarcli.setText("Buscar");
+        buscarcli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscacliActionPerformed(evt);
             }
@@ -712,9 +716,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void botaoSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarClienteActionPerformed
 
-        salvarCliente();
+        try {
+            salvarCliente();
 
-        // TODO add your handling code here:
+            // TODO add your handling code here:
+        } catch (EmailException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoSalvarClienteActionPerformed
 
     private void comboCidadeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCidadeClienteActionPerformed

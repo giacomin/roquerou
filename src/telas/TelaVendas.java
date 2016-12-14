@@ -300,7 +300,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
 
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
 
-        String vdata = campoData.getText();
+        String vdata = campoData.getText().trim();
         int vcliente = comboCliente.getSelectedIndex();
 
         comboCliente.setBackground(Color.gray);
