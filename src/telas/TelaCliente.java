@@ -60,7 +60,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         NivelDAO nd = new NivelDAO();
         if (nd.buscar() == 3) {
             botaoNovoCliente.setEnabled(false);
-            buscacli.setEnabled(false);
+            buscarcli.setEnabled(false);
             tabelaCliente.setEnabled(false);
             popularCombo();
             setarLabels();
@@ -348,7 +348,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         campoFoneCliente = new javax.swing.JTextField();
         jpCliente2 = new javax.swing.JPanel();
         campoPesquisaCliente = new javax.swing.JTextField();
-        buscacli = new javax.swing.JButton();
+        buscarcli = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
         botaoEditarCliente = new javax.swing.JButton();
@@ -563,7 +563,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         buscarcli.setText("Buscar");
         buscarcli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscacliActionPerformed(evt);
+                buscarcliActionPerformed(evt);
             }
         });
 
@@ -642,7 +642,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCliente2Layout.createSequentialGroup()
                         .addComponent(campoPesquisaCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buscacli)))
+                        .addComponent(buscarcli)))
                 .addContainerGap())
         );
         jpCliente2Layout.setVerticalGroup(
@@ -651,7 +651,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpCliente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscacli))
+                    .addComponent(buscarcli))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -878,12 +878,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoFoneClienteFocusLost
 
-    private void buscacliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscacliActionPerformed
+    private void buscarcliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarcliActionPerformed
 
         buscarCliente();
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscacliActionPerformed
+    }//GEN-LAST:event_buscarcliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -892,7 +892,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton botaoFechar;
     private javax.swing.JButton botaoNovoCliente;
     private javax.swing.JButton botaoSalvarCliente;
-    private javax.swing.JButton buscacli;
+    private javax.swing.JButton buscarcli;
     private javax.swing.JTextField campoBairroCliente;
     private javax.swing.JTextField campoCodCliente;
     private javax.swing.JTextField campoEmailCliente;
